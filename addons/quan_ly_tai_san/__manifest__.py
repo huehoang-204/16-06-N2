@@ -20,11 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'nhan_su'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/tai_san_demo.xml',
         'views/danh_muc_tai_san.xml',
         'views/kiem_ke_tai_san.xml',
         'views/lich_su_khau_hao.xml',
@@ -44,12 +45,19 @@
     ],
     
     'assets': {
+        'web.assets_common': [  # THAY ĐỔI: Dùng assets_common thay vì backend
+            'quan_ly_tai_san/static/src/js/moment_locale_fix.js',
+        ],
         'web.assets_backend': [
+            'quan_ly_tai_san/static/src/js/date_picker_fix.js',
             'https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js',
             'quan_ly_tai_san/static/src/css/dashboard.css',
             'quan_ly_tai_san/static/src/js/dashboard_overview.js',
             'quan_ly_tai_san/static/src/js/dashboard_borrowing.js',
         ],
     },
+    
+    'installable': True,
+    'application': True,
 }

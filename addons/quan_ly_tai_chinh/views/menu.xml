@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_root" 
+            name="Quản lý tài chính" 
+            sequence="0" />
+
+        <menuitem
+            id="menu_bao_cao_tai_chinh"
+            name="Báo cáo tài chính"
+            parent="menu_root"
+            action="action_bao_cao_tai_chinh"
+            sequence="1"/>
+            
+        <menuitem
+            id="menu_khau_hao"
+            name="Khấu hao tài sản"
+            parent="menu_root"
+            
+            sequence="1"
+            action="khau_hao_tai_san_action"/>
+        <menuitem
+            id="menu_but_toan"
+            name="Bút toán"
+            parent="menu_root"
+            
+            sequence="1"
+            action="but_toan_action"/>
+        <menuitem
+            id="menu_tai_khoan_quan_tri"
+            name="Tài khoản quản trị"
+            parent="menu_root"
+            
+            sequence="1"
+            action="tai_khoan_quan_tri_action"/>
+           
+        
+    </data>
+</odoo>

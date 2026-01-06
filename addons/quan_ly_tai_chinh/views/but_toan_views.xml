@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="but_toan_tree" model="ir.ui.view">
+            <field name="name">but_toan.tree</field>
+            <field name="model">but_toan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="so_but_toan"/>
+                    <field name="ngay_but_toan"/>
+                    <field name="mo_ta"/>
+                    <field name="so_tien"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="but_toan_form" model="ir.ui.view">
+            <field name="name">but_toan.form</field>
+            <field name="model">but_toan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_post" string="Vào sổ" type="object" class="btn-primary" attrs="{'invisible': [('trang_thai', '=', 'posted')]}"/>
+                        <button name="action_draft" string="Chuyển dự thảo" type="object" attrs="{'invisible': [('trang_thai', '=', 'draft')]}"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="so_but_toan"/>
+                            <field name="ngay_but_toan"/>
+                            <field name="mo_ta"/>
+                            <field name="khau_hao_id"/>
+                            <field name="tai_khoan_no_id"/>
+                            <field name="tai_khoan_co_id"/>
+                            <field name="so_tien"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="but_toan_action" model="ir.actions.act_window">
+            <field name="name">Bút toán</field>
+            <field name="res_model">but_toan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
