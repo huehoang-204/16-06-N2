@@ -20,11 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'nhan_su'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/sequence.xml',
         'views/danh_muc_tai_san.xml',
         'views/kiem_ke_tai_san.xml',
         'views/lich_su_khau_hao.xml',
