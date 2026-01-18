@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== TREE VIEW ========== -->
+    <record id="view_bao_cao_tai_chinh_tree" model="ir.ui.view">
+        <field name="name">bao_cao_tai_chinh.tree</field>
+        <field name="model">bao_cao_tai_chinh</field>
+        <field name="arch" type="xml">
+            <tree string="Báo cáo tài chính">
+                <field name="name"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="doanh_thu" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="tong_chi_phi" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="loi_nhuan" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="trang_thai" widget="badge"/>
+                <field name="ngay_tao" widget="date"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- ========== SEARCH VIEW - SỬA LẠI DOMAIN ========== -->
+    <record id="view_bao_cao_tai_chinh_search" model="ir.ui.view">
+        <field name="name">bao_cao_tai_chinh.search</field>
+        <field name="model">bao_cao_tai_chinh</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="trang_thai"/>
+                <filter name="loi_nhuan_duong" string="Có lãi" domain="[('loi_nhuan', '&gt;', 0)]"/>
+                <filter name="loi_nhuan_am" string="Lỗ" domain="[('loi_nhuan', '&lt;', 0)]"/>
+                <separator/>
+                <filter name="trang_thai_nhap" string="Nháp" domain="[('trang_thai', '=', 'draft')]"/>
+                <filter name="trang_thai_dang_xu_ly" string="Đang xử lý" domain="[('trang_thai', '=', 'in_progress')]"/>
+                <filter name="trang_thai_hoan_thanh" string="Hoàn thành" domain="[('trang_thai', '=', 'completed')]"/>
+            </search>
+        </field>
+    </record>
+    
+    <!-- ========== FORM VIEW ĐƠN GIẢN ========== -->
+    <record id="view_bao_cao_tai_chinh_form" model="ir.ui.view">
+        <field name="name">bao_cao_tai_chinh.form</field>
+        <field name="model">bao_cao_tai_chinh</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo tài chính">
+                <header>
+                    <button name="action_tinh_toan" type="object" string="Tính toán" class="btn-primary"/>
+                    <field name="trang_thai" widget="statusbar" statusbar_visible="draft,in_progress,completed,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="thang"/>
+                            <field name="nam"/>
+                            <field name="ngay_tao" readonly="1"/>
+                            <field name="nguoi_tao_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="trang_thai"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Doanh thu &amp; Chi phí">
+                            <group>
+                                <field name="doanh_thu"/>
+                                <field name="tong_chi_phi" readonly="1"/>
+                                <field name="loi_nhuan" readonly="1"/>
+                                <field name="ty_le_loi_nhuan" readonly="1"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Chi tiết chi phí">
+                            <group>
+                                <field name="chi_phi_khau_hao"/>
+                                <field name="chi_phi_luong"/>
+                                <field name="chi_phi_van_phong"/>
+                                <field name="chi_phi_marketing"/>
+                                <field name="chi_phi_dien_nuoc"/>
+                                <field name="chi_phi_khac"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- ========== ACTION ========== -->
+    <record id="action_bao_cao_tai_chinh" model="ir.actions.act_window">
+        <field name="name">Báo cáo tài chính</field>
+        <field name="res_model">bao_cao_tai_chinh</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_bao_cao_tai_chinh_search"/>
+    </record>
+</odoo>

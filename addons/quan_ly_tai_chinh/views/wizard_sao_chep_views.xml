@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View for Wizard -->
+        <record id="view_bao_cao_tai_chinh_wizard_form" model="ir.ui.view">
+            <field name="name">bao.cao.tai.chinh.wizard.form</field>
+            <field name="model">bao.cao.tai.chinh.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sao chép báo cáo tài chính">
+                    <group>
+                        <group>
+                            <field name="bao_cao_id" readonly="1"/>
+                            <field name="ten_bao_cao_moi" placeholder="Nhập tên báo cáo mới..."/>
+                        </group>
+                        <group>
+                            <field name="thang"/>
+                            <field name="nam"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Sao chép" name="action_sao_chep" type="object" class="btn-primary"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

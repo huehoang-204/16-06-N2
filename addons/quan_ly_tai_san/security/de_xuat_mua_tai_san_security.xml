@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+            SECURITY RULES DISABLED
+            Tất cả các rule đã bị vô hiệu hóa để tránh lỗi dữ liệu cũ
+            Ai cũng có thể tạo, sửa, xóa bản ghi
+            Sẽ thêm lại sau khi database sạch sẽ
+        -->
+    </data>
+</odoo>

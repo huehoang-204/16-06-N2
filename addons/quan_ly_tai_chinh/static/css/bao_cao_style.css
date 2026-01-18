@@ -1,0 +1,102 @@
+/* static/src/css/bao_cao_style.css */
+
+/* KPI Cards */
+.kpi-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+}
+
+.kpi-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.kpi-card .card-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Chart containers */
+.o_bao_cao_chart {
+    position: relative;
+    width: 100%;
+}
+
+/* Form styling */
+.o_bao_cao_tai_chinh_form .o_notebook .tab-content {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Status colors */
+.bg-success {
+    background: linear-gradient(45deg, #28a745, #20c997) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(45deg, #dc3545, #fd7e14) !important;
+}
+
+.bg-primary {
+    background: linear-gradient(45deg, #007bff, #6610f2) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(45deg, #ffc107, #ff6b35) !important;
+}
+
+.bg-info {
+    background: linear-gradient(45deg, #17a2b8, #20c997) !important;
+}
+
+/* Tree view badges */
+.badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .kpi-card .card-text {
+        font-size: 1.5rem;
+    }
+    
+    .o_bao_cao_tai_chinh_form .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    
+    .o_bao_cao_tai_chinh_form .col-md-6,
+    .o_bao_cao_tai_chinh_form .col-lg-3 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

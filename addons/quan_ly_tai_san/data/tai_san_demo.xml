@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    <!-- ==================== DANH MỤC TÀI SẢN MẪU ==================== -->
+    <record id="demo_danh_muc_may_tinh" model="danh_muc_tai_san">
+        <field name="ma_danh_muc_ts">DM001</field>
+        <field name="ten_danh_muc_ts">Máy tính &amp; Thiết bị CNTT</field>
+        <field name="mo_ta_danh_muc_ts">Máy tính, laptop, máy in, máy chiếu, thiết bị mạng</field>
+    </record>
+    
+    <record id="demo_danh_muc_noi_that" model="danh_muc_tai_san">
+        <field name="ma_danh_muc_ts">DM002</field>
+        <field name="ten_danh_muc_ts">Nội thất văn phòng</field>
+        <field name="mo_ta_danh_muc_ts">Bàn làm việc, ghế, tủ hồ sơ, kệ sách</field>
+    </record>
+    
+    <record id="demo_danh_muc_phuong_tien" model="danh_muc_tai_san">
+        <field name="ma_danh_muc_ts">DM003</field>
+        <field name="ten_danh_muc_ts">Phương tiện đi lại</field>
+        <field name="mo_ta_danh_muc_ts">Xe ô tô, xe máy phục vụ công tác</field>
+    </record>
+    
+    <record id="demo_danh_muc_thiet_bi_ky_thuat" model="danh_muc_tai_san">
+        <field name="ma_danh_muc_ts">DM004</field>
+        <field name="ten_danh_muc_ts">Thiết bị kỹ thuật</field>
+        <field name="mo_ta_danh_muc_ts">Máy móc, thiết bị chuyên dụng phục vụ sản xuất</field>
+    </record>
+    
+    <!-- ==================== TÀI SẢN MẪU ==================== -->
+    <!-- Laptop 1 -->
+    <record id="demo_tai_san_laptop_1" model="tai_san">
+        <field name="ma_tai_san">TS001</field>
+        <field name="ten_tai_san">Laptop Dell XPS 15</field>
+        <field name="ngay_mua_ts">2023-01-15</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">25000000</field>
+        <field name="gia_tri_hien_tai">20000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_may_tinh"/>
+        <field name="pp_khau_hao">straight-line</field>
+        <field name="thoi_gian_su_dung">1</field>
+        <field name="thoi_gian_toi_da">5</field>
+        <field name="ty_le_khau_hao">20</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Laptop cao cấp cho quản lý</field>
+    </record>
+    
+    <!-- Laptop 2 -->
+    <record id="demo_tai_san_laptop_2" model="tai_san">
+        <field name="ma_tai_san">TS002</field>
+        <field name="ten_tai_san">Laptop HP Pavilion</field>
+        <field name="ngay_mua_ts">2023-03-20</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">18000000</field>
+        <field name="gia_tri_hien_tai">15000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_may_tinh"/>
+        <field name="pp_khau_hao">degressive</field>
+        <field name="thoi_gian_su_dung">1</field>
+        <field name="thoi_gian_toi_da">4</field>
+        <field name="ty_le_khau_hao">25</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Laptop cho nhân viên</field>
+    </record>
+    
+    <!-- Máy in -->
+    <record id="demo_tai_san_may_in" model="tai_san">
+        <field name="ma_tai_san">TS003</field>
+        <field name="ten_tai_san">Máy in HP LaserJet Pro</field>
+        <field name="ngay_mua_ts">2022-11-10</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">8000000</field>
+        <field name="gia_tri_hien_tai">6000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_may_tinh"/>
+        <field name="pp_khau_hao">straight-line</field>
+        <field name="thoi_gian_su_dung">2</field>
+        <field name="thoi_gian_toi_da">5</field>
+        <field name="ty_le_khau_hao">20</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Máy in laser đen trắng</field>
+    </record>
+    
+    <!-- Máy chiếu -->
+    <record id="demo_tai_san_may_chieu" model="tai_san">
+        <field name="ma_tai_san">TS004</field>
+        <field name="ten_tai_san">Máy chiếu Sony VPL</field>
+        <field name="ngay_mua_ts">2023-05-05</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">15000000</field>
+        <field name="gia_tri_hien_tai">14000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_may_tinh"/>
+        <field name="pp_khau_hao">none</field>
+        <field name="thoi_gian_su_dung">0</field>
+        <field name="thoi_gian_toi_da">7</field>
+        <field name="ty_le_khau_hao">15</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Máy chiếu phòng họp</field>
+    </record>
+    
+    <!-- Bàn làm việc -->
+    <record id="demo_tai_san_ban_lam_viec" model="tai_san">
+        <field name="ma_tai_san">TS005</field>
+        <field name="ten_tai_san">Bàn làm việc gỗ công nghiệp</field>
+        <field name="ngay_mua_ts">2022-08-15</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">3500000</field>
+        <field name="gia_tri_hien_tai">3000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_noi_that"/>
+        <field name="pp_khau_hao">straight-line</field>
+        <field name="thoi_gian_su_dung">2</field>
+        <field name="thoi_gian_toi_da">10</field>
+        <field name="ty_le_khau_hao">10</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Bàn làm việc tiêu chuẩn</field>
+    </record>
+    
+    <!-- Ghế văn phòng -->
+    <record id="demo_tai_san_ghe_van_phong" model="tai_san">
+        <field name="ma_tai_san">TS006</field>
+        <field name="ten_tai_san">Ghế văn phòng hạng sang</field>
+        <field name="ngay_mua_ts">2023-02-28</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">5000000</field>
+        <field name="gia_tri_hien_tai">4500000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_noi_that"/>
+        <field name="pp_khau_hao">degressive</field>
+        <field name="thoi_gian_su_dung">1</field>
+        <field name="thoi_gian_toi_da">8</field>
+        <field name="ty_le_khau_hao">12.5</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Ghế cho quản lý</field>
+    </record>
+    
+    <!-- Xe ô tô -->
+    <record id="demo_tai_san_xe_oto" model="tai_san">
+        <field name="ma_tai_san">TS007</field>
+        <field name="ten_tai_san">Xe ô tô Toyota Innova</field>
+        <field name="ngay_mua_ts">2021-06-10</field>
+        <field name="don_vi_tien_te">vnd</field>
+        <field name="gia_tri_ban_dau">800000000</field>
+        <field name="gia_tri_hien_tai">600000000</field>
+        <field name="danh_muc_ts_id" ref="demo_danh_muc_phuong_tien"/>
+        <field name="pp_khau_hao">degressive</field>
+        <field name="thoi_gian_su_dung">3</field>
+        <field name="thoi_gian_toi_da">10</field>
+        <field name="ty_le_khau_hao">20</field>
+        <field name="don_vi_tinh">Chiếc</field>
+        <field name="ghi_chu">Xe phục vụ công tác</field>
+    </record>
+    
+    <!-- ==================== PHÂN BỔ TÀI SẢN MẪU ==================== -->
+    <!-- Phân bổ laptop 1 cho Giám đốc -->
+    <record id="demo_phan_bo_laptop_1" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_giam_doc"/>
+        <field name="tai_san_id" ref="demo_tai_san_laptop_1"/>
+        <field name="ngay_phat">2023-01-20</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_1"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_giam_doc"/>
+        <field name="ghi_chu">Cấp cho Giám đốc sử dụng</field>
+    </record>
+    
+    <!-- Phân bổ laptop 2 cho Phòng Kinh doanh -->
+    <record id="demo_phan_bo_laptop_2" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_kinh_doanh"/>
+        <field name="tai_san_id" ref="demo_tai_san_laptop_2"/>
+        <field name="ngay_phat">2023-04-01</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_3"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_kinh_doanh"/>
+        <field name="ghi_chu">Cấp cho Trưởng phòng Kinh doanh</field>
+    </record>
+    
+    <!-- Phân bổ máy in cho Phòng Kế toán -->
+    <record id="demo_phan_bo_may_in" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_ke_toan"/>
+        <!-- ĐÃ SỬA: tai_sAN_id → tai_san_id -->
+        <field name="tai_san_id" ref="demo_tai_san_may_in"/>
+        <field name="ngay_phat">2022-11-15</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_4"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_ke_toan"/>
+        <field name="ghi_chu">Máy in phòng Kế toán</field>
+    </record>
+    
+    <!-- Phân bổ máy chiếu cho Phòng Hành chính -->
+    <record id="demo_phan_bo_may_chieu" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_hanh_chinh"/>
+        <field name="tai_san_id" ref="demo_tai_san_may_chieu"/>
+        <field name="ngay_phat">2023-05-10</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_7"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_hanh_chinh"/>
+        <field name="ghi_chu">Máy chiếu phòng họp</field>
+    </record>
+    
+    <!-- Phân bổ bàn làm việc cho Phòng Kinh doanh -->
+    <record id="demo_phan_bo_ban_lam_viec" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_kinh_doanh"/>
+        <field name="tai_san_id" ref="demo_tai_san_ban_lam_viec"/>
+        <field name="ngay_phat">2022-08-20</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_3"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_kinh_doanh"/>
+        <field name="ghi_chu">Bàn làm việc Trưởng phòng</field>
+    </record>
+    
+    <!-- Phân bổ ghế văn phòng cho Phòng Kế toán -->
+    <record id="demo_phan_bo_ghe_van_phong" model="phan_bo_tai_san">
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_ke_toan"/>
+        <field name="tai_san_id" ref="demo_tai_san_ghe_van_phong"/>
+        <field name="ngay_phat">2023-03-05</field>
+        <field name="nhan_vien_su_dung_id" ref="nhan_su.demo_nhan_vien_4"/>
+        <field name="trang_thai">in-use</field>
+        <field name="vi_tri_tai_san_id" ref="nhan_su.demo_phong_ban_ke_toan"/>
+        <field name="ghi_chu">Ghế Kế toán trưởng</field>
+    </record>
+    
+    <!-- ==================== KIỂM KÊ TÀI SẢN MẪU ==================== -->
+    <!-- Phiếu kiểm kê Phòng Kế toán -->
+    <record id="demo_kiem_ke_ke_toan" model="kiem_ke_tai_san">
+        <field name="ma_phieu_kiem_ke">KKTS-202401-001</field>
+        <field name="ten_phieu_kiem_ke">Kiểm kê tài sản Phòng Kế toán 2024</field>
+        <field name="phong_ban_id" ref="nhan_su.demo_phong_ban_ke_toan"/>
+        <field name="nhan_vien_kiem_ke_id" ref="nhan_su.demo_nhan_vien_4"/>
+        <field name="thoi_gian_tao">2024-01-15 09:00:00</field>
+        <field name="ghi_chu">Kiểm kê định kỳ quý I/2024</field>
+    </record>
+    
+    <!-- Chi tiết kiểm kê máy in -->
+    <record id="demo_kiem_ke_line_may_in" model="kiem_ke_tai_san_line">
+        <field name="kiem_ke_tai_san_id" ref="demo_kiem_ke_ke_toan"/>
+        <field name="phan_bo_tai_san_id" ref="demo_phan_bo_may_in"/>
+        <field name="so_luong_thuc_te">1</field>
+        <field name="so_luong_ly_thuyet">1</field>
+        <field name="trang_thai">finished</field>
+        <field name="trang_thai_tai_san">good</field>
+        <field name="ghi_chu">Máy hoạt động tốt</field>
+    </record>
+    </data>
+</odoo>

@@ -35,15 +35,19 @@ class AssetDashboard(models.Model):
                 })
         
         # Tổng số tài sản theo phòng ban
-        departments = self.env['phong_ban'].search([])
         departments_data = []
-        for dept in departments:
-            asset_count = self.env['phan_bo_tai_san'].search_count([('phong_ban_id', '=', dept.id)])
-            if asset_count > 0:
-                departments_data.append({
-                    'name': dept.ten_phong_ban or dept.ma_phong_ban,
-                    'count': asset_count
-                })
+        try:
+            departments = self.env['phong_ban'].search([])
+            for dept in departments:
+                asset_count = self.env['phan_bo_tai_san'].search_count([('phong_ban_id', '=', dept.id)])
+                if asset_count > 0:
+                    departments_data.append({
+                        'name': dept.ten_phong_ban or dept.ma_phong_ban,
+                        'count': asset_count
+                    })
+        except KeyError:
+            # Module nhan_su chưa được cài đặt
+            departments_data = []
         
         # Tổng số tài sản đang mượn & đã trả
         borrowed_assets = self.env['muon_tra_tai_san'].search_count([('trang_thai', '=', 'dang-muon')])

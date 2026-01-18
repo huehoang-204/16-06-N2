@@ -11,10 +11,10 @@ class DonMuonTaiSan(models.Model):
 
     ma_don_muon = fields.Char("Mã đơn mượn", required=True, default='M')
     ten_don_muon = fields.Char('Đơn mượn tài sản', required=True)
-    phong_ban_cho_muon_id = fields.Many2one('phong_ban', string='Phòng ban cho mượn', required=True, ondelete='restrict')
+    phong_ban_cho_muon_id = fields.Many2one('phong_ban', string='Phòng ban cho mượn', required=False, ondelete='set null')
     thoi_gian_muon = fields.Datetime('Thời gian mượn', required=True, default=lambda self: fields.Datetime.now())
     thoi_gian_tra = fields.Datetime('Thời gian trả', required=True)
-    nhan_vien_muon_id = fields.Many2one('nhan_vien', string='Nhân viên mượn tài sản', required=True, ondelete='restrict')
+    nhan_vien_muon_id = fields.Many2one('nhan_vien', string='Nhân viên mượn tài sản', required=False, ondelete='set null')
     
     ly_do = fields.Char('Lý do mượn tài sản', required=True)
     
@@ -34,7 +34,7 @@ class DonMuonTaiSan(models.Model):
         for record in self:
             da_muon_ids = record.don_muon_tai_san_ids.mapped('phan_bo_tai_san_id').ids
             ds_tai_san = self.env['phan_bo_tai_san'].search([
-                ('phong_ban_id', '=', record.phong_ban_cho_muon_id.id),
+                ('phong_ban_id', '=', record.phong_ban_cho_muon_id.id if record.phong_ban_cho_muon_id else False),
                 ('id', 'not in', da_muon_ids)
             ])
             record.ds_tai_san_chua_muon = ds_tai_san

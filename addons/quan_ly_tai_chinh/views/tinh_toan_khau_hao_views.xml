@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tính Toán Khấu Hao Tự Động Tree View -->
+    <record id="view_tinh_toan_khau_hao_tree" model="ir.ui.view">
+        <field name="name">tinh.toan.khau.hao.tree</field>
+        <field name="model">tinh.toan.khau.hao</field>
+        <field name="arch" type="xml">
+            <tree string="Tính Toán Khấu Hao Tự Động" decoration-info="state=='draft'" decoration-success="state=='done'">
+                <field name="thang_nam"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="ngay_tinh"/>
+                <field name="tong_khau_hao_thang" sum="Tổng Khấu Hao" widget="monetary"/>
+                <field name="tong_so_tai_san" sum="Tổng Số Tài Sản"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Tính Toán Khấu Hao Tự Động Form View -->
+    <record id="view_tinh_toan_khau_hao_form" model="ir.ui.view">
+        <field name="name">tinh.toan.khau.hao.form</field>
+        <field name="model">tinh.toan.khau.hao</field>
+        <field name="arch" type="xml">
+            <form string="Tính Toán Khấu Hao Tự Động">
+                <header>
+                    <button name="action_calculate" string="Tính Khấu Hao" type="object" 
+                            class="oe_highlight" states="draft" 
+                            confirm="Bạn có chắc chắn muốn tính khấu hao cho tháng này?"/>
+                    <button name="action_create_journal_entries" string="Tạo Bút Toán" type="object" 
+                            class="oe_highlight" states="calculated" 
+                            confirm="Bạn có chắc chắn muốn tạo bút toán khấu hao?"/>
+                    <button name="action_reset_to_draft" string="Đặt Lại Nháp" type="object" 
+                            states="calculated,done"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,calculated,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="thang_nam" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="thang" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="nam" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="ngay_tinh" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="tong_so_tai_san" readonly="1"/>
+                            <field name="tong_khau_hao_thang" readonly="1" widget="monetary"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Chi Tiết Khấu Hao">
+                            <field name="line_ids" readonly="1">
+                                <tree string="Chi Tiết" create="false" delete="false">
+                                    <field name="tai_san_id" readonly="1"/>
+                                    <field name="khau_hao_tai_san_id" readonly="1"/>
+                                    <field name="gia_tri_ban_dau" readonly="1" widget="monetary"/>
+                                    <field name="ty_le_khau_hao" readonly="1"/>
+                                    <field name="so_thang_da_khau_hao" readonly="1"/>
+                                    <field name="so_tien_khau_hao" readonly="1" widget="monetary" sum="Tổng Khấu Hao"/>
+                                    <field name="ghi_chu" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Bút Toán Đã Tạo" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <field name="but_toan_ids" readonly="1">
+                                <tree string="Bút Toán">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="journal_id"/>
+                                    <field name="amount_total" widget="monetary"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Ghi Chú">
+                            <field name="ghi_chu" placeholder="Nhập ghi chú..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+
+    <!-- Tính Toán Khấu Hao Tự Động Search View -->
+    <record id="view_tinh_toan_khau_hao_search" model="ir.ui.view">
+        <field name="name">tinh.toan.khau.hao.search</field>
+        <field name="model">tinh.toan.khau.hao</field>
+        <field name="arch" type="xml">
+            <search string="Tìm Kiếm Tính Khấu Hao">
+                <field name="thang_nam"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <filter string="Nháp" name="nhap" domain="[('state', '=', 'draft')]"/>
+                <filter string="Đã Tính" name="da_tinh" domain="[('state', '=', 'calculated')]"/>
+                <filter string="Hoàn Thành" name="hoan_thanh" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter string="Tháng Này" name="thang_nay" 
+                        domain="[('thang', '=', context_today().month), ('nam', '=', context_today().year)]"/>
+                <filter string="Năm Này" name="nam_nay" 
+                        domain="[('nam', '=', context_today().year)]"/>
+                <group expand="0" string="Nhóm Theo">
+                    <filter string="Tháng" name="group_thang" context="{'group_by': 'thang'}"/>
+                    <filter string="Năm" name="group_nam" context="{'group_by': 'nam'}"/>
+                    <filter string="Trạng Thái" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Chi Tiết Tính Khấu Hao Tree View -->
+    <record id="view_tinh_toan_khau_hao_line_tree" model="ir.ui.view">
+        <field name="name">tinh.toan.khau.hao.line.tree</field>
+        <field name="model">tinh.toan.khau.hao.line</field>
+        <field name="arch" type="xml">
+            <tree string="Chi Tiết Tính Khấu Hao">
+                <field name="tinh_toan_id"/>
+                <field name="tai_san_id"/>
+                <field name="khau_hao_tai_san_id"/>
+                <field name="gia_tri_ban_dau" widget="monetary"/>
+                <field name="ty_le_khau_hao"/>
+                <field name="so_thang_da_khau_hao"/>
+                <field name="so_tien_khau_hao" sum="Tổng Khấu Hao" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Chi Tiết Tính Khấu Hao Form View -->
+    <record id="view_tinh_toan_khau_hao_line_form" model="ir.ui.view">
+        <field name="name">tinh.toan.khau.hao.line.form</field>
+        <field name="model">tinh.toan.khau.hao.line</field>
+        <field name="arch" type="xml">
+            <form string="Chi Tiết Tính Khấu Hao">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="tinh_toan_id" readonly="1"/>
+                            <field name="tai_san_id" readonly="1"/>
+                            <field name="khau_hao_tai_san_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="gia_tri_ban_dau" readonly="1" widget="monetary"/>
+                            <field name="ty_le_khau_hao" readonly="1"/>
+                            <field name="so_thang_da_khau_hao" readonly="1"/>
+                            <field name="so_tien_khau_hao" readonly="1" widget="monetary"/>
+                        </group>
+                    </group>
+                    <group string="Ghi Chú">
+                        <field name="ghi_chu" nolabel="1" placeholder="Nhập ghi chú..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tính Toán Khấu Hao Action -->
+    <record id="action_tinh_toan_khau_hao" model="ir.actions.act_window">
+        <field name="name">Tính Khấu Hao Tự Động</field>
+        <field name="res_model">tinh.toan.khau.hao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_thang_nay': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo phiếu tính khấu hao tự động
+            </p>
+            <p>
+                Hệ thống sẽ tự động tính khấu hao cho tất cả tài sản theo lịch trình đã định.
+                Bạn có thể xem lại kết quả tính toán trước khi tạo bút toán.
+            </p>
+        </field>
+    </record>
+
+    <!-- Chi Tiết Tính Khấu Hao Action -->
+    <record id="action_tinh_toan_khau_hao_line" model="ir.actions.act_window">
+        <field name="name">Chi Tiết Tính Khấu Hao</field>
+        <field name="res_model">tinh.toan.khau.hao.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Không có chi tiết tính khấu hao
+            </p>
+        </field>
+    </record>
+
+    <!-- Cron Job - Tự động tính khấu hao hàng tháng -->
+    <record id="cron_tinh_khau_hao_hang_thang" model="ir.cron">
+        <field name="name">Tính Khấu Hao Tự Động Hàng Tháng</field>
+        <field name="model_id" ref="model_tinh_toan_khau_hao"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_tinh_khau_hao_hang_thang()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="nextcall" eval="(DateTime.now() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00')"/>
+    </record>
+</odoo>

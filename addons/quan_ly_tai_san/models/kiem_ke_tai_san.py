@@ -12,7 +12,7 @@ class KiemKeTaiSan(models.Model):
     rec_name = fields.Char(compute='_compute_rec_name', store=True)
     ma_phieu_kiem_ke = fields.Char('Mã phiếu', default="KKTS-", required=True)
     ten_phieu_kiem_ke = fields.Char('Tên phiếu', required=True)
-    phong_ban_id = fields.Many2one('phong_ban', string='Bộ phận cần kiểm kê', required=True, ondelete='cascade')
+    phong_ban_id = fields.Many2one('phong_ban', string='Bộ phận cần kiểm kê', required=False, ondelete='set null')
     nhan_vien_kiem_ke_id = fields.Many2one('nhan_vien', string='Nhân viên kiểm kê', ondelete='set null')
     ds_kiem_ke_ids = fields.One2many(comodel_name='kiem_ke_tai_san_line', 
                                      inverse_name='kiem_ke_tai_san_id', 
@@ -27,7 +27,7 @@ class KiemKeTaiSan(models.Model):
         for record in self:
             da_kiem_ke_ids = record.ds_kiem_ke_ids.mapped('phan_bo_tai_san_id').ids
             ds_tai_san = self.env['phan_bo_tai_san'].search([
-                ('phong_ban_id', '=', record.phong_ban_id.id),
+                ('phong_ban_id', '=', record.phong_ban_id.id if record.phong_ban_id else False),
                 ('id', 'not in', da_kiem_ke_ids)
             ])
             record.ds_tai_san_chua_kiem_ke = ds_tai_san

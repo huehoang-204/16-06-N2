@@ -7,17 +7,17 @@ class PhanBoTaiSan(models.Model):
     _description = 'Bảng chứa thông tin Phân bổ tài sản'
     _rec_name = "tai_san_id"
 
-    phong_ban_id = fields.Many2one('phong_ban', string='Phòng ban', required=True, ondelete='restrict')
+    phong_ban_id = fields.Many2one('phong_ban', string='Phòng ban', required=False, ondelete='set null')
     tai_san_id = fields.Many2one('tai_san', string='Tài sản', required=True, ondelete='cascade')
     ngay_phat = fields.Date('Ngày phân bổ', required=True, default=fields.Date.today())
-    nhan_vien_su_dung_id = fields.Many2one(comodel_name = 'nhan_vien', string='Nhân viên sử dụng', ondelete='restrict')
+    nhan_vien_su_dung_id = fields.Many2one(comodel_name = 'nhan_vien', string='Nhân viên sử dụng', ondelete='set null')
     
     ghi_chu = fields.Char('Ghi chú', default='')
     trang_thai = fields.Selection([
         ('in-use', 'Đang sử dụng'),
         ('not-in-use', 'Không sử dụng')
     ], string='Trạng thái', required=True, default='in-use')
-    vi_tri_tai_san_id = fields.Many2one('phong_ban', string='Vị trí tài sản', required=True, ondelete='restrict')
+    vi_tri_tai_san_id = fields.Many2one('phong_ban', string='Vị trí tài sản', required=False, ondelete='set null')
 
     custom_name = fields.Char(compute="_compute_custom_name", store=True, string="Tên hiển thị")
 

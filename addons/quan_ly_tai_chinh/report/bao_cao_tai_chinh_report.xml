@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_bao_cao_tai_chinh">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h1>BÁO CÁO TÀI CHÍNH</h1>
+                                <h3 t-field="doc.name"/>
+                                <p>
+                                    Tháng <span t-field="doc.thang"/> / 
+                                    <span t-field="doc.nam"/>
+                                </p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p>Ngày in: <span t-field="datetime.datetime.now().strftime('%d/%m/%Y')"/></p>
+                                <p>Trạng thái: 
+                                    <span t-if="doc.trang_thai == 'completed'" class="text-success">HOÀN THÀNH</span>
+                                    <span t-elif="doc.trang_thai == 'in_progress'" class="text-warning">ĐANG XỬ LÝ</span>
+                                    <span t-elif="doc.trang_thai == 'draft'" class="text-secondary">NHÁP</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content">
+                        <!-- KPI Section -->
+                        <div class="kpi-section">
+                            <div class="row">
+                                <div class="col-4 text-center">
+                                    <div class="kpi-box bg-success">
+                                        <h4>DOANH THU</h4>
+                                        <h2 t-field="doc.doanh_thu" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="kpi-box bg-danger">
+                                        <h4>TỔNG CHI PHÍ</h4>
+                                        <h2 t-field="doc.tong_chi_phi" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="kpi-box" t-attf-class="kpi-box {{ 'bg-primary' if doc.loi_nhuan >= 0 else 'bg-warning' }}">
+                                        <h4>LỢI NHUẬN</h4>
+                                        <h2 t-field="doc.loi_nhuan" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chi tiết chi phí -->
+                        <div class="mt-4">
+                            <h3>CHI TIẾT CHI PHÍ</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>LOẠI CHI PHÍ</th>
+                                        <th>SỐ TIỀN</th>
+                                        <th>TỶ LỆ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.get_chi_phi_details()" t-as="item">
+                                        <td t-field="item.name"/>
+                                        <td t-field="item.amount" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                        <td t-field="item.percentage"/>%
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-active">
+                                        <th>TỔNG CỘNG</th>
+                                        <th t-field="doc.tong_chi_phi" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                        <th>100%</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        
+                        <!-- Nhận xét -->
+                        <div class="mt-4">
+                            <h3>NHẬN XÉT</h3>
+                            <div t-attf-class="alert {{ 'alert-success' if doc.loi_nhuan &gt; 0 else 'alert-danger' if doc.loi_nhuan &lt; 0 else 'alert-warning' }}">
+                                <p t-if="doc.loi_nhuan &gt; 0">
+                                    📈 Doanh nghiệp hoạt động có lãi. Tỷ lệ lợi nhuận đạt 
+                                    <strong t-field="doc.ty_le_loi_nhuan"/>%.
+                                </p>
+                                <p t-elif="doc.loi_nhuan &lt; 0">
+                                    📉 Doanh nghiệp đang bị lỗ. Cần xem xét cắt giảm chi phí.
+                                </p>
+                                <p t-else="">
+                                    ⚖️ Doanh nghiệp hòa vốn. Cần tăng doanh thu để có lãi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="footer">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Người lập: <span t-field="doc.nguoi_tao_id.name"/></p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <p>Ngày hoàn thành: <span t-field="doc.ngay_hoan_thanh" t-options="{'widget': 'date'}"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

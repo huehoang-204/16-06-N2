@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard Tài Chính Tree View -->
+    <record id="view_dashboard_tai_chinh_tree" model="ir.ui.view">
+        <field name="name">dashboard.tai.chinh.tree</field>
+        <field name="model">dashboard.tai.chinh</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng Điều Khiển Tài Chính" create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="ngay_hien_tai"/>
+                <field name="tong_phe_duyet"/>
+                <field name="tong_tai_san"/>
+                <field name="tong_but_toan"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Dashboard Tài Chính Form View -->
+    <record id="view_dashboard_tai_chinh_form" model="ir.ui.view">
+        <field name="name">dashboard.tai.chinh.form</field>
+        <field name="model">dashboard.tai.chinh</field>
+        <field name="arch" type="xml">
+            <form string="Bảng Điều Khiển Tài Chính" create="false" edit="false" delete="false">
+                <header>
+                    <button name="action_refresh" string="Làm Mới Dữ Liệu" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="ngay_hien_tai"/>
+                    </group>
+
+                    <notebook>
+                        <!-- Tab Thống kê Phê Duyệt -->
+                        <page string="Thống Kê Phê Duyệt">
+                            <group>
+                                <group string="Số Lượng Phê Duyệt">
+                                    <field name="tong_phe_duyet"/>
+                                    <field name="phe_duyet_cho_duyet"/>
+                                    <field name="phe_duyet_da_duyet"/>
+                                    <field name="phe_duyet_hoan_thanh"/>
+                                    <field name="phe_duyet_bi_tu_choi"/>
+                                </group>
+                                <group string="Giá Trị Phê Duyệt">
+                                    <field name="tong_gia_tri_phe_duyet" widget="monetary"/>
+                                    <field name="gia_tri_cho_duyet" widget="monetary"/>
+                                    <field name="gia_tri_da_duyet" widget="monetary"/>
+                                </group>
+                            </group>
+                            <group>
+                                <button name="action_view_phe_duyet" string="Xem Chi Tiết Phê Duyệt" 
+                                        type="object" class="oe_highlight" icon="fa-search"/>
+                            </group>
+                        </page>
+
+                        <!-- Tab Thống kê Tài Sản -->
+                        <page string="Thống Kê Tài Sản">
+                            <group>
+                                <group string="Tài Sản">
+                                    <field name="tong_tai_san"/>
+                                    <field name="tai_san_hoat_dong"/>
+                                    <field name="tai_san_dang_khau_hao"/>
+                                    <field name="tai_san_hoan_thanh_khau_hao"/>
+                                </group>
+                                <group string="Giá Trị Tài Sản">
+                                    <field name="tong_gia_tri_tai_san" widget="monetary"/>
+                                    <field name="tong_gia_tri_con_lai" widget="monetary"/>
+                                    <field name="tong_khau_hao_tich_luy" widget="monetary"/>
+                                </group>
+                            </group>
+                            <group>
+                                <button name="action_view_tai_san" string="Xem Chi Tiết Tài Sản" 
+                                        type="object" class="oe_highlight" icon="fa-search"/>
+                            </group>
+                        </page>
+
+                        <!-- Tab Thống kê Khấu Hao -->
+                        <page string="Thống Kê Khấu Hao">
+                            <group>
+                                <group string="Khấu Hao Tháng">
+                                    <field name="khau_hao_thang_nay"/>
+                                    <field name="khau_hao_quy_nay"/>
+                                    <field name="khau_hao_nam_nay"/>
+                                    <field name="tong_khau_hao_tich_luy"/>
+                                </group>
+                                <group string="Giá Trị Tài Sản">
+                                    <field name="tong_gia_tri_tai_san" widget="monetary"/>
+                                    <field name="tong_gia_tri_con_lai" widget="monetary"/>
+                                </group>
+                            </group>
+                            <group>
+                                <button name="action_view_khau_hao" string="Xem Chi Tiết Khấu Hao" 
+                                        type="object" class="oe_highlight" icon="fa-search"/>
+                            </group>
+                        </page>
+
+                        <!-- Tab Thống kê Bút Toán -->
+                        <page string="Thống Kê Bút Toán">
+                            <group>
+                                <group string="Bút Toán">
+                                    <field name="tong_but_toan"/>
+                                    <field name="but_toan_nhap"/>
+                                    <field name="but_toan_da_ghi"/>
+                                </group>
+                                <group string="Giá Trị Bút Toán">
+                                    <field name="tong_gia_tri_but_toan" widget="monetary"/>
+                                </group>
+                            </group>
+                            <group>
+                                <button name="action_view_but_toan" string="Xem Chi Tiết Bút Toán" 
+                                        type="object" class="oe_highlight" icon="fa-search"/>
+                            </group>
+                        </page>
+
+                        <!-- Tab Xu Hướng Khấu Hao -->
+                        <page string="Xu Hướng Khấu Hao">
+                            <field name="depreciation_trend_ids">
+                                <tree string="Xu Hướng Khấu Hao 12 Tháng" create="false" edit="false" delete="false">
+                                    <field name="month"/>
+                                    <field name="count"/>
+                                    <field name="amount" widget="monetary" sum="Tổng"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Biểu đồ xu hướng khấu hao:</strong> Hiển thị giá trị khấu hao trong 12 tháng gần nhất
+                                </div>
+                            </group>
+                        </page>
+
+                        <!-- Tab Xu Hướng Mua Sắm -->
+                        <page string="Xu Hướng Mua Sắm">
+                            <field name="purchase_trend_ids">
+                                <tree string="Xu Hướng Mua Sắm 12 Tháng" create="false" edit="false" delete="false">
+                                    <field name="month"/>
+                                    <field name="count"/>
+                                    <field name="amount" widget="monetary" sum="Tổng Giá Trị"/>
+                                    <field name="count_approved"/>
+                                    <field name="amount_approved" widget="monetary" sum="Tổng Đã Duyệt"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Biểu đồ xu hướng mua sắm:</strong> Hiển thị số lượng và giá trị đề xuất mua tài sản trong 12 tháng gần nhất
+                                </div>
+                            </group>
+                        </page>
+
+                        <!-- Tab Phân Bổ Theo Phòng Ban -->
+                        <page string="Phân Bổ Phòng Ban">
+                            <field name="department_distribution_ids">
+                                <tree string="Phân Bổ Theo Phòng Ban" create="false" edit="false" delete="false">
+                                    <field name="department_id"/>
+                                    <field name="tai_san_count"/>
+                                    <field name="tai_san_value" widget="monetary" sum="Tổng Giá Trị TS"/>
+                                    <field name="de_xuat_count"/>
+                                    <field name="de_xuat_value" widget="monetary" sum="Tổng Giá Trị ĐX"/>
+                                    <field name="approved_count"/>
+                                    <field name="approved_value" widget="monetary" sum="Tổng Đã Duyệt"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Phân bổ theo phòng ban:</strong> Thống kê tài sản và đề xuất mua sắm của từng phòng ban
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Dashboard Tài Chính Search View -->
+    <record id="view_dashboard_tai_chinh_search" model="ir.ui.view">
+        <field name="name">dashboard.tai.chinh.search</field>
+        <field name="model">dashboard.tai.chinh</field>
+        <field name="arch" type="xml">
+            <search string="Tìm Kiếm Dashboard Tài Chính">
+                <field name="name"/>
+                <field name="ngay_hien_tai"/>
+                <group expand="0" string="Nhóm Theo">
+                    <filter string="Ngày" name="group_ngay" context="{'group_by': 'ngay_hien_tai'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Dashboard Tài Chính Kanban View -->
+    <record id="view_dashboard_tai_chinh_kanban" model="ir.ui.view">
+        <field name="name">dashboard.tai.chinh.kanban</field>
+        <field name="model">dashboard.tai.chinh</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard" create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="ngay_hien_tai"/>
+                <field name="tong_phe_duyet"/>
+                <field name="tong_tai_san"/>
+                <field name="tong_but_toan"/>
+                <field name="tong_gia_tri_phe_duyet"/>
+                <field name="tong_gia_tri_tai_san"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="o_secondary">
+                                        <span>Tháng <t t-esc="record.thang.value"/>/<t t-esc="record.nam.value"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content">
+                                <div class="row">
+                                    <div class="col-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="action_view_phe_duyet" type="object">
+                                            <t t-esc="record.tong_phe_duyet.value"/> Phê Duyệt
+                                        </button>
+                                    </div>
+                                    <div class="col-6 o_kanban_primary_right">
+                                        <span class="o_value"><t t-esc="record.tong_gia_tri_phe_duyet.value"/></span>
+                                        <span class="o_label">VNĐ</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <button class="btn btn-secondary" name="action_view_tai_san" type="object">
+                                            <t t-esc="record.tong_tai_san.value"/> Tài Sản
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="o_value"><t t-esc="record.tong_gia_tri_tai_san.value"/></span>
+                                        <span class="o_label">VNĐ</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <button class="btn btn-info" name="action_view_but_toan" type="object">
+                                            <t t-esc="record.tong_but_toan.value"/> Bút Toán
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-success" name="action_refresh" type="object">
+                                            <i class="fa fa-refresh"/> Làm Mới
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Dashboard Tài Chính Action -->
+    <record id="action_dashboard_tai_chinh" model="ir.actions.act_window">
+        <field name="name">Dashboard Tài Chính</field>
+        <field name="res_model">dashboard.tai.chinh</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_thang_hien_tai': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo Dashboard Tài Chính mới
+            </p>
+            <p>
+                Dashboard tài chính cung cấp các thống kê tổng quan về phê duyệt, tài sản, khấu hao, bút toán và kế toán quản trị.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== FORM VIEW ========== -->
+    <record id="view_de_xuat_mua_tai_san_form" model="ir.ui.view">
+        <field name="name">de.xuat.mua.tai.san.form</field>
+        <field name="model">de_xuat_mua_tai_san</field>
+        <field name="arch" type="xml">
+            <form string="Đề xuất mua tài sản">
+                <header>
+                    <button name="action_submit" string="Gửi đề xuất" type="object" 
+                            class="oe_highlight" states="draft"/>
+                    <button name="action_view_approval" string="Xem đơn phê duyệt" type="object" 
+                            class="btn-primary" states="waiting_approval,approved"
+                            attrs="{'invisible': [('phe_duyet_id', '=', False)]}"/>
+                    <button name="action_view_assets" string="Xem tài sản" type="object" 
+                            class="btn-info" states="approved"
+                            attrs="{'invisible': [('tai_san_count', '=', 0)]}"/>
+                    <button name="action_cancel" string="Hủy" type="object" 
+                            states="draft,submitted" confirm="Bạn có chắc muốn hủy đề xuất này?"/>
+                    <button name="action_reset_to_draft" string="Đưa về nháp" type="object" 
+                            states="rejected,cancelled,approved" class="btn-warning"
+                            confirm="Reset sẽ đưa đề xuất về trạng thái nháp để xóa. Bạn có chắc?"/>
+                    <field name="state" widget="statusbar" 
+                           statusbar_visible="draft,submitted,waiting_approval,approved"/>
+                </header>
+                
+                <sheet>
+                    <!-- Alert Box - Cảnh báo về quy trình phê duyệt -->
+                    <div class="alert alert-warning" role="alert" states="draft,submitted">
+                        <strong><i class="fa fa-exclamation-triangle"/> LƯU Ý QUAN TRỌNG:</strong>
+                        <ul class="mb-0">
+                            <li><strong>Đề xuất này CHỈ có thể được phê duyệt tại module Quản lý Tài chính.</strong></li>
+                            <li>Sau khi gửi đề xuất, hệ thống sẽ tự động tạo đơn phê duyệt.</li>
+                            <li>Truy cập: <strong>Menu Tài chính &gt; Phê duyệt mua tài sản</strong> để phê duyệt.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert alert-info" role="alert" states="waiting_approval">
+                        <strong><i class="fa fa-clock-o"/> Trạng thái:</strong> Đang chờ bộ phận tài chính phê duyệt.
+                        <br/>
+                        Bạn có thể nhấn nút "Xem đơn phê duyệt" bên dưới để theo dõi tiến trình.
+                    </div>
+                    
+                    <div class="alert alert-success" role="alert" states="approved">
+                        <strong><i class="fa fa-check-circle"/> Thành công!</strong> Đề xuất đã được phê duyệt bởi bộ phận tài chính.
+                    </div>
+                    
+                    <div class="alert alert-danger" role="alert" states="rejected">
+                        <strong><i class="fa fa-times-circle"/> Từ chối!</strong> Đề xuất đã bị từ chối bởi bộ phận tài chính.
+                    </div>
+                    
+                    <!-- Smart Buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_approval" type="object" class="oe_stat_button" 
+                                icon="fa-check-circle" attrs="{'invisible': [('phe_duyet_id', '=', False)]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Đơn phê duyệt</span>
+                            </div>
+                        </button>
+                        <button name="action_view_assets" type="object" class="oe_stat_button" 
+                                icon="fa-cubes" attrs="{'invisible': [('tai_san_count', '=', 0)]}">
+                            <field name="tai_san_count" widget="statinfo" string="Tài sản"/>
+                        </button>
+                    </div>
+                    
+                    <!-- Title -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="ma_de_xuat" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <group>
+                        <group string="Thông tin chung">
+                            <field name="ten_de_xuat" placeholder="Đề xuất mua laptop cho phòng IT..."/>
+                            <field name="ngay_de_xuat"/>
+                            <field name="nguoi_de_xuat_id" options="{'no_create': True}"/>
+                            <field name="phong_ban_id" options="{'no_create': True}"/>
+                            <field name="ngay_du_kien_nhan"/>
+                        </group>
+                        <group string="Tài chính">
+                            <field name="don_vi_tien_te"/>
+                            <field name="tong_gia_tri" widget="monetary" 
+                                   options="{'currency_field': 'don_vi_tien_te'}"/>
+                            <field name="phe_duyet_id" invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Chi tiết thiết bị" name="details">
+                            <field name="line_ids" context="{'default_don_vi_tinh': 'Chiếc', 'default_so_luong': 1, 'default_pp_khau_hao': 'straight-line', 'default_thoi_gian_su_dung': 5}">
+                                <tree>
+                                    <!-- BỎ editable="bottom" để tránh lỗi '_unknown' object với Many2one field -->
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="ten_thiet_bi"/>
+                                    <field name="danh_muc_ts_id"/>
+                                    <field name="so_luong"/>
+                                    <field name="don_vi_tinh"/>
+                                    <field name="don_gia" widget="monetary"/>
+                                    <field name="thanh_tien" widget="monetary" sum="Tổng"/>
+                                    <field name="pp_khau_hao"/>
+                                    <field name="thoi_gian_su_dung"/>
+                                    <field name="ty_le_khau_hao" string="TL KH (%)" readonly="1"/>
+                                    <field name="nha_cung_cap"/>
+                                </tree>
+                                <form string="Chi tiết thiết bị">
+                                    <group>
+                                        <group>
+                                            <field name="ten_thiet_bi"/>
+                                            <field name="danh_muc_ts_id"/>
+                                            <field name="so_luong"/>
+                                            <field name="don_vi_tinh"/>
+                                            <field name="don_gia"/>
+                                            <field name="thanh_tien"/>
+                                        </group>
+                                        <group>
+                                            <field name="pp_khau_hao"/>
+                                            <field name="thoi_gian_su_dung" 
+                                                   attrs="{'invisible': [('pp_khau_hao', '=', 'none')]}"/>
+                                            <field name="ty_le_khau_hao" 
+                                                   attrs="{'invisible': [('pp_khau_hao', '=', 'none')]}"/>
+                                            <field name="nha_cung_cap"/>
+                                        </group>
+                                    </group>
+                                    <group string="Mô tả chi tiết">
+                                        <field name="mo_ta" nolabel="1"/>
+                                    </group>
+                                    <group string="Thông số kỹ thuật">
+                                        <field name="thong_so_ky_thuat" nolabel="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Lý do &amp; Mô tả" name="description">
+                            <group>
+                                <field name="ly_do" nolabel="1" placeholder="Nhập lý do đề xuất mua thiết bị..."/>
+                            </group>
+                            <separator string="Mô tả chi tiết"/>
+                            <field name="mo_ta" nolabel="1"/>
+                        </page>
+                        
+                        <page string="File đính kèm" name="attachments">
+                            <field name="dinh_kem_ids" widget="many2many_binary" nolabel="1"/>
+                        </page>
+                        
+                        <page string="Ghi chú" name="notes">
+                            <field name="ghi_chu" nolabel="1" placeholder="Ghi chú thêm..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========== TREE VIEW ========== -->
+    <record id="view_de_xuat_mua_tai_san_tree" model="ir.ui.view">
+        <field name="name">de.xuat.mua.tai.san.tree</field>
+        <field name="model">de_xuat_mua_tai_san</field>
+        <field name="arch" type="xml">
+            <tree string="Đề xuất mua tài sản" 
+                  decoration-info="state=='draft'"
+                  decoration-warning="state=='submitted'"
+                  decoration-primary="state=='waiting_approval'"
+                  decoration-success="state=='approved'"
+                  decoration-danger="state=='rejected'"
+                  decoration-muted="state=='cancelled'">
+                <field name="ma_de_xuat"/>
+                <field name="ten_de_xuat"/>
+                <field name="ngay_de_xuat"/>
+                <field name="nguoi_de_xuat_id"/>
+                <field name="phong_ban_id"/>
+                <field name="tong_gia_tri" sum="Tổng" widget="monetary"/>
+                <field name="don_vi_tien_te" invisible="1"/>
+                <field name="ngay_du_kien_nhan"/>
+                <field name="state" widget="badge"
+                       decoration-info="state=='draft'"
+                       decoration-warning="state in ('submitted', 'waiting_approval')"
+                       decoration-success="state=='approved'"
+                       decoration-danger="state=='rejected'"
+                       decoration-muted="state=='cancelled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ========== SEARCH VIEW ========== -->
+    <record id="view_de_xuat_mua_tai_san_search" model="ir.ui.view">
+        <field name="name">de.xuat.mua.tai.san.search</field>
+        <field name="model">de_xuat_mua_tai_san</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm đề xuất mua tài sản">
+                <field name="ma_de_xuat"/>
+                <field name="ten_de_xuat"/>
+                <field name="nguoi_de_xuat_id"/>
+                <field name="phong_ban_id"/>
+                
+                <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Đã gửi" name="submitted" domain="[('state', '=', 'submitted')]"/>
+                <filter string="Chờ phê duyệt" name="waiting_approval" domain="[('state', '=', 'waiting_approval')]"/>
+                <filter string="Đã phê duyệt" name="approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Từ chối" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                
+                <separator/>
+                <filter string="Đề xuất của tôi" name="my_proposals" 
+                        domain="[('nguoi_de_xuat_id', '=', uid)]"/>
+                
+                <separator/>
+                <filter string="Tháng này" name="this_month" 
+                        domain="[('ngay_de_xuat', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')),
+                                ('ngay_de_xuat', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Năm nay" name="this_year" 
+                        domain="[('ngay_de_xuat', '&gt;=', (context_today() - relativedelta(day=1, month=1)).strftime('%Y-%m-%d'))]"/>
+                
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Trạng thái" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Người đề xuất" name="group_nguoi_de_xuat" context="{'group_by': 'nguoi_de_xuat_id'}"/>
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by': 'phong_ban_id'}"/>
+                    <filter string="Tháng" name="group_month" context="{'group_by': 'ngay_de_xuat:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ========== KANBAN VIEW ========== -->
+    <record id="view_de_xuat_mua_tai_san_kanban" model="ir.ui.view">
+        <field name="name">de.xuat.mua.tai.san.kanban</field>
+        <field name="model">de_xuat_mua_tai_san</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" default_group_by="state">
+                <field name="ma_de_xuat"/>
+                <field name="ten_de_xuat"/>
+                <field name="nguoi_de_xuat_id"/>
+                <field name="tong_gia_tri"/>
+                <field name="state"/>
+                <field name="ngay_de_xuat"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="ma_de_xuat"/>
+                                    </strong>
+                                    <br/>
+                                    <span class="o_kanban_record_subtitle">
+                                        <field name="ten_de_xuat"/>
+                                    </span>
+                                </div>
+                                <span class="float-right badge badge-pill">
+                                    <field name="state" widget="label"/>
+                                </span>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <field name="nguoi_de_xuat_id" widget="many2one_avatar_user"/>
+                                <br/>
+                                <i class="fa fa-calendar"/> <field name="ngay_de_xuat"/>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <strong><field name="tong_gia_tri" widget="monetary"/></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ========== ACTION ========== -->
+    <record id="action_de_xuat_mua_tai_san" model="ir.actions.act_window">
+        <field name="name">Đề xuất mua tài sản</field>
+        <field name="res_model">de_xuat_mua_tai_san</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'search_default_my_proposals': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo đề xuất mua tài sản mới
+            </p>
+            <p>
+                <strong>Quy trình đề xuất mua thiết bị:</strong>
+            </p>
+            <ol>
+                <li><strong>Tạo đề xuất</strong> - Nhập thông tin thiết bị cần mua tại đây</li>
+                <li><strong>Gửi đề xuất</strong> - Hệ thống tự động tạo đơn phê duyệt ở module Tài chính</li>
+                <li><strong>Phê duyệt</strong> - Bộ phận Tài chính phê duyệt tại menu: <em>Tài chính &gt; Phê duyệt mua tài sản</em></li>
+                <li><strong>Tạo tài sản</strong> - Hệ thống tự động tạo tài sản và ghi nhận tài chính</li>
+            </ol>
+            <p class="text-muted">
+                <strong>Lưu ý:</strong> Module này CHỈ dùng để tạo và gửi đề xuất. 
+                Không thể tự phê duyệt đề xuất tại đây.
+            </p>
+        </field>
+    </record>
+
+</odoo>

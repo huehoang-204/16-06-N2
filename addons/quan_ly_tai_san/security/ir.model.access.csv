@@ -3,7 +3,7 @@ access_danh_muc_tai_san_all,danh_muc_tai_san.all,model_danh_muc_tai_san,base.gro
 access_tai_san_all,tai_san.all,model_tai_san,base.group_user,1,1,1,1
 access_kiem_ke_tai_san_line_all,kiem_ke_tai_san_line.all,model_kiem_ke_tai_san_line,,1,1,1,1
 access_kiem_ke_tai_san_all,kiem_ke_tai_san.all,model_kiem_ke_tai_san,,1,1,1,1
-access_lich_su_khau_hao_all,lich_su_khau_hao.all,model_lich_su_khau_hao,,1,1,1,1
+
 access_luan_chuyen_tai_san_line_all,luan.chuyen.tai.san.line.all,model_luan_chuyen_tai_san_line,,1,1,1,1
 access_luan_chuyen_tai_san_all,luan_chuyen_tai_san.all,model_luan_chuyen_tai_san,,1,1,1,1
 access_muon_tra_tai_san_all,muon_tra_tai_san.all,model_muon_tra_tai_san,,1,1,1,1
@@ -14,3 +14,6 @@ access_don_muon_tai_san_all,don_muon_tai_san.all,model_don_muon_tai_san,,1,1,1,1
 access_don_muon_tai_san_line_all,don_muon_tai_san_line.all,model_don_muon_tai_san_line,,1,1,1,1
 access_asset_dashboard_all,asset.dashboard.all,model_asset_dashboard,,1,0,0,0
 access_lich_su_ky_thuat_all,lich_su_ky_thuat.all,model_lich_su_ky_thuat,,1,1,1,1
+access_lich_su_khau_hao_all,lich_su_khau_hao.all,model_lich_su_khau_hao,base.group_user,1,1,1,1
+access_de_xuat_mua_tai_san_all,de_xuat_mua_tai_san.all,model_de_xuat_mua_tai_san,base.group_user,1,1,1,1
+access_de_xuat_mua_tai_san_line_all,de_xuat_mua_tai_san_line.all,model_de_xuat_mua_tai_san_line,base.group_user,1,1,1,1

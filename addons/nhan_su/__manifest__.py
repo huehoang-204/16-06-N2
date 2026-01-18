@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/qlns_demo.xml',
         'views/nhan_vien.xml',
          'views/phong_ban.xml',
          'views/chuc_vu.xml',
@@ -35,4 +36,7 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'installable': True,
+    'application': True,
+
 }

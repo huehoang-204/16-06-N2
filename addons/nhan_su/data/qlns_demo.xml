@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== CHỨC VỤ MẪU ==================== -->
+    <record id="demo_chuc_vu_giam_doc" model="chuc_vu">
+        <field name="ma_chuc_vu">CV001</field>
+        <field name="ten_chuc_vu">Giám đốc</field>
+    </record>
+    
+    <record id="demo_chuc_vu_pho_giam_doc" model="chuc_vu">
+        <field name="ma_chuc_vu">CV002</field>
+        <field name="ten_chuc_vu">Phó giám đốc</field>
+    </record>
+    
+    <record id="demo_chuc_vu_truong_phong" model="chuc_vu">
+        <field name="ma_chuc_vu">CV003</field>
+        <field name="ten_chuc_vu">Trưởng phòng</field>
+    </record>
+    
+    <record id="demo_chuc_vu_pho_phong" model="chuc_vu">
+        <field name="ma_chuc_vu">CV004</field>
+        <field name="ten_chuc_vu">Phó phòng</field>
+    </record>
+    
+    <record id="demo_chuc_vu_nhan_vien" model="chuc_vu">
+        <field name="ma_chuc_vu">CV005</field>
+        <field name="ten_chuc_vu">Nhân viên</field>
+    </record>
+    
+    <record id="demo_chuc_vu_chuyen_vien" model="chuc_vu">
+        <field name="ma_chuc_vu">CV006</field>
+        <field name="ten_chuc_vu">Chuyên viên</field>
+    </record>
+    
+    <record id="demo_chuc_vu_ke_toan_truong" model="chuc_vu">
+        <field name="ma_chuc_vu">CV007</field>
+        <field name="ten_chuc_vu">Kế toán trưởng</field>
+    </record>
+    
+    <!-- ==================== PHÒNG BAN MẪU ==================== -->
+    <record id="demo_phong_ban_giam_doc" model="phong_ban">
+        <field name="ma_phong_ban">PB001</field>
+        <field name="ten_phong_ban">Ban Giám đốc</field>
+    </record>
+    
+    <record id="demo_phong_ban_hanh_chinh" model="phong_ban">
+        <field name="ma_phong_ban">PB002</field>
+        <field name="ten_phong_ban">Phòng Hành chính - Tổng hợp</field>
+    </record>
+    
+    <record id="demo_phong_ban_ke_toan" model="phong_ban">
+        <field name="ma_phong_ban">PB003</field>
+        <field name="ten_phong_ban">Phòng Kế toán - Tài chính</field>
+    </record>
+    
+    <record id="demo_phong_ban_kinh_doanh" model="phong_ban">
+        <field name="ma_phong_ban">PB004</field>
+        <field name="ten_phong_ban">Phòng Kinh doanh</field>
+    </record>
+    
+    <record id="demo_phong_ban_ky_thuat" model="phong_ban">
+        <field name="ma_phong_ban">PB005</field>
+        <field name="ten_phong_ban">Phòng Kỹ thuật</field>
+    </record>
+    
+    <record id="demo_phong_ban_nhan_su" model="phong_ban">
+        <field name="ma_phong_ban">PB006</field>
+        <field name="ten_phong_ban">Phòng Nhân sự</field>
+    </record>
+    
+    <!-- ==================== NHÂN VIÊN MẪU ==================== -->
+    <record id="demo_nhan_vien_1" model="nhan_vien">
+        <field name="ma_dinh_danh">NV001</field>
+        <field name="ho_ten">Nguyễn Văn An</field>
+        <field name="ngay_sinh">1980-05-15</field>
+        <field name="que_quan">Hà Nội</field>
+        <field name="email">nguyen.van.an@company.com</field>
+        <field name="so_dien_thoai">0912345678</field>
+    </record>
+    
+    <record id="demo_nhan_vien_2" model="nhan_vien">
+        <field name="ma_dinh_danh">NV002</field>
+        <field name="ho_ten">Trần Thị Bình</field>
+        <field name="ngay_sinh">1985-08-22</field>
+        <field name="que_quan">Hải Phòng</field>
+        <field name="email">tran.thi.binh@company.com</field>
+        <field name="so_dien_thoai">0923456789</field>
+    </record>
+    
+    <record id="demo_nhan_vien_3" model="nhan_vien">
+        <field name="ma_dinh_danh">NV003</field>
+        <field name="ho_ten">Lê Văn Cường</field>
+        <field name="ngay_sinh">1990-03-10</field>
+        <field name="que_quan">Đà Nẵng</field>
+        <field name="email">le.van.cuong@company.com</field>
+        <field name="so_dien_thoai">0934567890</field>
+    </record>
+    
+    <record id="demo_nhan_vien_4" model="nhan_vien">
+        <field name="ma_dinh_danh">NV004</field>
+        <field name="ho_ten">Phạm Thị Dung</field>
+        <field name="ngay_sinh">1992-11-30</field>
+        <field name="que_quan">TP.Hồ Chí Minh</field>
+        <field name="email">pham.thi.dung@company.com</field>
+        <field name="so_dien_thoai">0945678901</field>
+    </record>
+    
+    <record id="demo_nhan_vien_5" model="nhan_vien">
+        <field name="ma_dinh_danh">NV005</field>
+        <field name="ho_ten">Hoàng Văn Em</field>
+        <field name="ngay_sinh">1995-07-18</field>
+        <field name="que_quan">Cần Thơ</field>
+        <field name="email">hoang.van.em@company.com</field>
+        <field name="so_dien_thoai">0956789012</field>
+    </record>
+    
+    <!-- ==================== LỊCH SỬ CÔNG TÁC MẪU ==================== -->
+    <!-- Lịch sử công tác cho Nguyễn Văn An (Giám đốc) -->
+    <record id="demo_lich_su_an_1" model="lich_su_cong_tac">
+        <field name="time_start">2020-01-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_giam_doc"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_giam_doc"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_1"/>
+    </record>
+    
+    <!-- Lịch sử công tác cho Trần Thị Bình (Phó giám đốc) -->
+    <record id="demo_lich_su_binh_1" model="lich_su_cong_tac">
+        <field name="time_start">2021-03-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_giam_doc"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_pho_giam_doc"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_2"/>
+    </record>
+    
+    <!-- Lịch sử công tác cho Lê Văn Cường (Trưởng phòng Kinh doanh) -->
+    <record id="demo_lich_su_cuong_1" model="lich_su_cong_tac">
+        <field name="time_start">2022-06-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_kinh_doanh"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_truong_phong"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_3"/>
+    </record>
+    
+    <record id="demo_lich_su_cuong_2" model="lich_su_cong_tac">
+        <field name="time_start">2020-01-01</field>
+        <field name="time_end">2022-05-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_kinh_doanh"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_nhan_vien"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_3"/>
+    </record>
+    
+    <!-- Lịch sử công tác cho Phạm Thị Dung (Kế toán trưởng) -->
+    <record id="demo_lich_su_dung_1" model="lich_su_cong_tac">
+        <field name="time_start">2023-01-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_ke_toan"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_ke_toan_truong"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_4"/>
+    </record>
+    
+    <record id="demo_lich_su_dung_2" model="lich_su_cong_tac">
+        <field name="time_start">2021-07-01</field>
+        <field name="time_end">2022-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_ke_toan"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_chuyen_vien"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_4"/>
+    </record>
+    
+    <!-- Lịch sử công tác cho Hoàng Văn Em (Nhân viên Kỹ thuật) -->
+    <record id="demo_lich_su_em_1" model="lich_su_cong_tac">
+        <field name="time_start">2023-09-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_ky_thuat"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_nhan_vien"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_5"/>
+    </record>
+    
+    <!-- ==================== DỮ LIỆU BỔ SUNG ==================== -->
+    <!-- Thêm một số nhân viên khác -->
+    <record id="demo_nhan_vien_6" model="nhan_vien">
+        <field name="ma_dinh_danh">NV006</field>
+        <field name="ho_ten">Vũ Thị Phương</field>
+        <field name="ngay_sinh">1993-04-25</field>
+        <field name="que_quan">Nam Định</field>
+        <field name="email">vu.thi.phuong@company.com</field>
+        <field name="so_dien_thoai">0967890123</field>
+    </record>
+    
+    <record id="demo_nhan_vien_7" model="nhan_vien">
+        <field name="ma_dinh_danh">NV007</field>
+        <field name="ho_ten">Đỗ Minh Quân</field>
+        <field name="ngay_sinh">1988-12-05</field>
+        <field name="que_quan">Thái Bình</field>
+        <field name="email">do.minh.quan@company.com</field>
+        <field name="so_dien_thoai">0978901234</field>
+    </record>
+    
+    <!-- Lịch sử công tác cho Vũ Thị Phương (Chuyên viên Nhân sự) -->
+    <record id="demo_lich_su_phuong_1" model="lich_su_cong_tac">
+        <field name="time_start">2022-08-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_nhan_su"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_chuyen_vien"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_6"/>
+    </record>
+    
+    <!-- Lịch sử công tác cho Đỗ Minh Quân (Phó phòng Hành chính) -->
+    <record id="demo_lich_su_quan_1" model="lich_su_cong_tac">
+        <field name="time_start">2023-02-01</field>
+        <field name="time_end">2024-12-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_hanh_chinh"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_pho_phong"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_7"/>
+    </record>
+    
+    <!-- Lịch sử cũ cho Đỗ Minh Quân -->
+    <record id="demo_lich_su_quan_2" model="lich_su_cong_tac">
+        <field name="time_start">2020-01-01</field>
+        <field name="time_end">2023-01-31</field>
+        <field name="phong_ban_id" ref="demo_phong_ban_hanh_chinh"/>
+        <field name="chuc_vu_id" ref="demo_chuc_vu_nhan_vien"/>
+        <field name="nhan_vien_id" ref="demo_nhan_vien_7"/>
+    </record>
+</odoo>

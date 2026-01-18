@@ -46,7 +46,7 @@ class MuonTraTaiSan(models.Model):
             muon_tra_lines = []
             for line in don_muon.don_muon_tai_san_ids:
                 muon_tra_lines.append((0, 0, {
-                    'phan_bo_tai_san_id': line.phan_bo_tai_san_id.id,
+                    'phan_bo_tai_san_id': line.phan_bo_tai_san_id.id if line.phan_bo_tai_san_id else False,
                     'ghi_chu': line.ghi_chu
                 }))
 
@@ -73,7 +73,7 @@ class MuonTraTaiSan(models.Model):
         for record in self:
             da_muon_ids = record.muon_tra_line_ids.mapped('phan_bo_tai_san_id').ids
             ds_tai_san = self.env['phan_bo_tai_san'].search([
-                ('phong_ban_id', '=', record.phong_ban_cho_muon_id.id),
+                ('phong_ban_id', '=', record.phong_ban_cho_muon_id.id if record.phong_ban_cho_muon_id else False),
                 ('id', 'not in', da_muon_ids)
             ])
             record.ds_tai_san_chua_muon = ds_tai_san

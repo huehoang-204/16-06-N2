@@ -36,5 +36,12 @@
         <menuitem id="don_muon_tai_san_menu" name="Đơn mượn tài sản" parent="menu_muon_tra_tai_san" action="don_muon_tai_san_action" sequence="1" />
         <menuitem id="muon_tra_tai_san_menu" name="Quản lý mượn trả tài sản" parent="menu_muon_tra_tai_san" action="muon_tra_tai_san_action" sequence="2" />
         <!--  -->
+
+        <!-- Đề xuất mua tài sản -->
+        <menuitem id="menu_de_xuat_mua_tai_san"
+                  name="Đề xuất mua tài sản"
+                  parent="menu_root"
+                  action="action_de_xuat_mua_tai_san"
+                  sequence="6"/>
 	</data>
 </odoo>

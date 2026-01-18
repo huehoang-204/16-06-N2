@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="but_toan_sequence" model="ir.sequence">
+            <field name="name">Bút toán</field>
+            <field name="code">but_toan.sequence</field>
+            <field name="prefix">BT</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="phe_duyet_mua_tai_san_sequence" model="ir.sequence">
+            <field name="name">Phê duyệt mua tài sản</field>
+            <field name="code">phe_duyet_mua_tai_san</field>
+            <field name="prefix">PDTS</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

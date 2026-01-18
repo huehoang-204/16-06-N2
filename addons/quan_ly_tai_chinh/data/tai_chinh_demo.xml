@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    <!-- ==================== TÀI KHOẢN KẾ TOÁN MẪU ==================== -->
+    <!-- Tài khoản nợ (tài khoản chi phí) -->
+    <record id="demo_account_chi_phi_khau_hao" model="account.account">
+        <field name="name">Chi phí khấu hao tài sản cố định</field>
+        <field name="code">6421</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+        <field name="reconcile" eval="False"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <record id="demo_account_chi_phi_van_phong" model="account.account">
+        <field name="name">Chi phí văn phòng phẩm</field>
+        <field name="code">6422</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+        <field name="reconcile" eval="False"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <record id="demo_account_chi_phi_luong" model="account.account">
+        <field name="name">Chi phí tiền lương</field>
+        <field name="code">6423</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+        <field name="reconcile" eval="False"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <record id="demo_account_chi_phi_dien_nuoc" model="account.account">
+        <field name="name">Chi phí điện nước</field>
+        <field name="code">6424</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+        <field name="reconcile" eval="False"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <!-- Tài khoản có (tài khoản tích lũy) -->
+    <record id="demo_account_khau_hao_luy_ke" model="account.account">
+        <field name="name">Khấu hao lũy kế tài sản cố định</field>
+        <field name="code">214</field>
+        <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <record id="demo_account_phai_tra_nhan_vien" model="account.account">
+        <field name="name">Phải trả nhân viên</field>
+        <field name="code">3311</field>
+        <field name="user_type_id" ref="account.data_account_type_payable"/>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <record id="demo_account_phai_tra_nha_cung_cap" model="account.account">
+        <field name="name">Phải trả nhà cung cấp</field>
+        <field name="code">3312</field>
+        <field name="user_type_id" ref="account.data_account_type_payable"/>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <!-- ==================== KHẤU HAO TÀI SẢN MẪU ==================== -->
+    <!-- Khấu hao cho Laptop Dell -->
+    <record id="demo_khau_hao_laptop_1" model="khau_hao_tai_san">
+        <field name="tai_san_id" ref="quan_ly_tai_san.demo_tai_san_laptop_1"/>
+        <field name="ngay_bat_dau">2023-02-01</field>
+        <field name="so_nam_khau_hao">5</field>
+        <field name="trang_thai">dang_khau_hao</field>
+    </record>
+    
+    <!-- Khấu hao cho Laptop HP -->
+    <record id="demo_khau_hao_laptop_2" model="khau_hao_tai_san">
+        <field name="tai_san_id" ref="quan_ly_tai_san.demo_tai_san_laptop_2"/>
+        <field name="ngay_bat_dau">2023-04-01</field>
+        <field name="so_nam_khau_hao">4</field>
+        <field name="trang_thai">dang_khau_hao</field>
+    </record>
+    
+    <!-- Khấu hao cho Máy in -->
+    <record id="demo_khau_hao_may_in" model="khau_hao_tai_san">
+        <field name="tai_san_id" ref="quan_ly_tai_san.demo_tai_san_may_in"/>
+        <field name="ngay_bat_dau">2022-12-01</field>
+        <field name="so_nam_khau_hao">5</field>
+        <field name="trang_thai">dang_khau_hao</field>
+    </record>
+    
+    <!-- Khấu hao cho Xe ô tô -->
+    <record id="demo_khau_hao_xe_oto" model="khau_hao_tai_san">
+        <field name="tai_san_id" ref="quan_ly_tai_san.demo_tai_san_xe_oto"/>
+        <field name="ngay_bat_dau">2021-07-01</field>
+        <field name="so_nam_khau_hao">10</field>
+        <field name="trang_thai">dang_khau_hao</field>
+    </record>
+    
+    <!-- ==================== LỊCH KHẤU HAO MẪU ==================== -->
+    <!-- Lịch khấu hao năm 1 cho Laptop Dell -->
+    <record id="demo_lich_khau_hao_laptop1_nam1" model="lich_khau_hao">
+        <field name="khau_hao_id" ref="demo_khau_hao_laptop_1"/>
+        <field name="nam">1</field>
+        <field name="ngay_khau_hao">2023-12-31</field>
+        <field name="gia_tri_khau_hao">5000000</field>
+        <field name="da_ghi_nhan" eval="True"/>
+    </record>
+    
+    <record id="demo_lich_khau_hao_laptop1_nam2" model="lich_khau_hao">
+        <field name="khau_hao_id" ref="demo_khau_hao_laptop_1"/>
+        <field name="nam">2</field>
+        <field name="ngay_khau_hao">2024-12-31</field>
+        <field name="gia_tri_khau_hao">5000000</field>
+        <field name="da_ghi_nhan" eval="False"/>
+    </record>
+    
+    <!-- Lịch khấu hao cho Laptop HP -->
+    <record id="demo_lich_khau_hao_laptop2_nam1" model="lich_khau_hao">
+        <field name="khau_hao_id" ref="demo_khau_hao_laptop_2"/>
+        <field name="nam">1</field>
+        <field name="ngay_khau_hao">2023-12-31</field>
+        <field name="gia_tri_khau_hao">4500000</field>
+        <field name="da_ghi_nhan" eval="True"/>
+    </record>
+    
+    <!-- ==================== BÚT TOÁN MẪU ==================== -->
+    <!-- Bút toán khấu hao Laptop Dell tháng 1/2024 -->
+    <record id="demo_but_toan_khau_hao_1" model="but_toan">
+        <field name="so_but_toan">BT202401001</field>
+        <field name="ngay_but_toan">2024-01-31</field>
+        <field name="mo_ta">Bút toán khấu hao Laptop Dell tháng 1/2024</field>
+        <field name="khau_hao_id" ref="demo_khau_hao_laptop_1"/>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_khau_hao"/>
+        <field name="tai_khoan_co_id" ref="demo_account_khau_hao_luy_ke"/>
+        <field name="so_tien">416667</field>
+        <field name="trang_thai">posted</field>
+    </record>
+    
+    <!-- Bút toán khấu hao Laptop HP tháng 1/2024 -->
+    <record id="demo_but_toan_khau_hao_2" model="but_toan">
+        <field name="so_but_toan">BT202401002</field>
+        <field name="ngay_but_toan">2024-01-31</field>
+        <field name="mo_ta">Bút toán khấu hao Laptop HP tháng 1/2024</field>
+        <field name="khau_hao_id" ref="demo_khau_hao_laptop_2"/>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_khau_hao"/>
+        <field name="tai_khoan_co_id" ref="demo_account_khau_hao_luy_ke"/>
+        <field name="so_tien">375000</field>
+        <field name="trang_thai">posted</field>
+    </record>
+    
+    <!-- Bút toán chi lương tháng 1/2024 -->
+    <record id="demo_but_toan_luong" model="but_toan">
+        <field name="so_but_toan">BT202401003</field>
+        <field name="ngay_but_toan">2024-01-31</field>
+        <field name="mo_ta">Bút toán chi lương nhân viên tháng 1/2024</field>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_luong"/>
+        <field name="tai_khoan_co_id" ref="demo_account_phai_tra_nhan_vien"/>
+        <field name="so_tien">150000000</field>
+        <field name="trang_thai">posted</field>
+    </record>
+    
+    <!-- Bút toán mua văn phòng phẩm -->
+    <record id="demo_but_toan_van_phong_pham" model="but_toan">
+        <field name="so_but_toan">BT202401004</field>
+        <field name="ngay_but_toan">2024-01-15</field>
+        <field name="mo_ta">Bút toán mua văn phòng phẩm tháng 1/2024</field>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_van_phong"/>
+        <field name="tai_khoan_co_id" ref="demo_account_phai_tra_nha_cung_cap"/>
+        <field name="so_tien">5000000</field>
+        <field name="trang_thai">posted</field>
+    </record>
+    
+    <!-- Bút toán chi phí điện nước -->
+    <record id="demo_but_toan_dien_nuoc" model="but_toan">
+        <field name="so_but_toan">BT202401005</field>
+        <field name="ngay_but_toan">2024-01-20</field>
+        <field name="mo_ta">Bút toán chi phí điện nước tháng 1/2024</field>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_dien_nuoc"/>
+        <field name="tai_khoan_co_id" ref="demo_account_phai_tra_nha_cung_cap"/>
+        <field name="so_tien">8000000</field>
+        <field name="trang_thai">posted</field>
+    </record>
+    
+    <!-- Bút toán khấu hao xe ô tô -->
+    <record id="demo_but_toan_khau_hao_xe" model="but_toan">
+        <field name="so_but_toan">BT202401006</field>
+        <field name="ngay_but_toan">2024-01-31</field>
+        <field name="mo_ta">Bút toán khấu hao xe ô tô tháng 1/2024</field>
+        <field name="khau_hao_id" ref="demo_khau_hao_xe_oto"/>
+        <field name="tai_khoan_no_id" ref="demo_account_chi_phi_khau_hao"/>
+        <field name="tai_khoan_co_id" ref="demo_account_khau_hao_luy_ke"/>
+        <field name="so_tien">6666667</field>
+        <field name="trang_thai">draft</field>
+    </record>
+    
+    
+    <!-- ==================== SEQUENCE CHO BÚT TOÁN ==================== -->
+    <record id="seq_but_toan" model="ir.sequence">
+        <field name="name">Sequence Bút toán</field>
+        <field name="code">but_toan.sequence</field>
+        <field name="prefix">BT%(year)s%(month)s</field>
+        <field name="padding">3</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <!-- ==================== DỮ LIỆU TÍCH HỢP VỚI MODULE ACCOUNT ==================== -->
+    <!-- Thêm tài khoản mẫu cho Odoo Accounting (nếu chưa có) -->
+    <record id="demo_data_account_type_expenses" model="account.account.type">
+        <field name="name">Chi phí</field>
+        <field name="type">other</field>
+        <field name="internal_group">expense</field>
+    </record>
+    
+    <record id="demo_data_account_type_fixed_assets" model="account.account.type">
+        <field name="name">Tài sản cố định</field>
+        <field name="type">other</field>
+        <field name="internal_group">asset</field>
+    </record>
+    
+    <record id="demo_data_account_type_payable" model="account.account.type">
+        <field name="name">Phải trả</field>
+        <field name="type">other</field>
+        <field name="internal_group">liability</field>
+    </record>
+    
+    <!-- Tạo journal mẫu cho kế toán -->
+    <record id="demo_journal_general" model="account.journal">
+        <field name="name">Nhật ký chung</field>
+        <field name="code">NKCH</field>
+        <field name="type">general</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    
+    <!-- ==================== DỮ LIỆU TỔNG HỢP ==================== -->
+    <!-- Báo cáo tổng hợp chi phí -->
+    <record id="demo_bao_cao_chi_phi_thang1" model="bao_cao_tai_chinh">
+        <field name="name">Báo cáo chi phí tháng 1/2024</field>
+        <field name="thang">1</field>
+        <field name="nam">2024</field>
+        <field name="tong_chi_phi">171000000</field>
+        <field name="chi_phi_khau_hao">791667</field>
+        <field name="chi_phi_luong">150000000</field>
+        <field name="chi_phi_van_phong">13000000</field>
+        <field name="trang_thai">completed</field>
+    </record>
+    
+    <!-- Cập nhật giá trị tài sản sau khấu hao -->
+    <function model="tai_san" name="write">
+        <value model="tai_san" eval="[ref('quan_ly_tai_san.demo_tai_san_laptop_1')]"/>
+        <value eval="{'gia_tri_hien_tai': 20000000}"/>
+    </function>
+    
+    <function model="tai_san" name="write">
+        <value model="tai_san" eval="[ref('quan_ly_tai_san.demo_tai_san_laptop_2')]"/>
+        <value eval="{'gia_tri_hien_tai': 15000000}"/>
+    </function>
+    </data>
+</odoo>

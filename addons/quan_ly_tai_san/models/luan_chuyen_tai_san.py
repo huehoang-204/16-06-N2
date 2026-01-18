@@ -11,8 +11,8 @@ class LuanChuyenTaiSan(models.Model):
     ]
 
     ma_phieu_luan_chuyen = fields.Char('Mã phiếu',default='LCTS-', required=True)
-    bo_phan_nguon = fields.Many2one('phong_ban', string='Bộ phận hiện tại', required=True, ondelete='restrict')
-    bo_phan_dich = fields.Many2one('phong_ban', string='Bộ phận chuyển tới', required=True, ondelete='restrict')
+    bo_phan_nguon = fields.Many2one('phong_ban', string='Bộ phận hiện tại', required=False, ondelete='set null')
+    bo_phan_dich = fields.Many2one('phong_ban', string='Bộ phận chuyển tới', required=False, ondelete='set null')
     thoi_gian_luan_chuyen = fields.Datetime('Thời gian luân chuyển', required=True, default=fields.Datetime.now)
     ghi_chu = fields.Char('Lý do luân chuyển', default='', required=True)
 
@@ -43,8 +43,8 @@ class LuanChuyenTaiSan(models.Model):
                     if phan_bo_tai_san:
                         # Cập nhật phong_ban_id sang bộ phận đích
                         phan_bo_tai_san.write({
-                            'phong_ban_id': record.bo_phan_dich.id,
-                            'vi_tri_tai_san_id': record.bo_phan_dich.id,
+                            'phong_ban_id': record.bo_phan_dich.id if record.bo_phan_dich else False,
+                            'vi_tri_tai_san_id': record.bo_phan_dich.id if record.bo_phan_dich else False,
                             'ngay_phat': fields.Date.today(),
                             'ghi_chu': f"Lưu ý: Phiếu luân chuyển tài sản - {record.ma_phieu_luan_chuyen}"
                         })
