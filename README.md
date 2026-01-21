@@ -118,46 +118,50 @@ Giao diện tổng hợp với thiết kế card-based hiện đại:
 - **Thống kê kế toán quản trị**: Tổng chi phí, chi phí tháng hiện tại
 - **Biểu đồ dữ liệu**: 4 loại biểu đồ trực quan (Doughnut, Pie, Line, Bar)
 - Nút action nhanh để điều hướng đến danh sách liên quan
+<img width="1707" height="849" alt="image" src="https://github.com/user-attachments/assets/062595d5-4d94-4386-8426-f8c0859c7635" />
+
 
 #### 2. Khấu hao tài sản
 Phân bổ chi phí mua tài sản vào nhiều kỳ kế toán:
 - Tuân thủ nguyên tắc "Phù hợp" của kế toán
 - Tính toán khấu hao theo phương pháp đường thẳng
 - Tự động sinh bút toán khấu hao hàng kỳ
+<img width="1747" height="393" alt="image" src="https://github.com/user-attachments/assets/9c7512aa-364f-4fa9-8311-6c741a73caf7" />
+
 
 #### 3. Bút toán khấu hao
 Hành động pháp lý để ghi nhận chi phí vào Sổ cái:
 - Không có bút toán → báo cáo tài chính sai
 - Tự động tạo bút toán khấu hao từ lịch khấu hao
 - Kiểm soát các bút toán theo trạng thái (Nháp, Đã ghi nhận)
+<img width="1740" height="435" alt="image" src="https://github.com/user-attachments/assets/12aa559b-c033-4811-b686-02a5c059e89c" />
 
-#### 4. Đơn đề xuất mua tài sản
-Kiểm soát chi tiêu đầu vào (CAPEX):
-- Tạo đơn đề xuất mua với bOMM chi tiết
-- Duyệt theo quy trình phê duyệt có thẩm quyền
-- Ngăn chặn mua sắm vượt ngân sách
 
-#### 5. Tài khoản quản trị
+#### 4. Tài khoản quản trị
 Phân bổ chi phí theo bộ phận:
 - Ghi nhận chi phí vận hành từng phòng ban
 - Phân tích "Chi phí này của bộ phận nào?"
 - Hỗ trợ báo cáo chi phí theo đơn vị
+<img width="1737" height="242" alt="image" src="https://github.com/user-attachments/assets/2652593c-36c8-446d-86e3-88ad4d57a75a" />
 
-#### 6. Báo cáo tài chính
+
+#### 5. Báo cáo tài chính
 Tạo các báo cáo tuân thủ tiêu chuẩn kế toán:
 - Bảng cân đối kế toán
 - Báo cáo kết quả kinh doanh
 - Báo cáo dòng tiền
 - Chi tiết khấu hao và giá trị tài sản
+<img width="1735" height="225" alt="image" src="https://github.com/user-attachments/assets/9a82d305-d0c1-40b4-ba5f-5edd20a6e92a" />
 
-#### 7. Dự báo ngân sách mua sắm **(NEW)**
+
+#### 6. Dự báo ngân sách mua sắm **(NEW)**
 Lập kế hoạch tài chính dài hạn:
 - Dự báo nhu cầu thay thế tài sản cũ trong năm
 - Tính toán ngân sách CAPEX dựa trên lịch khấu hao
 - Tích hợp lịch sử mượn/trả để xác định tài sản cần thanh lý
 - Xác định tài sản nào thanh lý được giá tốt nhất
 
-#### 8. Quản lý đơn mua tài sản
+#### 7. Quản lý đơn mua tài sản
 Theo dõi toàn bộ quy trình mua sắm:
 - Từ đơn đề xuất → phê duyệt → hợp đồng → nhận hàng → thanh toán
 - Liên kết với kế toán cho phép ghi nhận tài sản vào sổ cái ngay khi nhận hàng
