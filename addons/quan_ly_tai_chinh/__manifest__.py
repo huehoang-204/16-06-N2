@@ -26,13 +26,14 @@
     'data': [
         'security/ir.model.access.csv',
         'data/sequence.xml',
+        'views/dashboard_tai_chinh_views.xml',
         'data/tai_chinh_demo.xml',  # ← THÊM vào đây để luôn load
         'views/khau_hao_tai_san_views.xml',
         'views/but_toan_views.xml',
         'views/tai_khoan_quan_tri_views.xml',
         'views/bao_cao_tai_chinh_views.xml',
         'views/phe_duyet_mua_tai_san_views.xml',
-        'views/dashboard_tai_chinh_views.xml',
+        
         'views/tinh_toan_khau_hao_views.xml',
         'views/wizard_sao_chep_views.xml',
         'report/bao_cao_tai_chinh_report.xml',
@@ -40,7 +41,9 @@
     ],
     'assets': {
         'web.assets_backend': [
+            'quan_ly_tai_chinh/static/css/dashboard_style.css',
             'quan_ly_tai_chinh/static/css/bao_cao_style.css',
+            'quan_ly_tai_chinh/static/js/dashboard_tai_chinh.js',
             'quan_ly_tai_chinh/static/js/bao_cao_charts.js',
         ],
     },

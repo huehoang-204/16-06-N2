@@ -25,7 +25,6 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'security/de_xuat_mua_tai_san_security.xml',  # ← Thêm security rules
         'data/sequence.xml',
         'data/tai_san_demo.xml',  # ← THÊM vào đây để luôn load
         'views/danh_muc_tai_san.xml',

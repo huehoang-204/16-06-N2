@@ -183,7 +183,7 @@ class DashboardTaiChinh(models.Model):
             
             # Đếm tài sản
             record.tong_tai_san = tai_san_obj.search_count([])
-            record.tai_san_hoat_dong = tai_san_obj.search_count([('trang_thai', '=', 'hoat_dong')])
+            record.tai_san_hoat_dong = tai_san_obj.search_count([('trang_thai_thanh_ly', '=', 'da_phan_bo')])
             
             # Đếm khấu hao
             record.tai_san_dang_khau_hao = khau_hao_obj.search_count([('trang_thai', '=', 'dang_khau_hao')])
@@ -224,38 +224,28 @@ class DashboardTaiChinh(models.Model):
     def _compute_but_toan_stats(self):
         """Tính toán thống kê bút toán"""
         for record in self:
-            move_obj = self.env['account.move']
+            but_toan_obj = self.env['account.move']
+            record.tong_but_toan = but_toan_obj.search_count([])
+            record.but_toan_da_ghi = but_toan_obj.search_count([('state', '=', 'posted')])
+            record.but_toan_nhap = but_toan_obj.search_count([('state', '=', 'draft')])
             
-            # Đếm bút toán liên quan đến tài sản
-            phe_duyet_ids = self.env['phe_duyet_mua_tai_san'].search([])
-            but_toan_ids = phe_duyet_ids.mapped('but_toan_id')
-            
-            record.tong_but_toan = len(but_toan_ids)
-            record.but_toan_nhap = len(but_toan_ids.filtered(lambda x: x.state == 'draft'))
-            record.but_toan_da_ghi = len(but_toan_ids.filtered(lambda x: x.state == 'posted'))
-            
-            # Tính tổng giá trị
-            record.tong_gia_tri_but_toan = sum(but_toan_ids.mapped('amount_total'))
+            all_but_toan = but_toan_obj.search([])
+            record.tong_gia_tri_but_toan = sum(all_but_toan.mapped('amount_total')) if all_but_toan else 0
     
     def _compute_ke_toan_quan_tri_stats(self):
         """Tính toán thống kê kế toán quản trị"""
         for record in self:
-            tk_qt_obj = self.env['tai_khoan_quan_tri']
-            
-            # Tổng chi phí
-            all_tk = tk_qt_obj.search([])
-            record.tong_chi_phi = sum(all_tk.filtered(lambda x: x.so_tien).mapped('so_tien'))
+            tai_khoan_obj = self.env['tai_khoan_quan_tri']
+            all_tai_khoan = tai_khoan_obj.search([])
+            record.tong_chi_phi = sum(all_tai_khoan.mapped('so_tien')) if all_tai_khoan else 0
             
             # Chi phí tháng này
-            today = fields.Date.today()
-            thang_dau = today.replace(day=1)
-            thang_cuoi = (thang_dau + relativedelta(months=1)) - relativedelta(days=1)
-            
-            tk_thang = tk_qt_obj.search([
-                ('ngay_ghi_nhan', '>=', thang_dau),
-                ('ngay_ghi_nhan', '<=', thang_cuoi)
+            today = date.today()
+            month_start = today.replace(day=1)
+            chi_phi_thang = tai_khoan_obj.search([
+                ('ngay_ghi_nhan', '>=', month_start)
             ])
-            record.chi_phi_thang_nay = sum(tk_thang.filtered(lambda x: x.so_tien).mapped('so_tien'))
+            record.chi_phi_thang_nay = sum(chi_phi_thang.mapped('so_tien')) if chi_phi_thang else 0
     
     # ========== ACTION METHODS ==========
     
@@ -302,21 +292,13 @@ class DashboardTaiChinh(models.Model):
         }
     
     def action_refresh(self):
-        """Làm mới dashboard"""
-        self._compute_phe_duyet_stats()
-        self._compute_khau_hao_stats()
-        self._compute_but_toan_stats()
-        self._compute_ke_toan_quan_tri_stats()
-        self._compute_depreciation_trend()
-        self._compute_purchase_trend()
-        self._compute_department_distribution()
-        
+        """Làm mới dashboard - Version đơn giản"""
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': 'Thành công',
-                'message': 'Đã làm mới dữ liệu dashboard và biểu đồ',
+                'message': 'Dữ liệu dashboard đã được làm mới',
                 'type': 'success',
                 'sticky': False,
             }
@@ -334,32 +316,20 @@ class DashboardTaiChinh(models.Model):
             
             for i in range(11, -1, -1):
                 month_date = today - relativedelta(months=i)
-                month_start = month_date.replace(day=1)
-                month_end = (month_start + relativedelta(months=1)) - relativedelta(days=1)
                 month_str = month_date.strftime('%Y-%m')
                 
-                # Tính khấu hao trong tháng
+                # Đơn giản: lấy khấu hao đang hoạt động trong 12 tháng
                 khau_hao_records = self.env['khau_hao_tai_san'].search([
-                    ('ngay_bat_dau', '<=', month_end),
-                    ('ngay_ket_thuc', '>=', month_start),
-                    ('trang_thai', '!=', 'cancelled')
+                    ('trang_thai', '=', 'dang_khau_hao')
                 ])
                 
-                total_amount = 0
-                tai_san_ids = set()
-                for khau_hao in khau_hao_records:
-                    # Tính số tháng khấu hao trong khoảng
-                    start = max(khau_hao.ngay_bat_dau, month_start)
-                    end = min(khau_hao.ngay_ket_thuc, month_end)
-                    
-                    if khau_hao.khau_hao_hang_thang > 0:
-                        total_amount += khau_hao.khau_hao_hang_thang
-                        tai_san_ids.add(khau_hao.tai_san_id.id)
+                total_amount = sum(khau_hao_records.mapped('gia_tri_khau_hao_hang_nam'))
+                count = len(khau_hao_records)
                 
                 trends.append((0, 0, {
                     'month': month_str,
                     'amount': total_amount,
-                    'count': len(tai_san_ids)
+                    'count': count
                 }))
             
             record.depreciation_trend_ids = trends
@@ -375,24 +345,19 @@ class DashboardTaiChinh(models.Model):
             
             for i in range(11, -1, -1):
                 month_date = today - relativedelta(months=i)
-                month_start = month_date.replace(day=1)
-                month_end = (month_start + relativedelta(months=1)) - relativedelta(days=1)
                 month_str = month_date.strftime('%Y-%m')
                 
-                # Tất cả đề xuất trong tháng
-                all_phe_duyet = self.env['phe_duyet_mua_tai_san'].search([
-                    ('ngay_tao', '>=', month_start),
-                    ('ngay_tao', '<=', month_end)
-                ])
+                # Đơn giản: lấy tất cả phê duyệt
+                all_phe_duyet = self.env['phe_duyet_mua_tai_san'].search([])
                 
                 # Đề xuất đã được phê duyệt
-                approved_phe_duyet = all_phe_duyet.filtered(lambda p: p.trang_thai == 'approved')
+                approved_phe_duyet = all_phe_duyet.filtered(lambda p: p.trang_thai in ['approved', 'done'])
                 
                 trends.append((0, 0, {
                     'month': month_str,
-                    'amount': sum(all_phe_duyet.mapped('tong_gia_tri')),
+                    'amount': sum(all_phe_duyet.mapped('tong_gia_tri')) if all_phe_duyet else 0,
                     'count': len(all_phe_duyet),
-                    'amount_approved': sum(approved_phe_duyet.mapped('tong_gia_tri')),
+                    'amount_approved': sum(approved_phe_duyet.mapped('tong_gia_tri')) if approved_phe_duyet else 0,
                     'count_approved': len(approved_phe_duyet)
                 }))
             
