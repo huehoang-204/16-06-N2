@@ -12,11 +12,6 @@
         <img width="170" alt="image" src="https://github.com/user-attachments/assets/e5cf9d51-47fb-42d2-b5df-fb3d2e669772" />
         <img width="180"  alt="image" src="https://github.com/user-attachments/assets/1a21a890-24d3-4481-b8ca-7885637bf17e" />
         <img width="200" alt="image" src="https://github.com/user-attachments/assets/4901129c-be54-4246-9478-2847c45a48bd" />
-
-
-
-        <img src="docs/logo/fitdnu_logo.png" alt="AIoTLab Logo" width="180"/>
-        <img src="docs/logo/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
     </p>
 
 [![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)
