@@ -49,56 +49,63 @@ Cung cấp cái nhìn 360° về tình trạng tài sản của tổ chức:
 - Số lượng tài sản hiện có trong hệ thống
 - Số lượng tài sản đang bị lỗi/hư hỏng
 - Dự báo nhu cầu mua sắm trong tương lai
-
+![Dashboard](./images/overview.png)
 #### 2. Quản lý loại tài sản
 Chuẩn hóa phân loại tài sản trong toàn tổ chức:
 - Tối ưu hóa quy trình kế toán - không cần định khoản lại cho mỗi lần mua mới
 - Tự động áp dụng chính sách khấu hao tiêu chuẩn (vd: Laptop → khấu hao 3 năm → TK 211)
 - Đảm bảo nhất quán dữ liệu và báo cáo
-
+![Tình hình mượn trả](./images/borrowing.png)
+![Loại tài sản](./images/loai-tai-san.png)
 #### 3. Quản lý tài sản cụ thể
 Xây dựng "hồ sơ lý lịch" chi tiết cho từng tài sản (Digital Twin):
 - Theo dõi Serial Number, Model, nhà cung cấp
 - Lưu trữ lịch sử bảo trì, sửa chữa
 - Ghi nhận giá trị khấu hao và tuổi thọ
 - Tạo QR Code cho quản lý hàng tồn kho
+![Tài sản cụ thể](./images/tai-san-cu-the.png)
 
 #### 4. Phân bổ tài sản cho các phòng ban
 Xác định rõ ràng trách nhiệm vật lý và tài chính:
 - Tài sản nằm ở phòng nào → phòng đó chịu trách nhiệm bảo quản
 - Phân bổ chi phí khấu hao theo đơn vị sử dụng
 - Thuận lợi cho báo cáo chi phí theo bộ phận
-
+![Phân bổ tài sản](./images/phan-bo-tai-san.png)
+![Khấu hao tài sản](./images/khau-hao-tai-san.png)
 #### 5. Kiểm kê tài sản
 Đối chiếu định kỳ giữa "Phần mềm" (hệ thống) và "Thực tế" (kho):
 - Phát hiện tài sản mất mát, hư hỏng hoặc thất thoát
 - Điều chỉnh sổ sách khi có chênh lệch
 - Đảm bảo độ chính xác của dữ liệu tài chính
+![Kiểm kê tài sản](./images/kiem-ke-tai-san.png)
 
 #### 6. Luân chuyển tài sản
 Linh hoạt trong quản lý nhân sự và cơ cấu tổ chức:
 - Chuyển tài sản giữa nhân viên khi có thay đổi nhân sự
 - Chuyển tài sản giữa các chi nhánh/phòng ban
 - Duy trì lịch sử luân chuyển để kiểm toán
+![Luân chuyển tài sản](./images/luan-chuyen-tai-san.png)
 
 #### 7. Thanh lý tài sản
 Xử lý tài sản hết giá trị sử dụng:
 - Ghi nhận tài sản hư hỏng không thể sửa chữa
 - Thu hồi vốn nếu bán được
 - Làm sạch sổ sách kế toán
+![Thanh lý tài sản](./images/thanh-ly-tai-san.png)
 
 #### 8. Quản lý đơn mượn tài sản & cấp phát tài sản
 Quy trình hóa việc yêu cầu/cấp phát thiết bị:
 - Tránh cấp phát tùy tiện, không có kiểm soát
 - Theo dõi tài sản được mượn/cấp và thời hạn trả
 - Đảm bảo tuân thủ ngân sách và chính sách
+![Quản lý mượn tài sản](./images/don-muon-tai-san.png)
 
 #### 9. Đơn đề xuất mua tài sản & Duyệt đơn mượn **(NEW)**
 Kiểm soát và phê duyệt các yêu cầu:
 - Tạo và theo dõi đơn đề xuất mua sắm tài sản
 - Workflow phê duyệt rõ ràng từ lập đơn → duyệt → thực hiện mua
 - Duyệt/từ chối yêu cầu mượn tài sản theo quy định
-
+![Quản lý cấp phát tài sản](./images/cap-phat-tai-san.png)
 ---
 
 ### **Module Quản lý Tài chính**
@@ -165,17 +172,7 @@ Theo dõi toàn bộ quy trình mua sắm:
 | **Đơn đề xuất mua + Duyệt mượn** | Thêm vào module "Quản lý Tài sản" để hoàn chỉnh quy trình kiểm soát |
 | **Dashboard Tài chính** | Giao diện card-based hiện đại với biểu đồ Chart.js trực quan |
 | **Dự báo ngân sách** | Chức năng mới hỗ trợ lập kế hoạch tài chính dài hạn (*sắp có*) |
-![Dashboard](./images/overview.png)
-![Tình hình mượn trả](./images/borrowing.png)
-![Loại tài sản](./images/loai-tai-san.png)
-![Tài sản cụ thể](./images/tai-san-cu-the.png)
-![Phân bổ tài sản](./images/phan-bo-tai-san.png)
-![Khấu hao tài sản](./images/khau-hao-tai-san.png)
-![Kiểm kê tài sản](./images/kiem-ke-tai-san.png)
-![Luân chuyển tài sản](./images/luan-chuyen-tai-san.png)
-![Thanh lý tài sản](./images/thanh-ly-tai-san.png)
-![Quản lý mượn tài sản](./images/don-muon-tai-san.png)
-![Quản lý cấp phát tài sản](./images/cap-phat-tai-san.png)
+
 
 # 2. Cài đặt công cụ, môi trường và các thư viện cần thiết
 
