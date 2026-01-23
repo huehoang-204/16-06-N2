@@ -21,7 +21,7 @@
 </div>
 
 ---
-## 🔧 2. Các công nghệ được sử dụng
+## 🔧 Các công nghệ được sử dụng
 
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)
