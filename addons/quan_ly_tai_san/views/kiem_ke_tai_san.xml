@@ -65,11 +65,11 @@
             <field name="model">kiem_ke_tai_san</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm phiếu kiểm kê">
-                    <field name="ma_phieu_kiem_ke" />
-                    <field name="ten_phieu_kiem_ke" />
-                    <field name="phong_ban_id" />
-                    <field name="nhan_vien_kiem_ke_id" />
-                    <field name="thoi_gian_tao" />
+                    <field name="ma_phieu_kiem_ke" string="Mã phiếu"/>
+                    <field name="ten_phieu_kiem_ke" string="Tên phiếu"/>
+                    <field name="phong_ban_id" string="Phòng ban"/>
+                    <field name="nhan_vien_kiem_ke_id" string="Nhân viên"/>
+                    <field name="thoi_gian_tao" string="Thời gian"/>
                 </search>
             </field>
         </record>

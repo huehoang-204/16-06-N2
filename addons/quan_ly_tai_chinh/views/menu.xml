@@ -3,59 +3,72 @@
     <data>
         <!-- Tài chính - Menu độc lập -->
         <menuitem name="Quản lý tài chính" id="menu_tai_chinh" sequence="10" web_icon="quan_ly_tai_chinh,static/description/icon.png"/>
+        
+        <!-- 1. Dashboard - Đầu tiên -->
         <menuitem
             id="menu_dashboard_tai_chinh"
             name="Dashboard"
             parent="menu_tai_chinh"
             sequence="1"
-            action="action_dashboard_tai_chinh"/>
+            action="action_dashboard_tai_chinh_new"/>
         
+        <!-- 2. Phê duyệt mua tài sản -->
         <menuitem
-            id="menu_bao_cao_tai_chinh"
-            name="Báo cáo tài chính"
+            id="menu_phe_duyet_mua_tai_san"
+            name="Phê duyệt mua tài sản"
             parent="menu_tai_chinh"
-            action="action_bao_cao_tai_chinh"
-            sequence="1"/>
-            
+            sequence="5"
+            action="action_phe_duyet_mua_tai_san"/>
+        
+        <!-- 3. Nhóm Khấu hao -->
+        <menuitem
+            id="menu_khau_hao_group"
+            name="Khấu hao"
+            parent="menu_tai_chinh"
+            sequence="10"/>
+        
         <menuitem
             id="menu_khau_hao"
             name="Khấu hao tài sản"
-            parent="menu_tai_chinh"
+            parent="menu_khau_hao_group"
             sequence="1"
             action="khau_hao_tai_san_action"/>
             
         <menuitem
+            id="menu_tinh_toan_khau_hao"
+            name="Tính khấu hao tự động"
+            parent="menu_khau_hao_group"
+            sequence="2"
+            action="action_tinh_toan_khau_hao"/>
+        
+        <!-- 4. Nhóm Kế toán -->
+        <menuitem
+            id="menu_ke_toan_group"
+            name="Kế toán"
+            parent="menu_tai_chinh"
+            sequence="20"/>
+            
+        <menuitem
             id="menu_but_toan"
             name="Bút toán"
-            parent="menu_tai_chinh"
+            parent="menu_ke_toan_group"
             sequence="1"
             action="but_toan_action"/>
             
         <menuitem
             id="menu_tai_khoan_quan_tri"
             name="Tài khoản quản trị"
-            parent="menu_tai_chinh"
-            sequence="1"
+            parent="menu_ke_toan_group"
+            sequence="2"
             action="tai_khoan_quan_tri_action"/>
         
-        <!-- Dashboard -->
-     
-        <!-- Tính toán khấu hao tự động -->
+        <!-- 5. Báo cáo tài chính -->
         <menuitem
-            id="menu_tinh_toan_khau_hao"
-            name="Tính khấu hao tự động"
+            id="menu_bao_cao_tai_chinh"
+            name="Báo cáo tài chính"
             parent="menu_tai_chinh"
-            sequence="1"
-            action="action_tinh_toan_khau_hao"/>
-        
-        <!-- Phê duyệt mua tài sản -->
-        <menuitem
-            id="menu_phe_duyet_mua_tai_san"
-            name="Phê duyệt mua tài sản"
-            parent="menu_tai_chinh"
-            sequence="1"
-            action="action_phe_duyet_mua_tai_san"/>
-           
+            action="action_bao_cao_tai_chinh"
+            sequence="30"/>
         
     </data>
 </odoo>

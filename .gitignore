@@ -53,3 +53,8 @@ package.json
 /venv/
 /venv_15_04/
 .Identifier
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard từ chối đơn mượn (dùng ở đơn đăng ký) -->
+        <record id="view_don_muon_tu_choi_wizard_form" model="ir.ui.view">
+            <field name="name">don_muon_tu_choi_wizard.view.form</field>
+            <field name="model">don_muon_tu_choi_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Từ chối đơn mượn">
+                    <group>
+                        <field name="don_muon_id" readonly="1"/>
+                        <field name="ly_do" placeholder="Nhập lý do từ chối..."/>
+                    </group>
+                    <footer>
+                        <button name="action_xac_nhan" string="❌ Xác nhận từ chối" type="object" class="btn-danger"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Wizard từ chối mượn trả (dùng ở quản lý mượn trả) -->
+        <record id="view_muon_tra_tu_choi_wizard_form" model="ir.ui.view">
+            <field name="name">muon_tra_tu_choi_wizard.view.form</field>
+            <field name="model">muon_tra_tu_choi_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Từ chối yêu cầu mượn">
+                    <group>
+                        <field name="muon_tra_id" readonly="1"/>
+                        <field name="ly_do" placeholder="Nhập lý do từ chối..."/>
+                    </group>
+                    <footer>
+                        <button name="action_xac_nhan" string="❌ Xác nhận từ chối" type="object" class="btn-danger"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Wizard gia hạn thời gian trả -->
+        <record id="view_muon_tra_gia_han_wizard_form" model="ir.ui.view">
+            <field name="name">muon_tra_gia_han_wizard.view.form</field>
+            <field name="model">muon_tra_gia_han_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Gia hạn thời gian trả">
+                    <group>
+                        <field name="muon_tra_id" readonly="1"/>
+                        <field name="thoi_gian_tra_moi"/>
+                        <field name="ly_do_gia_han" placeholder="Nhập lý do gia hạn..."/>
+                    </group>
+                    <footer>
+                        <button name="action_xac_nhan" string="⏰ Xác nhận gia hạn" type="object" class="btn-primary"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Wizard xác nhận trả tài sản -->
+        <record id="view_muon_tra_xac_nhan_tra_wizard_form" model="ir.ui.view">
+            <field name="name">muon_tra_xac_nhan_tra_wizard.view.form</field>
+            <field name="model">muon_tra_xac_nhan_tra_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Xác nhận trả tài sản">
+                    <group>
+                        <field name="muon_tra_id" readonly="1"/>
+                    </group>
+                    
+                    <group string="Danh sách tài sản trả">
+                        <field name="line_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="muon_tra_line_id" invisible="1"/>
+                                <field name="phan_bo_tai_san_id" readonly="1"/>
+                                <field name="tinh_trang_khi_tra"/>
+                                <field name="ghi_chu" placeholder="Ghi chú nếu có vấn đề..."/>
+                            </tree>
+                        </field>
+                    </group>
+                    
+                    <group>
+                        <field name="ghi_chu_chung" placeholder="Ghi chú chung khi trả tài sản..."/>
+                    </group>
+                    
+                    <footer>
+                        <button name="action_xac_nhan" string="✅ Xác nhận trả" type="object" class="btn-success"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

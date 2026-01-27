@@ -105,10 +105,8 @@
                 <filter string="Đã Tính" name="da_tinh" domain="[('state', '=', 'calculated')]"/>
                 <filter string="Hoàn Thành" name="hoan_thanh" domain="[('state', '=', 'done')]"/>
                 <separator/>
-                <filter string="Tháng Này" name="thang_nay" 
-                        domain="[('thang', '=', context_today().month), ('nam', '=', context_today().year)]"/>
-                <filter string="Năm Này" name="nam_nay" 
-                        domain="[('nam', '=', context_today().year)]"/>
+                <filter string="Tháng Này" name="thang_nay" domain="[]"/>
+                <filter string="Năm Này" name="nam_nay" domain="[]"/>
                 <group expand="0" string="Nhóm Theo">
                     <filter string="Tháng" name="group_thang" context="{'group_by': 'thang'}"/>
                     <filter string="Năm" name="group_nam" context="{'group_by': 'nam'}"/>

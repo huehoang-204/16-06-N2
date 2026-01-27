@@ -43,8 +43,8 @@
         'web.assets_backend': [
             'quan_ly_tai_chinh/static/css/dashboard_style.css',
             'quan_ly_tai_chinh/static/css/bao_cao_style.css',
-            'quan_ly_tai_chinh/static/js/dashboard_tai_chinh.js',
             'quan_ly_tai_chinh/static/js/bao_cao_charts.js',
+            'quan_ly_tai_chinh/static/js/dashboard_charts.js',
         ],
     },
     # only loaded in demonstration mode

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Knowledge Base Data -->
+        
+        <!-- Mượn tài sản -->
+        <record id="knowledge_muon_tai_san_huong_dan" model="chatbot.knowledge">
+            <field name="name">KB001</field>
+            <field name="title">Hướng dẫn mượn tài sản</field>
+            <field name="topic">muon_tai_san</field>
+            <field name="keywords">mượn, tài sản, đăng ký, hướng dẫn, máy chiếu, laptop</field>
+            <field name="content"><![CDATA[
+<h3>🎯 Hướng dẫn mượn tài sản</h3>
+
+<p><strong>Bước 1:</strong> Truy cập menu <strong>Quản lý Tài sản</strong> → <strong>Đơn mượn tài sản</strong></p>
+
+<p><strong>Bước 2:</strong> Nhấn nút <strong>Tạo</strong> để tạo đơn mượn mới</p>
+
+<p><strong>Bước 3:</strong> Điền đầy đủ thông tin:</p>
+<ul>
+    <li>Chọn phòng ban cho mượn</li>
+    <li>Chọn nhân viên mượn (thường là bạn)</li>
+    <li>Thời gian mượn và thời gian trả dự kiến</li>
+    <li>Lý do mượn (bắt buộc)</li>
+</ul>
+
+<p><strong>Bước 4:</strong> Thêm tài sản cần mượn vào danh sách</p>
+
+<p><strong>Bước 5:</strong> Nhấn <strong>Lưu</strong> rồi <strong>Gửi duyệt</strong></p>
+
+<p><strong>💡 Lưu ý:</strong></p>
+<ul>
+    <li>Đơn mượn cần được quản lý phê duyệt trước khi nhận tài sản</li>
+    <li>Vui lòng trả tài sản đúng hạn để tránh bị ghi nhận quá hạn</li>
+    <li>Nếu cần gia hạn, liên hệ quản lý tài sản</li>
+</ul>
+            ]]></field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="knowledge_tra_tai_san" model="chatbot.knowledge">
+            <field name="name">KB002</field>
+            <field name="title">Hướng dẫn trả tài sản</field>
+            <field name="topic">tra_tai_san</field>
+            <field name="keywords">trả, hoàn trả, tài sản</field>
+            <field name="content"><![CDATA[
+<h3>📦 Hướng dẫn trả tài sản</h3>
+
+<p><strong>Bước 1:</strong> Mang tài sản đến phòng quản lý tài sản</p>
+
+<p><strong>Bước 2:</strong> Quản lý sẽ kiểm tra tình trạng tài sản</p>
+
+<p><strong>Bước 3:</strong> Xác nhận trả tài sản trên hệ thống</p>
+
+<p><strong>💡 Lưu ý:</strong></p>
+<ul>
+    <li>Trả tài sản đúng hạn theo đơn mượn</li>
+    <li>Nếu tài sản bị hư hỏng, cần báo cáo ngay</li>
+    <li>Giữ gìn tài sản cẩn thận trong quá trình mượn</li>
+</ul>
+            ]]></field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="knowledge_thanh_ly" model="chatbot.knowledge">
+            <field name="name">KB003</field>
+            <field name="title">Quy trình thanh lý tài sản</field>
+            <field name="topic">thanh_ly</field>
+            <field name="keywords">thanh lý, xử lý, tài sản cũ, hủy</field>
+            <field name="content"><![CDATA[
+<h3>📋 Quy trình thanh lý tài sản</h3>
+
+<p><strong>Điều kiện thanh lý:</strong></p>
+<ul>
+    <li>Tài sản đã khấu hao hết giá trị</li>
+    <li>Tài sản hư hỏng không thể sửa chữa</li>
+    <li>Tài sản lỗi thời không còn phù hợp sử dụng</li>
+</ul>
+
+<p><strong>Các bước thực hiện:</strong></p>
+<ol>
+    <li><strong>Đề xuất thanh lý:</strong> Người quản lý tài sản tạo đề xuất</li>
+    <li><strong>Kiểm kê tài sản:</strong> Thực hiện kiểm kê trước khi thanh lý</li>
+    <li><strong>Phê duyệt:</strong> Lãnh đạo duyệt đề xuất thanh lý</li>
+    <li><strong>Thực hiện:</strong> Bán, tặng hoặc hủy tài sản theo quyết định</li>
+    <li><strong>Ghi nhận kế toán:</strong> Hạch toán thanh lý tài sản</li>
+</ol>
+            ]]></field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="knowledge_quy_trinh_chung" model="chatbot.knowledge">
+            <field name="name">KB004</field>
+            <field name="title">Các quy trình quản lý tài sản</field>
+            <field name="topic">quy_trinh</field>
+            <field name="keywords">quy trình, quy định, policy</field>
+            <field name="content"><![CDATA[
+<h3>📚 Các quy trình chính trong quản lý tài sản</h3>
+
+<p><strong>1. Quy trình mượn tài sản:</strong></p>
+<p>Đăng ký → Chờ duyệt → Nhận tài sản → Sử dụng → Trả tài sản</p>
+
+<p><strong>2. Quy trình đề xuất mua tài sản:</strong></p>
+<p>Tạo đề xuất → Phê duyệt → Mua sắm → Nhập kho → Phân bổ</p>
+
+<p><strong>3. Quy trình thanh lý tài sản:</strong></p>
+<p>Đề xuất → Kiểm kê → Phê duyệt → Thực hiện → Ghi sổ</p>
+
+<p><strong>4. Quy trình bảo trì, sửa chữa:</strong></p>
+<p>Báo hỏng → Đánh giá → Sửa chữa → Nghiệm thu</p>
+
+<p><strong>5. Quy trình kiểm kê:</strong></p>
+<p>Lập kế hoạch → Thực hiện kiểm kê → Đối chiếu → Xử lý chênh lệch → Báo cáo</p>
+            ]]></field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- FAQ Data -->
+        <record id="faq_muon_may_chieu" model="chatbot.faq">
+            <field name="question">Làm sao để mượn máy chiếu?</field>
+            <field name="topic">muon_tai_san</field>
+            <field name="keywords">máy chiếu, mượn, projector</field>
+            <field name="answer"><![CDATA[
+<p>Để mượn máy chiếu, bạn cần:</p>
+<ol>
+    <li>Vào menu <strong>Quản lý Tài sản → Đơn mượn tài sản</strong></li>
+    <li>Tạo đơn mượn mới</li>
+    <li>Chọn phòng ban có máy chiếu (thường là phòng CNTT hoặc Hành chính)</li>
+    <li>Thêm máy chiếu vào danh sách, điền thời gian mượn</li>
+    <li>Gửi duyệt và đợi phê duyệt</li>
+</ol>
+<p>💡 <em>Lưu ý: Nên đăng ký trước ít nhất 1 ngày để đảm bảo có thiết bị sẵn sàng.</em></p>
+            ]]></field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="faq_kiem_tra_bao_hanh" model="chatbot.faq">
+            <field name="question">Làm sao để kiểm tra bảo hành tài sản?</field>
+            <field name="topic">bao_hanh</field>
+            <field name="keywords">bảo hành, warranty, kiểm tra</field>
+            <field name="answer"><![CDATA[
+<p>Để kiểm tra thông tin bảo hành:</p>
+<ol>
+    <li>Vào menu <strong>Quản lý Tài sản → Tài sản</strong></li>
+    <li>Tìm tài sản cần kiểm tra</li>
+    <li>Xem thông tin <strong>Ngày hết bảo hành</strong> trong form tài sản</li>
+</ol>
+<p>Hoặc bạn có thể hỏi tôi: <em>"Laptop của tôi còn bảo hành bao lâu?"</em></p>
+            ]]></field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="faq_bao_hong" model="chatbot.faq">
+            <field name="question">Tài sản bị hỏng thì phải làm gì?</field>
+            <field name="topic">other</field>
+            <field name="keywords">hỏng, hư, sửa chữa, bảo trì</field>
+            <field name="answer"><![CDATA[
+<p>Khi tài sản bị hỏng:</p>
+<ol>
+    <li>Báo cáo ngay cho quản lý tài sản hoặc phòng CNTT</li>
+    <li>Mô tả chi tiết tình trạng hư hỏng</li>
+    <li>Chờ đánh giá và xử lý từ bộ phận kỹ thuật</li>
+</ol>
+<p><strong>Nếu tài sản đang trong thời gian bảo hành:</strong> Liên hệ nhà cung cấp để được hỗ trợ miễn phí.</p>
+<p><strong>Nếu hết bảo hành:</strong> Sẽ được đánh giá sửa chữa hoặc thanh lý.</p>
+            ]]></field>
+            <field name="sequence">3</field>
+        </record>
+
+    </data>
+</odoo>

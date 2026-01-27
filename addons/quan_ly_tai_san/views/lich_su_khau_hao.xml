@@ -56,10 +56,10 @@
             <field name="model">lich_su_khau_hao</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm lịch sử khấu hao">
-                    <field name="ma_phieu_khau_hao"/>
-                    <field name="ma_ts"/>
-                    <field name="ngay_khau_hao"/>
-                    <field name="loai_phieu"/>
+                    <field name="ma_phieu_khau_hao" string="Mã phiếu"/>
+                    <field name="ma_ts" string="Mã tài sản"/>
+                    <field name="ngay_khau_hao" string="Ngày khấu hao"/>
+                    <field name="loai_phieu" string="Loại phiếu"/>
                 </search>
             </field>
         </record>

@@ -17,6 +17,16 @@ class PhanBoTaiSan(models.Model):
         ('in-use', 'Đang sử dụng'),
         ('not-in-use', 'Không sử dụng')
     ], string='Trạng thái', required=True, default='in-use')
+    
+    # Tình trạng vật lý của tài sản
+    tinh_trang = fields.Selection([
+        ('binh_thuong', 'Bình thường'),
+        ('dang_muon', 'Đang mượn'),
+        ('hu_hong', 'Hư hỏng'),
+        ('mat', 'Mất'),
+    ], string='Tình trạng', default='binh_thuong', tracking=True,
+       help='Tình trạng vật lý hiện tại của tài sản')
+    
     vi_tri_tai_san_id = fields.Many2one('phong_ban', string='Vị trí tài sản', required=False, ondelete='set null')
 
     custom_name = fields.Char(compute="_compute_custom_name", store=True, string="Tên hiển thị")

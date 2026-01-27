@@ -10,7 +10,7 @@
         Quản lý tài sản của Doanh Nghiệp
     """,
 
-    'author': "Nguyễn Ngọc Đan Trường - 1504",
+    'author': "Hoàng Phương Huế",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listinga
@@ -41,6 +41,8 @@
         'views/dashboard_overview.xml',
         'views/dashboard_borrowing.xml',
         'views/menu.xml',
+        'wizard/muon_tra_wizard_views.xml',
+        
     ],
     # only loaded in demonstration mode
     # 'demo': [

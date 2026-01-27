@@ -58,9 +58,9 @@
             <field name="model">luan_chuyen_tai_san</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm luân chuyển tài sản">
-                    <field name="bo_phan_nguon"/>
-                    <field name="bo_phan_dich"/>
-                    <field name="thoi_gian_luan_chuyen"/>
+                    <field name="bo_phan_nguon" string="Bộ phận nguồn"/>
+                    <field name="bo_phan_dich" string="Bộ phận đích"/>
+                    <field name="thoi_gian_luan_chuyen" string="Thời gian"/>
                 </search>
             </field>
         </record>

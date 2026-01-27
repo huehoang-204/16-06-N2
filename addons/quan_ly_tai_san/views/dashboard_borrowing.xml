@@ -1,97 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Dashboard Mượn Trả Tài Sản - Clean Design -->
         <record id="dashboard_borrowing_view" model="ir.ui.view">
             <field name="name">dashboard.borrowing</field>
             <field name="model">asset.dashboard</field>
             <field name="arch" type="xml">
-                <form string="Mượn Trả Tài Sản" js_class="dashboard_borrowing_view">
-                    <div class="o_dashboards">
-                        <div class="container-fluid o_dashboard_common">
-                            <div style="font-size:25px">Tình hình mượn trả</div>
-                            <!-- Summary Stats -->
-                            <div class="row mt16">
-                                <div class="col-lg-4">
-                                    <div class="card text-center mb-3 o_dashboard_card">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-primary">Đang chờ duyệt</h5>
-                                            <h2 class="card-text text-primary pending_requests">0</h2>
-                                        </div>
+                <form string="Mượn Trả Tài Sản" js_class="dashboard_borrowing_view" create="false" edit="false" delete="false">
+                    <div class="o_asset_dashboard">
+                        <div class="dashboard-container">
+                            
+                            <!-- Header -->
+                            <div class="dashboard-header">
+                                <h1><i class="fa fa-exchange"/> Dashboard Mượn Trả Tài Sản</h1>
+                            </div>
+
+                            <!-- Row 1: Thống kê mượn trả -->
+                            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                                <div class="dash-card stat-card primary">
+                                    <div class="stat-icon"><i class="fa fa-clock-o"/></div>
+                                    <div class="stat-value pending_requests">0</div>
+                                    <div class="stat-label">Đang Chờ Duyệt</div>
+                                </div>
+                                <div class="dash-card stat-card success">
+                                    <div class="stat-icon"><i class="fa fa-check"/></div>
+                                    <div class="stat-value approved_not_returned">0</div>
+                                    <div class="stat-label">Đã Duyệt (Chưa Trả)</div>
+                                </div>
+                                <div class="dash-card stat-card warning">
+                                    <div class="stat-icon"><i class="fa fa-hand-paper-o"/></div>
+                                    <div class="stat-value borrowed_assets_count">0</div>
+                                    <div class="stat-label">Tài Sản Đang Mượn</div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Top Borrowed Assets Chart -->
+                            <div style="margin-bottom: 24px;">
+                                <div class="dash-card chart-card">
+                                    <div class="chart-header green">
+                                        <i class="fa fa-bar-chart"/> Top Tài Sản Được Mượn Nhiều Nhất
+                                    </div>
+                                    <div class="chart-body">
+                                        <canvas id="topBorrowedAssetsChart" height="250"></canvas>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="card text-center mb-3 o_dashboard_card">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-success">Đã duyệt (chưa trả)</h5>
-                                            <h2 class="card-text text-success approved_not_returned">0</h2>
-                                        </div>
+                            </div>
+
+                            <!-- Row 3: Overdue Assets Table -->
+                            <div style="margin-bottom: 24px;">
+                                <div class="dash-card">
+                                    <div class="chart-header" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                                        <i class="fa fa-exclamation-triangle"/> Tài Sản Quá Hạn Chưa Trả
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card text-center mb-3 o_dashboard_card">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-warning">Số tài sản đang mượn</h5>
-                                            <h2 class="card-text text-warning borrowed_assets_count">0</h2>
+                                    <div style="padding: 0;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0" id="overdueAssetsTable" style="margin-bottom: 0;">
+                                                <thead style="background: #f8fafc;">
+                                                    <tr>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Mã Phiếu</th>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Tên Phiếu</th>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Người Mượn</th>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Ngày Mượn</th>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Ngày Trả Dự Kiến</th>
+                                                        <th style="padding: 14px 16px; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Số Ngày Quá Hạn</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Dynamic content loaded by JS -->
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Top Borrowed Assets -->
-                            <div class="row mt16">
-                                <div class="col-lg-12">
-                                    <div class="card mb-3 o_dashboard_card">
-                                        <div class="card-header bg-primary text-white">
-                                            <h5 class="mb-0">Top tài sản được mượn nhiều nhất</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <canvas id="topBorrowedAssetsChart" height="250"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Overdue Assets -->
-                            <div class="row mt16">
-                                <div class="col-lg-12">
-                                    <div class="card mb-3 o_dashboard_card">
-                                        <div class="card-header bg-danger text-white">
-                                            <h5 class="mb-0">Tài sản quá hạn chưa trả</h5>
-                                        </div>
-                                        <div class="card-body p-0">
-                                            <div class="table-responsive">
-                                                <table class="table table-striped mb-0" id="overdueAssetsTable">
-                                                    <thead class="bg-light">
-                                                        <tr>
-                                                            <th>Mã phiếu</th>
-                                                            <th>Tên phiếu</th>
-                                                            <th>Người mượn</th>
-                                                            <th>Ngày mượn</th>
-                                                            <th>Ngày trả</th>
-                                                            <th>Số ngày quá hạn</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Dynamic content -->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </form>
             </field>
         </record>
 
+        <!-- Action -->
         <record id="dashboard_muon_tra" model="ir.actions.act_window">
-            <field name="name">Dashboard Đơn Mượn &amp; Trả</field>
+            <field name="name">Dashboard Mượn Trả</field>
             <field name="res_model">asset.dashboard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="dashboard_borrowing_view"/>
-            <field name="target">main</field>
+            <field name="target">inline</field>
         </record>
     </data>
 </odoo>

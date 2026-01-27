@@ -17,3 +17,10 @@ access_lich_su_ky_thuat_all,lich_su_ky_thuat.all,model_lich_su_ky_thuat,,1,1,1,1
 access_lich_su_khau_hao_all,lich_su_khau_hao.all,model_lich_su_khau_hao,base.group_user,1,1,1,1
 access_de_xuat_mua_tai_san_all,de_xuat_mua_tai_san.all,model_de_xuat_mua_tai_san,base.group_user,1,1,1,1
 access_de_xuat_mua_tai_san_line_all,de_xuat_mua_tai_san_line.all,model_de_xuat_mua_tai_san_line,base.group_user,1,1,1,1
+access_don_muon_tu_choi_wizard_all,don_muon_tu_choi_wizard.all,model_don_muon_tu_choi_wizard,,1,1,1,1
+access_muon_tra_tu_choi_wizard_all,muon_tra_tu_choi_wizard.all,model_muon_tra_tu_choi_wizard,,1,1,1,1
+access_muon_tra_gia_han_wizard_all,muon_tra_gia_han_wizard.all,model_muon_tra_gia_han_wizard,,1,1,1,1
+access_muon_tra_xac_nhan_tra_wizard_all,muon_tra_xac_nhan_tra_wizard.all,model_muon_tra_xac_nhan_tra_wizard,,1,1,1,1
+access_muon_tra_xac_nhan_tra_wizard_line_all,muon_tra_xac_nhan_tra_wizard_line.all,model_muon_tra_xac_nhan_tra_wizard_line,,1,1,1,1
+access_xac_nhan_tra_wizard_all,xac_nhan_tra_wizard.all,model_xac_nhan_tra_wizard,,1,1,1,1
+access_xac_nhan_tra_wizard_line_all,xac_nhan_tra_wizard_line.all,model_xac_nhan_tra_wizard_line,,1,1,1,1
