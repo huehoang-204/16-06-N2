@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Dashboard Server Action - tự động tạo record và mở form -->
+        <record id="action_dashboard_main_server" model="ir.actions.server">
+            <field name="name">Dashboard</field>
+            <field name="model_id" ref="model_dashboard_main"/>
+            <field name="state">code</field>
+            <field name="code">
+# Tạo một record dashboard mới (TransientModel)
+dashboard = env['dashboard.main'].create({'name': 'Dashboard'})
+# Trả về action mở form view với record đó
+action = {
+    'type': 'ir.actions.act_window',
+    'name': 'Dashboard Tổng quan',
+    'res_model': 'dashboard.main',
+    'view_mode': 'form',
+    'res_id': dashboard.id,
+    'view_id': env.ref('q_trang_chu.view_dashboard_main_form').id,
+    'target': 'current',
+}
+            </field>
+        </record>
+        
+        <!-- Dashboard Action Window (backup) -->
+        <record id="action_dashboard_main" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">dashboard.main</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_dashboard_main_form"/>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Dashboard Form View - QWeb based -->
+        <record id="view_dashboard_main_form" model="ir.ui.view">
+            <field name="name">dashboard.main.form</field>
+            <field name="model">dashboard.main</field>
+            <field name="arch" type="xml">
+                <form string="Dashboard Tổng quan" create="false" edit="false" delete="false" class="o_form_readonly o_form_norecord o_dashboard_action">
+                    <sheet>
+                        <div class="o_dashboard_main" style="padding: 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 80vh;">
+                            <!-- Header -->
+                            <div style="margin-bottom: 30px;">
+                                <h1 style="font-size: 2rem; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
+                                    <i class="fa fa-dashboard" title="Dashboard"/> Dashboard Tổng quan
+                                </h1>
+                                <p style="color: #7f8c8d;">Quản lý Tài sản &amp; Tài chính</p>
+                            </div>
+
+                            <!-- Stats Cards -->
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px; border-left: 4px solid #667eea !important;">
+                                        <div class="card-body">
+                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                                <i class="fa fa-cube fa-lg text-white" title="Tổng tài sản"/>
+                                            </div>
+                                            <h2 class="mb-1" style="font-weight: 700; color: #2c3e50;">
+                                                <field name="total_tai_san" readonly="1"/>
+                                            </h2>
+                                            <p class="text-muted mb-0" style="text-transform: uppercase; font-size: 0.85rem;">Tổng tài sản</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px; border-left: 4px solid #f5576c !important;">
+                                        <div class="card-body">
+                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                                <i class="fa fa-clock-o fa-lg text-white" title="Đơn chờ duyệt"/>
+                                            </div>
+                                            <h2 class="mb-1" style="font-weight: 700; color: #2c3e50;">
+                                                <field name="don_cho_duyet" readonly="1"/>
+                                            </h2>
+                                            <p class="text-muted mb-0" style="text-transform: uppercase; font-size: 0.85rem;">Đơn chờ duyệt</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px; border-left: 4px solid #4facfe !important;">
+                                        <div class="card-body">
+                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                                <i class="fa fa-exchange fa-lg text-white" title="Đang cho mượn"/>
+                                            </div>
+                                            <h2 class="mb-1" style="font-weight: 700; color: #2c3e50;">
+                                                <field name="dang_muon" readonly="1"/>
+                                            </h2>
+                                            <p class="text-muted mb-0" style="text-transform: uppercase; font-size: 0.85rem;">Đang cho mượn</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px; border-left: 4px solid #38ef7d !important;">
+                                        <div class="card-body">
+                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                                <i class="fa fa-money fa-lg text-white" title="Tổng giá trị"/>
+                                            </div>
+                                            <h2 class="mb-1" style="font-weight: 700; color: #2c3e50; font-size: 1.5rem;">
+                                                <field name="total_value" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                            </h2>
+                                            <p class="text-muted mb-0" style="text-transform: uppercase; font-size: 0.85rem;">Tổng giá trị</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="card shadow-sm border-0 mb-4" style="border-radius: 16px;">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3"><i class="fa fa-bolt text-warning"/> Thao tác nhanh</h5>
+                                    <div class="row">
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_open_don_muon" type="object" class="btn btn-light w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-plus-circle fa-2x d-block mb-2" style="color: #667eea;"/>
+                                                <span>Tạo đơn mượn</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_open_muon_tra" type="object" class="btn btn-light w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-check-square-o fa-2x d-block mb-2" style="color: #38ef7d;"/>
+                                                <span>Duyệt đơn</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_open_tai_san" type="object" class="btn btn-light w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-cubes fa-2x d-block mb-2" style="color: #f5576c;"/>
+                                                <span>Tài sản</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_open_kiem_ke" type="object" class="btn btn-light w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-clipboard fa-2x d-block mb-2" style="color: #4facfe;"/>
+                                                <span>Kiểm kê</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_open_phe_duyet" type="object" class="btn btn-light w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-file-text fa-2x d-block mb-2" style="color: #764ba2;"/>
+                                                <span>Phê duyệt mua</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-3">
+                                            <button name="action_refresh_data" type="object" class="btn btn-primary w-100" style="border-radius: 12px; padding: 20px 10px;">
+                                                <i class="fa fa-refresh fa-2x d-block mb-2"/>
+                                                <span>Làm mới</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notifications and Recent Activities -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3"><i class="fa fa-bell text-danger"/> Thông báo quan trọng</h5>
+                                            <field name="thong_bao_html" readonly="1" nolabel="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm border-0" style="border-radius: 16px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3"><i class="fa fa-history text-info"/> Hoạt động gần đây</h5>
+                                            <field name="hoat_dong_html" readonly="1" nolabel="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Chatbot Clean Blue Design -->
+    <t t-name="q_trang_chu.MessengerChat" owl="1">
+        <div class="o_chatbot_container">
+            
+            <!-- Floating Toggle Button -->
+            <button t-attf-class="o_chatbot_toggle_btn {{state.isOpen ? 'is_open' : ''}}" 
+                    t-on-click="toggleChat"
+                    title="AI Assistant">
+                <span class="icon">
+                    <t t-if="!state.isOpen">🤖</t>
+                    <t t-else="">✕</t>
+                </span>
+            </button>
+
+            <!-- Chat Window -->
+            <div t-attf-class="o_chatbot_window {{state.isOpen ? 'is_open' : ''}}">
+                
+                <!-- Header -->
+                <div class="o_chatbot_header">
+                    <span class="o_chatbot_title">🤖 AI Assistant</span>
+                    <button class="o_chatbot_close" t-on-click="closeChat" title="Đóng">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="o_chatbot_messages">
+                    
+                    <!-- Welcome / First message -->
+                    <t t-if="state.messages.length === 0">
+                        <!-- Bot greeting -->
+                        <div class="o_chat_msg is_bot">
+                            <div class="o_chat_avatar">🤖</div>
+                            <div class="o_chat_content">
+                                <div class="o_chat_bubble">
+                                    Xin chào! 👋 Tôi là AI Assistant. Tôi có thể giúp gì cho bạn?
+                                </div>
+                                <div class="o_chat_time">Vừa xong</div>
+                                
+                                <!-- Quick Reply Buttons -->
+                                <div class="o_chat_quick_buttons">
+                                    <t t-foreach="welcomeOptions" t-as="option" t-key="option_index">
+                                        <button class="o_chat_quick_btn" 
+                                                t-on-click="() => sendQuickReply(option.query)">
+                                            <t t-esc="option.label"/>
+                                        </button>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
+                    <!-- Chat Messages -->
+                    <t t-foreach="state.messages" t-as="msg" t-key="msg.id">
+                        <div t-attf-class="o_chat_msg {{msg.isUser ? 'is_user' : 'is_bot'}}">
+                            <div class="o_chat_avatar">
+                                <t t-if="msg.isUser">😊</t>
+                                <t t-else="">🤖</t>
+                            </div>
+                            <div class="o_chat_content">
+                                <div class="o_chat_bubble" t-raw="msg.content"/>
+                                <div class="o_chat_time" t-esc="msg.timestamp"/>
+                                
+                                <!-- Suggestions -->
+                                <t t-if="!msg.isUser and msg.suggestions and msg.suggestions.length > 0 and msg_last">
+                                    <div class="o_chat_suggestions_inline">
+                                        <t t-foreach="msg.suggestions" t-as="sug" t-key="sug_index">
+                                            <button class="o_chat_suggestion_pill" 
+                                                    t-on-click="() => sendQuickReply(sug)">
+                                                <t t-esc="sug"/>
+                                            </button>
+                                        </t>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+
+                    <!-- Typing Indicator -->
+                    <t t-if="state.isTyping">
+                        <div class="o_chat_typing">
+                            <div class="o_chat_avatar">🤖</div>
+                            <div class="o_chat_typing_dots">
+                                <div class="o_typing_dot"/>
+                                <div class="o_typing_dot"/>
+                                <div class="o_typing_dot"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <!-- Input Area -->
+                <div class="o_chatbot_input_area">
+                    <input type="text" 
+                           class="o_input_field"
+                           t-att-value="state.inputValue"
+                           t-on-input="handleInput"
+                           t-on-keypress="handleKeyPress"
+                           placeholder="Nhập tin nhắn..."/>
+                    <button class="o_input_send_btn" 
+                            t-on-click="() => sendMessage()"
+                            t-att-disabled="!state.inputValue || !state.inputValue.trim()"
+                            title="Gửi">
+                        <i class="fa fa-paper-plane"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

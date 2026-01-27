@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ========== CHATBOT ASSISTANT CONFIG ========== -->
+        <record id="view_chatbot_assistant_form" model="ir.ui.view">
+            <field name="name">chatbot.assistant.form</field>
+            <field name="model">chatbot.assistant</field>
+            <field name="arch" type="xml">
+                <form string="Cấu hình Chatbot">
+                    <sheet>
+                        <group string="Thông tin cơ bản">
+                            <field name="name"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Cấu hình Google Gemini AI">
+                            <field name="use_gemini"/>
+                            <field name="gemini_api_key" password="True" 
+                                   attrs="{'invisible': [('use_gemini', '=', False)]}"/>
+                            <field name="temperature" 
+                                   attrs="{'invisible': [('use_gemini', '=', False)]}"/>
+                            <field name="max_tokens" 
+                                   attrs="{'invisible': [('use_gemini', '=', False)]}"/>
+                        </group>
+                        <div class="alert alert-info" role="alert">
+                            <strong>💡 Lưu ý:</strong> 
+                            Chatbot sử dụng Google Gemini AI để trả lời thông minh hơn.
+                            Nếu tắt Gemini, chatbot sẽ sử dụng rule-based responses.
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ========== CHATBOT KNOWLEDGE ========== -->
+        <record id="view_chatbot_knowledge_tree" model="ir.ui.view">
+            <field name="name">chatbot.knowledge.tree</field>
+            <field name="model">chatbot.knowledge</field>
+            <field name="arch" type="xml">
+                <tree string="Cơ sở tri thức">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="title"/>
+                    <field name="topic" widget="badge"
+                           decoration-primary="topic == 'muon_tai_san'"
+                           decoration-success="topic == 'quy_trinh'"
+                           decoration-warning="topic == 'faq'"/>
+                    <field name="view_count"/>
+                    <field name="helpful_count"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_chatbot_knowledge_form" model="ir.ui.view">
+            <field name="name">chatbot.knowledge.form</field>
+            <field name="model">chatbot.knowledge</field>
+            <field name="arch" type="xml">
+                <form string="Tri thức Chatbot">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-eye" type="object" name="action_increment_view">
+                                <field name="view_count" widget="statinfo" string="Lượt xem"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-thumbs-up" type="object" name="action_mark_helpful">
+                                <field name="helpful_count" widget="statinfo" string="Hữu ích"/>
+                            </button>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="title"/>
+                                <field name="topic"/>
+                            </group>
+                            <group>
+                                <field name="keywords" placeholder="vd: mượn, tài sản, hướng dẫn"/>
+                                <field name="sequence"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Nội dung" name="content">
+                                <field name="content" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_chatbot_knowledge_search" model="ir.ui.view">
+            <field name="name">chatbot.knowledge.search</field>
+            <field name="model">chatbot.knowledge</field>
+            <field name="arch" type="xml">
+                <search string="Tìm kiếm tri thức">
+                    <field name="title"/>
+                    <field name="keywords"/>
+                    <filter name="active" string="Đang hoạt động" domain="[('active', '=', True)]"/>
+                    <group expand="0" string="Nhóm theo">
+                        <filter name="group_topic" string="Chủ đề" context="{'group_by': 'topic'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_chatbot_knowledge" model="ir.actions.act_window">
+            <field name="name">Cơ sở tri thức</field>
+            <field name="res_model">chatbot.knowledge</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_active': 1}</field>
+        </record>
+
+        <!-- ========== CHATBOT FAQ ========== -->
+        <record id="view_chatbot_faq_tree" model="ir.ui.view">
+            <field name="name">chatbot.faq.tree</field>
+            <field name="model">chatbot.faq</field>
+            <field name="arch" type="xml">
+                <tree string="Câu hỏi thường gặp">
+                    <field name="sequence" widget="handle"/>
+                    <field name="question"/>
+                    <field name="topic" widget="badge"/>
+                    <field name="ask_count"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_chatbot_faq_form" model="ir.ui.view">
+            <field name="name">chatbot.faq.form</field>
+            <field name="model">chatbot.faq</field>
+            <field name="arch" type="xml">
+                <form string="FAQ">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="question"/>
+                                <field name="topic"/>
+                            </group>
+                            <group>
+                                <field name="keywords"/>
+                                <field name="sequence"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <separator string="Câu trả lời"/>
+                        <field name="answer" widget="html"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_chatbot_faq" model="ir.actions.act_window">
+            <field name="name">FAQ</field>
+            <field name="res_model">chatbot.faq</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ========== CHATBOT POLICY ========== -->
+        <record id="view_chatbot_policy_tree" model="ir.ui.view">
+            <field name="name">chatbot.policy.tree</field>
+            <field name="model">chatbot.policy</field>
+            <field name="arch" type="xml">
+                <tree string="Quy chế, quy định">
+                    <field name="sequence" widget="handle"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="category" widget="badge"/>
+                    <field name="effective_date"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_chatbot_policy_form" model="ir.ui.view">
+            <field name="name">chatbot.policy.form</field>
+            <field name="model">chatbot.policy</field>
+            <field name="arch" type="xml">
+                <form string="Quy chế">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="effective_date"/>
+                                <field name="expiry_date"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <separator string="Tóm tắt"/>
+                        <field name="summary"/>
+                        <separator string="Nội dung chi tiết"/>
+                        <field name="content" widget="html"/>
+                        <separator string="Tài liệu đính kèm"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_chatbot_policy" model="ir.actions.act_window">
+            <field name="name">Quy chế, quy định</field>
+            <field name="res_model">chatbot.policy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ========== CHATBOT CONVERSATION ========== -->
+        <record id="view_chatbot_conversation_tree" model="ir.ui.view">
+            <field name="name">chatbot.conversation.tree</field>
+            <field name="model">chatbot.conversation</field>
+            <field name="arch" type="xml">
+                <tree string="Lịch sử hội thoại">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_chatbot_conversation_form" model="ir.ui.view">
+            <field name="name">chatbot.conversation.form</field>
+            <field name="model">chatbot.conversation</field>
+            <field name="arch" type="xml">
+                <form string="Cuộc hội thoại">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="user_id"/>
+                            <field name="create_date"/>
+                        </group>
+                        <notebook>
+                            <page string="Tin nhắn" name="messages">
+                                <field name="message_ids">
+                                    <tree>
+                                        <field name="timestamp"/>
+                                        <field name="is_user"/>
+                                        <field name="content"/>
+                                        <field name="intent"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_chatbot_conversation" model="ir.actions.act_window">
+            <field name="name">Lịch sử hội thoại</field>
+            <field name="res_model">chatbot.conversation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ========== CHATBOT PAGE CLIENT ACTION ========== -->
+        <record id="action_chatbot_page" model="ir.actions.client">
+            <field name="name">AI Chatbot</field>
+            <field name="tag">q_trang_chu.chatbot_page</field>
+        </record>
+
+    </data>
+</odoo>
+

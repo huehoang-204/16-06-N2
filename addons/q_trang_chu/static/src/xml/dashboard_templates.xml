@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Dashboard Main Template -->
+    <t t-name="q_trang_chu.DashboardMain" owl="1">
+        <div class="o_dashboard_main">
+            <!-- Header -->
+            <div class="o_dashboard_header">
+                <h1 class="o_dashboard_title">
+                    <i class="fa fa-dashboard"/> Dashboard Tổng quan
+                </h1>
+                <p class="o_dashboard_subtitle">Quản lý Tài sản &amp; Tài chính</p>
+            </div>
+
+            <!-- Loading State -->
+            <t t-if="state.loading">
+                <div class="text-center py-5">
+                    <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                    <p class="mt-3">Đang tải dữ liệu...</p>
+                </div>
+            </t>
+
+            <t t-else="">
+                <!-- Stats Cards -->
+                <div class="o_dashboard_stats">
+                    <!-- Tổng tài sản -->
+                    <div class="o_stat_card primary" t-on-click="openTaiSan">
+                        <div class="o_stat_icon primary">
+                            <i class="fa fa-cube"/>
+                        </div>
+                        <div class="o_stat_value" t-esc="formatNumber(state.data.tai_san.total)"/>
+                        <div class="o_stat_label">Tổng tài sản</div>
+                        <div class="o_stat_change positive">
+                            <i class="fa fa-check-circle"/> 
+                            <span t-esc="formatNumber(state.data.tai_san.active)"/> đang sử dụng
+                        </div>
+                    </div>
+
+                    <!-- Đơn chờ duyệt -->
+                    <div class="o_stat_card warning" t-on-click="openDonMuon">
+                        <div class="o_stat_icon warning">
+                            <i class="fa fa-clock-o"/>
+                        </div>
+                        <div class="o_stat_value" t-esc="formatNumber(state.data.muon_tra.don_cho_duyet)"/>
+                        <div class="o_stat_label">Đơn chờ duyệt</div>
+                        <t t-if="state.data.muon_tra.qua_han > 0">
+                            <div class="o_stat_change negative">
+                                <i class="fa fa-exclamation-triangle"/> 
+                                <span t-esc="state.data.muon_tra.qua_han"/> quá hạn
+                            </div>
+                        </t>
+                    </div>
+
+                    <!-- Đang cho mượn -->
+                    <div class="o_stat_card info" t-on-click="openMuonTra">
+                        <div class="o_stat_icon info">
+                            <i class="fa fa-exchange"/>
+                        </div>
+                        <div class="o_stat_value" t-esc="formatNumber(state.data.tai_san.dang_muon)"/>
+                        <div class="o_stat_label">Đang cho mượn</div>
+                        <div class="o_stat_change positive">
+                            <i class="fa fa-users"/> 
+                            <span t-esc="formatNumber(state.data.muon_tra.don_dang_muon)"/> đơn
+                        </div>
+                    </div>
+
+                    <!-- Giá trị tài sản -->
+                    <div class="o_stat_card success" t-on-click="openTaiSan">
+                        <div class="o_stat_icon success">
+                            <i class="fa fa-money"/>
+                        </div>
+                        <div class="o_stat_value" style="font-size: 1.8rem;">
+                            <t t-esc="formatCurrency(state.data.tai_san.total_value)"/>
+                        </div>
+                        <div class="o_stat_label">Tổng giá trị</div>
+                        <div class="o_stat_change positive">
+                            <i class="fa fa-line-chart"/> 
+                            Còn lại: <t t-esc="formatCurrency(state.data.tai_san.depreciated_value)"/>
+                        </div>
+                    </div>
+
+                    <!-- Phê duyệt mua tài sản -->
+                    <div class="o_stat_card info" t-on-click="openPheDuyet">
+                        <div class="o_stat_icon info">
+                            <i class="fa fa-file-text"/>
+                        </div>
+                        <div class="o_stat_value" t-esc="formatNumber(state.data.tai_chinh.phe_duyet_cho_duyet)"/>
+                        <div class="o_stat_label">Phê duyệt chờ</div>
+                        <div class="o_stat_change positive">
+                            <i class="fa fa-coins"/> 
+                            <t t-esc="formatCurrency(state.data.tai_chinh.tong_gia_tri_phe_duyet)"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="o_chart_card mb-4">
+                    <div class="o_chart_title">
+                        <i class="fa fa-bolt"/> Thao tác nhanh
+                    </div>
+                    <div class="o_quick_actions">
+                        <a class="o_quick_action_btn" t-on-click="openDonMuon">
+                            <i class="fa fa-plus-circle"/>
+                            <span>Tạo đơn mượn</span>
+                        </a>
+                        <a class="o_quick_action_btn" t-on-click="openMuonTra">
+                            <i class="fa fa-check-square-o"/>
+                            <span>Duyệt đơn</span>
+                        </a>
+                        <a class="o_quick_action_btn" t-on-click="openTaiSan">
+                            <i class="fa fa-cubes"/>
+                            <span>Quản lý tài sản</span>
+                        </a>
+                        <a class="o_quick_action_btn" t-on-click="openKiemKe">
+                            <i class="fa fa-clipboard"/>
+                            <span>Kiểm kê</span>
+                        </a>
+                        <a class="o_quick_action_btn" t-on-click="openPheDuyet">
+                            <i class="fa fa-file-text"/>
+                            <span>Phê duyệt mua</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Notifications and Activities -->
+                <div class="row">
+                    <!-- Thông báo -->
+                    <div class="col-md-6">
+                        <div class="o_dashboard_notifications">
+                            <div class="o_chart_title">
+                                <i class="fa fa-bell"/> Thông báo quan trọng
+                            </div>
+                            <t t-if="state.data.thong_bao.length === 0">
+                                <p class="text-muted text-center py-3">
+                                    <i class="fa fa-check-circle text-success"/> Không có thông báo mới
+                                </p>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="state.data.thong_bao" t-as="notif" t-key="notif_index">
+                                    <div t-attf-class="o_notification_item {{notif.type}}"
+                                         t-on-click="() => handleNotificationClick(notif)">
+                                        <i t-attf-class="fa {{notif.icon}}"/>
+                                        <span t-esc="notif.message"/>
+                                        <i class="fa fa-chevron-right ml-auto"/>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Hoạt động gần đây -->
+                    <div class="col-md-6">
+                        <div class="o_activity_timeline">
+                            <div class="o_chart_title">
+                                <i class="fa fa-history"/> Hoạt động gần đây
+                            </div>
+                            <t t-if="state.data.hoat_dong_gan_day.length === 0">
+                                <p class="text-muted text-center py-3">
+                                    Chưa có hoạt động nào
+                                </p>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="state.data.hoat_dong_gan_day.slice(0, 5)" t-as="activity" t-key="activity_index">
+                                    <div class="o_activity_item">
+                                        <div t-attf-class="o_activity_icon {{activity.color}}">
+                                            <i t-attf-class="fa {{activity.icon}}"/>
+                                        </div>
+                                        <div class="o_activity_content">
+                                            <div class="o_activity_title" t-esc="activity.title"/>
+                                            <div class="o_activity_desc" t-esc="activity.description"/>
+                                        </div>
+                                        <div class="o_activity_time" t-esc="activity.date"/>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

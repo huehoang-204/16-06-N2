@@ -18,6 +18,10 @@
                             </group>
                             <group string="Trạng thái / Vị trí">
                                 <field name="trang_thai"/>
+                                <field name="tinh_trang" widget="badge"
+                                    decoration-success="tinh_trang == 'binh_thuong'"
+                                    decoration-warning="tinh_trang == 'dang_muon'"
+                                    decoration-danger="tinh_trang in ['hu_hong', 'mat']"/>
                                 <field name="vi_tri_tai_san_id" string="Vị trí tài sản"/>
                                 <field name="ghi_chu"/>
                             </group>
@@ -32,11 +36,17 @@
             <field name="name">phan_bo_tai_san.view.tree</field>
             <field name="model">phan_bo_tai_san</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách phân bổ tài sản">
+                <tree string="Danh sách phân bổ tài sản"
+                    decoration-warning="tinh_trang == 'dang_muon'"
+                    decoration-danger="tinh_trang in ['hu_hong', 'mat']">
                     <field name="phong_ban_id"/>
                     <field name="tai_san_id"/>
                     <field name="ngay_phat"/>
                     <field name="trang_thai"/>
+                    <field name="tinh_trang" widget="badge"
+                        decoration-success="tinh_trang == 'binh_thuong'"
+                        decoration-warning="tinh_trang == 'dang_muon'"
+                        decoration-danger="tinh_trang in ['hu_hong', 'mat']"/>
                     <field name="vi_tri_tai_san_id"/>
                 </tree>
             </field>
@@ -48,11 +58,11 @@
             <field name="model">phan_bo_tai_san</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm phân bổ tài sản">
-                    <field name="phong_ban_id"/>
-                    <field name="tai_san_id"/>
-                    <field name="ngay_phat"/>
-                    <field name="trang_thai"/>
-                    <field name="vi_tri_tai_san_id"/>
+                    <field name="phong_ban_id" string="Phòng ban"/>
+                    <field name="tai_san_id" string="Tài sản"/>
+                    <field name="ngay_phat" string="Ngày phát"/>
+                    <field name="trang_thai" string="Trạng thái"/>
+                    <field name="vi_tri_tai_san_id" string="Vị trí"/>
                 </search>
             </field>
         </record>

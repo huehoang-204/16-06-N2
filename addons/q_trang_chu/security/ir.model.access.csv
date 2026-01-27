@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dashboard_main_user,dashboard.main.user,model_dashboard_main,base.group_user,1,1,1,0
+access_dashboard_main_admin,dashboard.main.admin,model_dashboard_main,base.group_system,1,1,1,1
+access_chatbot_conversation_user,chatbot.conversation.user,model_chatbot_conversation,base.group_user,1,1,1,1
+access_chatbot_message_user,chatbot.message.user,model_chatbot_message,base.group_user,1,1,1,0
+access_chatbot_assistant_user,chatbot.assistant.user,model_chatbot_assistant,base.group_user,1,0,0,0
+access_chatbot_assistant_admin,chatbot.assistant.admin,model_chatbot_assistant,base.group_system,1,1,1,1
+access_chatbot_knowledge_user,chatbot.knowledge.user,model_chatbot_knowledge,base.group_user,1,0,0,0
+access_chatbot_knowledge_admin,chatbot.knowledge.admin,model_chatbot_knowledge,base.group_system,1,1,1,1
+access_chatbot_faq_user,chatbot.faq.user,model_chatbot_faq,base.group_user,1,0,0,0
+access_chatbot_faq_admin,chatbot.faq.admin,model_chatbot_faq,base.group_system,1,1,1,1
+access_chatbot_policy_user,chatbot.policy.user,model_chatbot_policy,base.group_user,1,0,0,0
+access_chatbot_policy_admin,chatbot.policy.admin,model_chatbot_policy,base.group_system,1,1,1,1

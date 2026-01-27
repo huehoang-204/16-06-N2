@@ -197,10 +197,10 @@
         <field name="model">de_xuat_mua_tai_san</field>
         <field name="arch" type="xml">
             <search string="Tìm kiếm đề xuất mua tài sản">
-                <field name="ma_de_xuat"/>
-                <field name="ten_de_xuat"/>
-                <field name="nguoi_de_xuat_id"/>
-                <field name="phong_ban_id"/>
+                <field name="ma_de_xuat" string="Mã đề xuất"/>
+                <field name="ten_de_xuat" string="Tên đề xuất"/>
+                <field name="nguoi_de_xuat_id" string="Người đề xuất"/>
+                <field name="phong_ban_id" string="Phòng ban"/>
                 
                 <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
                 <filter string="Đã gửi" name="submitted" domain="[('state', '=', 'submitted')]"/>
@@ -208,11 +208,11 @@
                 <filter string="Đã phê duyệt" name="approved" domain="[('state', '=', 'approved')]"/>
                 <filter string="Từ chối" name="rejected" domain="[('state', '=', 'rejected')]"/>
                 
-                <separator/>
+                <separator name="sep1"/>
                 <filter string="Đề xuất của tôi" name="my_proposals" 
                         domain="[('nguoi_de_xuat_id', '=', uid)]"/>
                 
-                <separator/>
+                <separator name="sep2"/>
                 <filter string="Tháng này" name="this_month" 
                         domain="[('ngay_de_xuat', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')),
                                 ('ngay_de_xuat', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%Y-%m-%d'))]"/>

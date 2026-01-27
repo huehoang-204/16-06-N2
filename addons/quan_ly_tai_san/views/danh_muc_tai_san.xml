@@ -56,9 +56,9 @@
 			<field name="model">danh_muc_tai_san</field>
 			<field name="arch" type="xml">
 				<search string="Tìm kiếm loại tài sản">
-					<field name="ma_danh_muc_ts" />
-					<field name="ten_danh_muc_ts" />
-					<field name="mo_ta_danh_muc_ts" />
+					<field name="ma_danh_muc_ts" string="Mã danh mục"/>
+					<field name="ten_danh_muc_ts" string="Tên danh mục"/>
+					<field name="mo_ta_danh_muc_ts" string="Mô tả"/>
 				</search>
 			</field>
 		</record>

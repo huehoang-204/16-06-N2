@@ -77,12 +77,12 @@ class AssetDashboard(models.Model):
         
         # Số đơn đã duyệt và chưa trả
         approved_not_returned = self.env['muon_tra_tai_san'].search_count([
-            ('trang_thai', '=', 'dang-muon')
+            ('trang_thai', '=', 'dang_muon')
         ])
         
         # Số tài sản đang được mượn
         borrowed_assets_count = self.env['muon_tra_tai_san_line'].search_count([
-            ('muon_tra_id.trang_thai', '=', 'dang-muon')
+            ('muon_tra_id.trang_thai', '=', 'dang_muon')
         ])
         
         # Top tài sản được mượn nhiều nhất
@@ -109,8 +109,8 @@ class AssetDashboard(models.Model):
         # Danh sách tài sản quá hạn chưa trả
         now = fields.Datetime.now()
         overdue_borrows = self.env['muon_tra_tai_san'].search([
-            ('trang_thai', '=', 'dang-muon'),
-            ('thoi_gian_tra', '<', now)
+            ('trang_thai', 'in', ['dang_muon', 'qua_han']),
+            ('thoi_gian_tra_du_kien', '<', now)
         ], limit=10)
         
         overdue_data = []
@@ -122,8 +122,8 @@ class AssetDashboard(models.Model):
                 'department': borrow.phong_ban_cho_muon_id.ten_phong_ban or borrow.phong_ban_cho_muon_id.ma_phong_ban,
                 'employee': borrow.nhan_vien_muon_id.ho_ten if borrow.nhan_vien_muon_id else '',
                 'borrow_date': borrow.thoi_gian_muon,
-                'due_date': borrow.thoi_gian_tra,
-                'days_overdue': (fields.Datetime.now() - borrow.thoi_gian_tra).days
+                'due_date': borrow.thoi_gian_tra_du_kien,
+                'days_overdue': (fields.Datetime.now() - borrow.thoi_gian_tra_du_kien).days if borrow.thoi_gian_tra_du_kien else 0
             })
         
         return {

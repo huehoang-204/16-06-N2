@@ -114,9 +114,14 @@ Kiểm soát và phê duyệt các yêu cầu:
 Giao diện tổng hợp với thiết kế card-based hiện đại:
 - **Thống kê phê duyệt**: Tổng, chờ duyệt, đã duyệt, hoàn thành, từ chối
 - **Thống kê khấu hao**: Tổng tài sản, đang khấu hao, giá trị còn lại
+- **Khấu hao theo thời kỳ**: Tháng này, quý này, năm nay (tính từ dữ liệu thực)
 - **Thống kê bút toán**: Tổng, đã ghi nhận, nhập, giá trị toàn bộ
 - **Thống kê kế toán quản trị**: Tổng chi phí, chi phí tháng hiện tại
-- **Biểu đồ dữ liệu**: 4 loại biểu đồ trực quan (Doughnut, Pie, Line, Bar)
+- **Biểu đồ động**: 4 loại biểu đồ trực quan lấy dữ liệu thực từ database
+  - Doughnut chart: Trạng thái phê duyệt
+  - Bar chart: Trạng thái tài sản
+  - Line chart: Xu hướng khấu hao 12 tháng
+  - Line chart: Xu hướng mua sắm 12 tháng
 - Nút action nhanh để điều hướng đến danh sách liên quan
 <img width="1707" height="849" alt="image" src="https://github.com/user-attachments/assets/062595d5-4d94-4386-8426-f8c0859c7635" />
 
@@ -168,14 +173,52 @@ Theo dõi toàn bộ quy trình mua sắm:
 
 ---
 
+### **Module Trang Chủ (q_trang_chu)** **(NEW)**
+
+#### 1. Dashboard tổng quan
+Giao diện chính của hệ thống với các thống kê tổng hợp:
+- **Thống kê tài sản**: Tổng số, đang hoạt động, tỉ lệ sử dụng
+- **Thống kê mượn trả**: Đơn chờ duyệt, đang mượn, quá hạn
+- **Thao tác nhanh**: Các nút điều hướng đến chức năng chính
+- Tự động tính toán dữ liệu khi mở dashboard
+
+#### 2. AI Chatbot Assistant 🤖 **(NEW)**
+Trợ lý thông minh tích hợp **Google Gemini AI**:
+- **Giao diện floating widget** - Nút chat ở góc phải màn hình
+- **Hỗ trợ 24/7** với các tính năng:
+  - 📦 Hướng dẫn quy trình mượn/trả tài sản step-by-step
+  - 📅 Kiểm tra lịch trống của tài sản
+  - 🔧 Tra cứu thông tin bảo hành từ database
+  - 📋 Giải thích các quy định, chính sách quản lý
+  - 📊 Cung cấp thống kê nhanh
+- **Tích hợp RAG** (Retrieval-Augmented Generation):
+  - Tự động lấy context từ database Odoo
+  - Hiểu thông tin người dùng, phòng ban, tài sản đang quản lý
+- **Intent Detection**: Tự động phát hiện ý định người dùng
+- **Lưu lịch sử hội thoại** trong database
+
+> 📖 Chi tiết xem tại: `addons/q_trang_chu/CHATBOT_DOCUMENTATION.md`
+
+---
+
 ## 1.3. Ghi chú về cập nhật
 
 | Thay đổi | Chi tiết |
 |---------|---------|
 | **Khấu hao tài sản** | Được chuyển sang module "Quản lý Tài chính" để tích hợp chặt chẽ với quy trình kế toán |
 | **Đơn đề xuất mua + Duyệt mượn** | Thêm vào module "Quản lý Tài sản" để hoàn chỉnh quy trình kiểm soát |
-| **Dashboard Tài chính** | Giao diện card-based hiện đại với biểu đồ Chart.js trực quan |
+| **Dashboard Tài chính** | Giao diện card-based hiện đại với biểu đồ Chart.js động lấy dữ liệu từ database |
+| **Dashboard Tài sản** | Redesign giao diện với CSS Grid, responsive và đồng bộ style |
+| **AI Chatbot** | Tích hợp Google Gemini 2.0 Flash với RAG để hỗ trợ người dùng thông minh |
+| **Biểu đồ động** | Biểu đồ xu hướng khấu hao và mua sắm tự động cập nhật từ database |
 | **Dự báo ngân sách** | Chức năng mới hỗ trợ lập kế hoạch tài chính dài hạn (*sắp có*) |
+
+### Cập nhật kỹ thuật (28/01/2026)
+- ✅ Sửa logic tính toán dashboard tài chính (sử dụng model `but_toan` thay vì `account.move`)
+- ✅ Thêm tính năng khấu hao theo thời kỳ (tháng/quý/năm)
+- ✅ Biểu đồ Chart.js lấy dữ liệu động qua JSON-RPC API
+- ✅ Cải thiện CSS cho dashboard cards (equal height, responsive)
+- ✅ Chatbot với giao diện Messenger-like và tích hợp Gemini AI
 
 
 # 2. Cài đặt công cụ, môi trường và các thư viện cần thiết
@@ -233,15 +276,61 @@ db_port = 5434
 xmlrpc_port = 8069
 ```
 
+## 4.2. Cấu hình Gemini API Key (cho AI Chatbot)
+
+Để sử dụng tính năng AI Chatbot, bạn cần có API key từ Google Gemini:
+
+1. **Lấy API key** tại: https://aistudio.google.com/apikey
+
+2. **Tạo file `.env`** từ file mẫu:
+```bash
+cp .env.example .env
+```
+
+3. **Điền API key** vào file `.env`:
+```
+GEMINI_API_KEY=your-actual-api-key-here
+```
+
+4. **Xuất biến môi trường** trước khi chạy Odoo:
+```bash
+export GEMINI_API_KEY="your-actual-api-key-here"
+```
+
+> ⚠️ **Lưu ý bảo mật**: File `.env` đã được thêm vào `.gitignore` và sẽ KHÔNG được push lên Git.
+
 # 5. Chạy hệ thống và cài đặt các ứng dụng cần thiết
 
-Lệnh chạy
+## 5.1. Chạy Odoo server
+
+```bash
+# Kích hoạt môi trường ảo (nếu chưa)
+source venv/bin/activate
+
+# Xuất biến môi trường cho Gemini AI
+export GEMINI_API_KEY="your-api-key"
+
+# Chạy Odoo
+python3 odoo-bin -c odoo.conf -u all
 ```
-python3 odoo-bin.py -c odoo.conf -u all
-```
 
+## 5.2. Truy cập hệ thống
 
-Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
+Người sử dụng truy cập theo đường dẫn: **http://localhost:8069/**
 
-Hoàn tất
-    
+Đăng nhập với tài khoản admin mặc định và cài đặt các module cần thiết:
+- `q_trang_chu` - Trang chủ & AI Chatbot
+- `quan_ly_tai_san` - Quản lý Tài sản
+- `quan_ly_tai_chinh` - Quản lý Tài chính
+
+---
+
+## 📚 Tài liệu bổ sung
+
+| Tài liệu | Đường dẫn |
+|----------|-----------|
+| Hướng dẫn Chatbot | `addons/q_trang_chu/CHATBOT_DOCUMENTATION.md` |
+
+---
+
+**Hoàn tất!** 🎉

@@ -133,11 +133,11 @@
 			<field name="model">tai_san</field>
 			<field name="arch" type="xml">
 				<search string="Tìm kiếm tài sản">
-					<field name="ma_tai_san" />
-					<field name="ten_tai_san" />
-					<field name="ngay_mua_ts" />
-					<field name="pp_khau_hao" />
-					<field name="don_vi_tinh" />
+					<field name="ma_tai_san" string="Mã tài sản"/>
+					<field name="ten_tai_san" string="Tên tài sản"/>
+					<field name="ngay_mua_ts" string="Ngày mua"/>
+					<field name="pp_khau_hao" string="Phương pháp khấu hao"/>
+					<field name="don_vi_tinh" string="Đơn vị tính"/>
 				</search>
 			</field>
 		</record>

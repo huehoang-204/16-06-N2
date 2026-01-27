@@ -1,301 +1,445 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Dashboard Tài Chính - Giao diện Overview -->
+    <!-- Dashboard Tài Chính - Clean Design -->
     <record id="view_dashboard_tai_chinh_overview" model="ir.ui.view">
         <field name="name">dashboard.tai.chinh.overview</field>
         <field name="model">dashboard.tai.chinh</field>
         <field name="arch" type="xml">
             <form string="Dashboard Tài Chính" create="false" edit="false" delete="false">
-                <div class="o_dashboards">
-                    <div class="container-fluid o_dashboard_common">
-                        <!-- Header Section -->
-                        <div style="font-size:25px; margin-bottom:20px;">
-                            <strong>Bảng Điều Khiển Tài Chính</strong>
-                            <button name="action_refresh" string="Làm Mới" type="object" class="btn btn-sm btn-primary float-right"/>
+                <div class="o_finance_dashboard">
+                    <div class="dashboard-container">
+                        
+                        <!-- Header -->
+                        <div class="dashboard-header">
+                            <h1><i class="fa fa-line-chart"/> Bảng Điều Khiển Tài Chính</h1>
                         </div>
 
-                        <!-- Summary Section - Phê Duyệt Mua Tài Sản -->
-                        <div class="row mt16 o_dashboard_stat_cards">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card text-center mb-3 o_dashboard_card">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-primary">Tổng Đơn Phê Duyệt</h5>
-                                        <h2 class="card-text text-primary"><field name="tong_phe_duyet"/></h2>
-                                        <small class="text-muted">Đơn</small>
-                                    </div>
-                                </div>
+                        <!-- Row 1: Thống kê đơn phê duyệt -->
+                        <div class="stats-grid">
+                            <div class="dash-card stat-card primary">
+                                <div class="stat-icon"><i class="fa fa-file-text-o"/></div>
+                                <div class="stat-value"><field name="tong_phe_duyet"/></div>
+                                <div class="stat-label">Tổng Đơn</div>
                             </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card text-center mb-3 o_dashboard_card">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-warning">Chờ Phê Duyệt</h5>
-                                        <h2 class="card-text text-warning"><field name="phe_duyet_cho_duyet"/></h2>
-                                        <small class="text-muted">Đơn</small>
-                                    </div>
-                                </div>
+                            <div class="dash-card stat-card warning">
+                                <div class="stat-icon"><i class="fa fa-clock-o"/></div>
+                                <div class="stat-value"><field name="phe_duyet_cho_duyet"/></div>
+                                <div class="stat-label">Chờ Duyệt</div>
                             </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card text-center mb-3 o_dashboard_card">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-success">Đã Phê Duyệt</h5>
-                                        <h2 class="card-text text-success"><field name="phe_duyet_da_duyet"/></h2>
-                                        <small class="text-muted">Đơn</small>
-                                    </div>
-                                </div>
+                            <div class="dash-card stat-card success">
+                                <div class="stat-icon"><i class="fa fa-check-circle"/></div>
+                                <div class="stat-value"><field name="phe_duyet_da_duyet"/></div>
+                                <div class="stat-label">Đã Duyệt</div>
                             </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card text-center mb-3 o_dashboard_card">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-danger">Từ Chối</h5>
-                                        <h2 class="card-text text-danger"><field name="phe_duyet_bi_tu_choi"/></h2>
-                                        <small class="text-muted">Đơn</small>
-                                    </div>
-                                </div>
+                            <div class="dash-card stat-card danger">
+                                <div class="stat-icon"><i class="fa fa-times-circle"/></div>
+                                <div class="stat-value"><field name="phe_duyet_bi_tu_choi"/></div>
+                                <div class="stat-label">Từ Chối</div>
                             </div>
                         </div>
 
-                        <!-- Financial Summary - Giá Trị -->
-                        <div class="row mt16 o_dashboard_stats">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-primary text-white">
-                                        <h5 class="mb-0">Giá Trị Phê Duyệt Mua Tài Sản</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6 text-center">
-                                                <h6>Chờ Duyệt</h6>
-                                                <h3 class="text-warning"><field name="gia_tri_cho_duyet" widget="monetary"/></h3>
-                                            </div>
-                                            <div class="col-6 text-center">
-                                                <h6>Đã Duyệt</h6>
-                                                <h3 class="text-success"><field name="gia_tri_da_duyet" widget="monetary"/></h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <!-- Row 2: Giá trị tài sản -->
+                        <div class="values-grid">
+                            <div class="dash-card value-card green">
+                                <div class="value-header">
+                                    <i class="fa fa-building-o"/>
+                                    <span>Tổng Giá Trị Tài Sản</span>
                                 </div>
+                                <div class="value-amount"><field name="tong_gia_tri_tai_san" widget="monetary"/></div>
                             </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-info text-white">
-                                        <h5 class="mb-0">Thống Kê Tài Sản</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6 text-center">
-                                                <h6>Tổng Tài Sản</h6>
-                                                <h3 class="text-info"><field name="tong_tai_san"/></h3>
-                                            </div>
-                                            <div class="col-6 text-center">
-                                                <h6>Đang Khấu Hao</h6>
-                                                <h3 class="text-primary"><field name="tai_san_dang_khau_hao"/></h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="dash-card value-card orange">
+                                <div class="value-header">
+                                    <i class="fa fa-minus-circle"/>
+                                    <span>Tích Lũy Khấu Hao</span>
                                 </div>
+                                <div class="value-amount"><field name="tong_khau_hao_tich_luy" widget="monetary"/></div>
+                            </div>
+                            <div class="dash-card value-card blue">
+                                <div class="value-header">
+                                    <i class="fa fa-balance-scale"/>
+                                    <span>Giá Trị Còn Lại</span>
+                                </div>
+                                <div class="value-amount"><field name="tong_gia_tri_con_lai" widget="monetary"/></div>
                             </div>
                         </div>
 
-                        <!-- Giá Trị Tài Sản Section -->
-                        <div class="row mt16 o_dashboard_stats">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-success text-white">
-                                        <h5 class="mb-0">Tổng Giá Trị Tài Sản</h5>
+                        <!-- Row 3: Chi tiết -->
+                        <div class="details-grid">
+                            <div class="dash-card detail-card">
+                                <div class="card-header blue">
+                                    <i class="fa fa-credit-card"/> Giá Trị Phê Duyệt
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-item">
+                                        <div class="detail-label">Chờ Duyệt</div>
+                                        <div class="detail-value" style="color: #f59e0b;"><field name="gia_tri_cho_duyet" widget="monetary"/></div>
                                     </div>
-                                    <div class="card-body text-center">
-                                        <h3 class="text-success"><field name="tong_gia_tri_tai_san" widget="monetary"/></h3>
+                                    <div class="detail-item">
+                                        <div class="detail-label">Đã Duyệt</div>
+                                        <div class="detail-value" style="color: #10b981;"><field name="gia_tri_da_duyet" widget="monetary"/></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-warning text-white">
-                                        <h5 class="mb-0">Tích Lũy Khấu Hao</h5>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <h3 class="text-warning"><field name="tong_khau_hao_tich_luy" widget="monetary"/></h3>
-                                    </div>
+                            <div class="dash-card detail-card">
+                                <div class="card-header teal">
+                                    <i class="fa fa-cubes"/> Thống Kê Tài Sản
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-danger text-white">
-                                        <h5 class="mb-0">Giá Trị Còn Lại</h5>
+                                <div class="card-body">
+                                    <div class="detail-item">
+                                        <div class="detail-label">Tổng Tài Sản</div>
+                                        <div class="detail-value" style="color: #3b82f6;"><field name="tong_tai_san"/></div>
                                     </div>
-                                    <div class="card-body text-center">
-                                        <h3 class="text-danger"><field name="tong_gia_tri_con_lai" widget="monetary"/></h3>
+                                    <div class="detail-item">
+                                        <div class="detail-label">Đang Khấu Hao</div>
+                                        <div class="detail-value" style="color: #8b5cf6;"><field name="tai_san_dang_khau_hao"/></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Khấu Hao Theo Thời Gian -->
-                        <div class="row mt16 o_dashboard_stats">
-                            <div class="col-lg-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-info text-white">
-                                        <h5 class="mb-0">Khấu Hao Theo Thời Kỳ</h5>
+                        <!-- Row 4: Khấu hao theo thời kỳ -->
+                        <div class="full-width">
+                            <div class="dash-card period-card">
+                                <div class="card-header">
+                                    <i class="fa fa-calendar"/> Khấu Hao Theo Thời Kỳ
+                                </div>
+                                <div class="card-body">
+                                    <div class="period-item">
+                                        <div class="period-label">Tháng Này</div>
+                                        <div class="period-value"><field name="khau_hao_thang_nay" widget="monetary"/></div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-4 text-center">
-                                                <h6>Tháng Này</h6>
-                                                <h3 class="text-info"><field name="khau_hao_thang_nay" widget="monetary"/></h3>
-                                            </div>
-                                            <div class="col-4 text-center">
-                                                <h6>Quý Này</h6>
-                                                <h3 class="text-primary"><field name="khau_hao_quy_nay" widget="monetary"/></h3>
-                                            </div>
-                                            <div class="col-4 text-center">
-                                                <h6>Năm Nay</h6>
-                                                <h3 class="text-warning"><field name="khau_hao_nam_nay" widget="monetary"/></h3>
-                                            </div>
-                                        </div>
+                                    <div class="period-item">
+                                        <div class="period-label">Quý Này</div>
+                                        <div class="period-value"><field name="khau_hao_quy_nay" widget="monetary"/></div>
+                                    </div>
+                                    <div class="period-item">
+                                        <div class="period-label">Năm Nay</div>
+                                        <div class="period-value"><field name="khau_hao_nam_nay" widget="monetary"/></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Bút Toán Section -->
-                        <div class="row mt16 o_dashboard_stats">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-success text-white">
-                                        <h5 class="mb-0">Thống Kê Bút Toán</h5>
+                        <!-- Row 5: Thống kê bút toán -->
+                        <div class="details-grid">
+                            <div class="dash-card detail-card">
+                                <div class="card-header purple">
+                                    <i class="fa fa-book"/> Thống Kê Bút Toán
+                                </div>
+                                <div class="card-body">
+                                    <div class="detail-item">
+                                        <div class="detail-label">Tổng Bút Toán</div>
+                                        <div class="detail-value" style="color: #10b981;"><field name="tong_but_toan"/></div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6 text-center">
-                                                <h6>Tổng Bút Toán</h6>
-                                                <h3 class="text-success"><field name="tong_but_toan"/></h3>
-                                            </div>
-                                            <div class="col-6 text-center">
-                                                <h6>Đã Ghi</h6>
-                                                <h3 class="text-primary"><field name="but_toan_da_ghi"/></h3>
-                                            </div>
-                                        </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">Đã Ghi Sổ</div>
+                                        <div class="detail-value" style="color: #4361ee;"><field name="but_toan_da_ghi"/></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-warning text-white">
-                                        <h5 class="mb-0">Tổng Giá Trị Bút Toán</h5>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <h3 class="text-warning"><field name="tong_gia_tri_but_toan" widget="monetary"/></h3>
-                                    </div>
+                            <div class="dash-card value-card green">
+                                <div class="value-header">
+                                    <i class="fa fa-money"/>
+                                    <span>Tổng Giá Trị Bút Toán</span>
                                 </div>
+                                <div class="value-amount"><field name="tong_gia_tri_but_toan" widget="monetary"/></div>
                             </div>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="row mt16">
-                            <div class="col-lg-12">
-                                <button name="action_view_phe_duyet" string="Xem Chi Tiết Phê Duyệt" type="object" class="btn btn-primary"/>
-                                <button name="action_view_tai_san" string="Xem Chi Tiết Tài Sản" type="object" class="btn btn-info"/>
-                                <button name="action_view_khau_hao" string="Xem Chi Tiết Khấu Hao" type="object" class="btn btn-warning"/>
-                                <button name="action_view_but_toan" string="Xem Chi Tiết Bút Toán" type="object" class="btn btn-success"/>
-                            </div>
+                        <div class="action-buttons">
+                            <button name="action_view_phe_duyet" string="Xem Phê Duyệt" type="object" class="btn btn-primary">
+                                <i class="fa fa-list"/> Xem Phê Duyệt
+                            </button>
+                            <button name="action_view_tai_san" string="Xem Tài Sản" type="object" class="btn btn-success">
+                                <i class="fa fa-cubes"/> Xem Tài Sản
+                            </button>
+                            <button name="action_view_khau_hao" string="Xem Khấu Hao" type="object" class="btn btn-warning">
+                                <i class="fa fa-calculator"/> Xem Khấu Hao
+                            </button>
+                            <button name="action_view_but_toan" string="Xem Bút Toán" type="object" class="btn btn-info">
+                                <i class="fa fa-book"/> Xem Bút Toán
+                            </button>
                         </div>
 
-                        <!-- Trends Section - Charts -->
-                        <div class="row mt16">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-primary text-white">
-                                        <h5 class="mb-0">Phân Bổ Phê Duyệt Theo Trạng Thái</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="approvalStatusChart" height="300"></canvas>
-                                    </div>
+                        <!-- Charts -->
+                        <div class="charts-grid">
+                            <div class="dash-card chart-card">
+                                <div class="chart-header blue">
+                                    <i class="fa fa-pie-chart"/> Phân Bổ Theo Trạng Thái
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="approvalStatusChart" height="280"></canvas>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-success text-white">
-                                        <h5 class="mb-0">Phân Bổ Tài Sản Theo Trạng Thái</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="assetStatusChart" height="300"></canvas>
-                                    </div>
+                            <div class="dash-card chart-card">
+                                <div class="chart-header green">
+                                    <i class="fa fa-bar-chart"/> Phân Bổ Tài Sản
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt16">
-                            <div class="col-lg-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-primary text-white">
-                                        <h5 class="mb-0">Xu Hướng Khấu Hao 12 Tháng</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="depreciationTrendChart" height="250"></canvas>
-                                    </div>
+                                <div class="chart-body">
+                                    <canvas id="assetStatusChart" height="280"></canvas>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row mt16">
-                            <div class="col-lg-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-success text-white">
-                                        <h5 class="mb-0">Xu Hướng Mua Sắm 12 Tháng</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="purchaseTrendChart" height="250"></canvas>
-                                    </div>
+                        <!-- Trend Charts -->
+                        <div class="full-width">
+                            <div class="dash-card chart-card">
+                                <div class="chart-header blue">
+                                    <i class="fa fa-line-chart"/> Xu Hướng Khấu Hao 12 Tháng
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="depreciationTrendChart" height="220"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="full-width">
+                            <div class="dash-card chart-card">
+                                <div class="chart-header green">
+                                    <i class="fa fa-shopping-cart"/> Xu Hướng Mua Sắm 12 Tháng
+                                </div>
+                                <div class="chart-body">
+                                    <canvas id="purchaseTrendChart" height="220"></canvas>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Department Distribution -->
-                        <div class="row mt16">
-                            <div class="col-lg-12">
-                                <div class="card mb-3 o_dashboard_card">
-                                    <div class="card-header bg-info text-white">
-                                        <h5 class="mb-0">Phân Bổ Theo Phòng Ban</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <field name="department_distribution_ids">
-                                            <tree string="Phân Bổ Phòng Ban" create="false" edit="false" delete="false">
-                                                <field name="department_id"/>
-                                                <field name="tai_san_count"/>
-                                                <field name="tai_san_value" widget="monetary"/>
-                                                <field name="de_xuat_count"/>
-                                                <field name="de_xuat_value" widget="monetary"/>
-                                                <field name="approved_count"/>
-                                                <field name="approved_value" widget="monetary"/>
-                                            </tree>
-                                        </field>
-                                    </div>
+                        <div class="full-width">
+                            <div class="dash-card">
+                                <div class="chart-header blue" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">
+                                    <i class="fa fa-sitemap"/> Phân Bổ Theo Phòng Ban
+                                </div>
+                                <div class="chart-body" style="padding: 0;">
+                                    <field name="department_distribution_ids">
+                                        <tree string="Phân Bổ Phòng Ban" create="false" edit="false" delete="false">
+                                            <field name="department_id"/>
+                                            <field name="tai_san_count"/>
+                                            <field name="tai_san_value" widget="monetary"/>
+                                            <field name="de_xuat_count"/>
+                                            <field name="de_xuat_value" widget="monetary"/>
+                                            <field name="approved_count"/>
+                                            <field name="approved_value" widget="monetary"/>
+                                        </tree>
+                                    </field>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+                
+                <!-- Inline Script to render charts with REAL DATA from server -->
+                <script type="text/javascript">
+                    (function() {
+                        function loadChartJS(callback) {
+                            if (typeof Chart !== 'undefined') {
+                                callback();
+                                return;
+                            }
+                            var script = document.createElement('script');
+                            script.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js';
+                            script.onload = callback;
+                            document.head.appendChild(script);
+                        }
+                        
+                        function fetchChartData(callback) {
+                            // Call Odoo JSON-RPC to get chart data
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('POST', '/web/dataset/call_kw/dashboard.tai.chinh/get_chart_data', true);
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+                            
+                            var params = {
+                                jsonrpc: '2.0',
+                                method: 'call',
+                                params: {
+                                    model: 'dashboard.tai.chinh',
+                                    method: 'get_chart_data',
+                                    args: [],
+                                    kwargs: {}
+                                },
+                                id: Math.floor(Math.random() * 1000000)
+                            };
+                            
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        try {
+                                            var response = JSON.parse(xhr.responseText);
+                                            if (response.result) {
+                                                callback(response.result);
+                                            } else {
+                                                callback(getDefaultData());
+                                            }
+                                        } catch (e) {
+                                            callback(getDefaultData());
+                                        }
+                                    } else {
+                                        callback(getDefaultData());
+                                    }
+                                }
+                            };
+                            
+                            xhr.send(JSON.stringify(params));
+                        }
+                        
+                        function getDefaultData() {
+                            return {
+                                approval_status: {labels: ['Chờ duyệt', 'Đã duyệt', 'Từ chối'], values: [0, 0, 0]},
+                                asset_status: {labels: ['Đang khấu hao', 'Tạm dừng', 'Hoàn thành'], values: [0, 0, 0]},
+                                depreciation_trend: {labels: [], values: []},
+                                purchase_trend: {labels: [], values: []}
+                            };
+                        }
+                        
+                        function renderChartsWithData(data) {
+                            // Approval Status Chart
+                            var ctx1 = document.getElementById('approvalStatusChart');
+                            if (ctx1 &amp;&amp; !ctx1._chartRendered) {
+                                ctx1._chartRendered = true;
+                                new Chart(ctx1.getContext('2d'), {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: data.approval_status.labels,
+                                        datasets: [{
+                                            data: data.approval_status.values,
+                                            backgroundColor: ['#f59e0b', '#22c55e', '#ef4444'],
+                                            borderWidth: 0
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: { legend: { position: 'bottom' } }
+                                    }
+                                });
+                            }
+                            
+                            // Asset Status Chart
+                            var ctx2 = document.getElementById('assetStatusChart');
+                            if (ctx2 &amp;&amp; !ctx2._chartRendered) {
+                                ctx2._chartRendered = true;
+                                new Chart(ctx2.getContext('2d'), {
+                                    type: 'bar',
+                                    data: {
+                                        labels: data.asset_status.labels,
+                                        datasets: [{
+                                            data: data.asset_status.values,
+                                            backgroundColor: ['#4361ee', '#f59e0b', '#22c55e'],
+                                            borderRadius: 6
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: { legend: { display: false } },
+                                        scales: { y: { beginAtZero: true } }
+                                    }
+                                });
+                            }
+                            
+                            // Depreciation Trend
+                            var ctx3 = document.getElementById('depreciationTrendChart');
+                            if (ctx3 &amp;&amp; !ctx3._chartRendered) {
+                                ctx3._chartRendered = true;
+                                new Chart(ctx3.getContext('2d'), {
+                                    type: 'line',
+                                    data: {
+                                        labels: data.depreciation_trend.labels,
+                                        datasets: [{
+                                            label: 'Khấu hao (VNĐ)',
+                                            data: data.depreciation_trend.values,
+                                            borderColor: '#4361ee',
+                                            backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                                            fill: true,
+                                            tension: 0.4
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: { legend: { display: false } },
+                                        scales: { 
+                                            y: { 
+                                                beginAtZero: true,
+                                                ticks: {
+                                                    callback: function(value) {
+                                                        return value.toLocaleString('vi-VN');
+                                                    }
+                                                }
+                                            } 
+                                        }
+                                    }
+                                });
+                            }
+                            
+                            // Purchase Trend
+                            var ctx4 = document.getElementById('purchaseTrendChart');
+                            if (ctx4 &amp;&amp; !ctx4._chartRendered) {
+                                ctx4._chartRendered = true;
+                                new Chart(ctx4.getContext('2d'), {
+                                    type: 'line',
+                                    data: {
+                                        labels: data.purchase_trend.labels,
+                                        datasets: [{
+                                            label: 'Mua sắm (VNĐ)',
+                                            data: data.purchase_trend.values,
+                                            borderColor: '#22c55e',
+                                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                                            fill: true,
+                                            tension: 0.4
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: { legend: { display: false } },
+                                        scales: { 
+                                            y: { 
+                                                beginAtZero: true,
+                                                ticks: {
+                                                    callback: function(value) {
+                                                        return value.toLocaleString('vi-VN');
+                                                    }
+                                                }
+                                            } 
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                        
+                        function init() {
+                            loadChartJS(function() {
+                                fetchChartData(renderChartsWithData);
+                            });
+                        }
+                        
+                        // Wait for DOM and render
+                        setTimeout(init, 500);
+                        
+                        // Also try on mutation
+                        var checkInterval = setInterval(function() {
+                            if (document.getElementById('approvalStatusChart')) {
+                                init();
+                                clearInterval(checkInterval);
+                            }
+                        }, 300);
+                        
+                        setTimeout(function() { clearInterval(checkInterval); }, 10000);
+                    })();
+                </script>
             </form>
         </field>
     </record>
 
-    <!-- Dashboard Tài Chính Search View -->
-    <record id="view_dashboard_tai_chinh_search" model="ir.ui.view">
-        <field name="name">dashboard.tai.chinh.search</field>
-        <field name="model">dashboard.tai.chinh</field>
-        <field name="arch" type="xml">
-            <search string="Tìm Kiếm Dashboard Tài Chính">
-                <field name="name"/>
-            </search>
-        </field>
-    </record>
-
     <!-- Dashboard Tài Chính Action -->
-    <record id="action_dashboard_tai_chinh" model="ir.actions.act_window">
+    <record id="action_dashboard_tai_chinh_new" model="ir.actions.act_window">
         <field name="name">Dashboard Tài Chính</field>
         <field name="res_model">dashboard.tai.chinh</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_dashboard_tai_chinh_overview"/>
-        <field name="target">main</field>
+        <field name="target">inline</field>
     </record>
 </odoo>

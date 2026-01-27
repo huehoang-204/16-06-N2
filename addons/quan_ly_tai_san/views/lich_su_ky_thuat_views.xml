@@ -43,8 +43,8 @@
             <field name="model">lich_su_ky_thuat</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm lịch sử kỹ thuật">
-                    <field name="tai_san_id"/>
-                    <field name="noi_dung"/>
+                    <field name="tai_san_id" string="Tài sản"/>
+                    <field name="noi_dung" string="Nội dung"/>
                     <filter string="Tháng này" name="this_month" 
                             domain="[('ngay', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')), ('ngay', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%Y-%m-%d'))]"/>
                     <filter string="Năm nay" name="this_year" 

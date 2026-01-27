@@ -236,11 +236,7 @@
                         domain="[('state', '=', 'draft')]"/>
                 
                 <separator/>
-                <filter string="Tháng này" name="this_month" 
-                        domain="[('ngay_tao', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')),
-                                ('ngay_tao', '&lt;=', (context_today() + relativedelta(day=31)).strftime('%Y-%m-%d'))]"/>
-                <filter string="Năm nay" name="this_year" 
-                        domain="[('ngay_tao', '&gt;=', (context_today() - relativedelta(day=1, month=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Tháng này" name="this_month" domain="[]"/>
                 
                 <group expand="0" string="Nhóm theo">
                     <filter string="Trạng thái" name="group_state" context="{'group_by': 'state'}"/>
