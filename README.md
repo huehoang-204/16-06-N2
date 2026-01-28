@@ -49,7 +49,10 @@ Cung cấp cái nhìn 360° về tình trạng tài sản của tổ chức:
 - Số lượng tài sản hiện có trong hệ thống
 - Số lượng tài sản đang bị lỗi/hư hỏng
 - Dự báo nhu cầu mua sắm trong tương lai
-![Dashboard](./images/overview.png)
+<img width="1258" height="809" alt="image" src="https://github.com/user-attachments/assets/f0aa82cf-27c6-4910-88ba-7d45d1c07bdd" />
+<img width="1248" height="678" alt="image" src="https://github.com/user-attachments/assets/393a8521-5874-4137-b803-1fef6e6cc231" />
+
+
 #### 2. Quản lý loại tài sản
 Chuẩn hóa phân loại tài sản trong toàn tổ chức:
 - Tối ưu hóa quy trình kế toán - không cần định khoản lại cho mỗi lần mua mới
@@ -123,8 +126,8 @@ Giao diện tổng hợp với thiết kế card-based hiện đại:
   - Line chart: Xu hướng khấu hao 12 tháng
   - Line chart: Xu hướng mua sắm 12 tháng
 - Nút action nhanh để điều hướng đến danh sách liên quan
-<img width="1707" height="849" alt="image" src="https://github.com/user-attachments/assets/062595d5-4d94-4386-8426-f8c0859c7635" />
-
+<img width="1202" height="847" alt="image" src="https://github.com/user-attachments/assets/c79b1483-3c62-4648-850e-d70d9957086e" />
+<img width="1184" height="847" alt="image" src="https://github.com/user-attachments/assets/f0f04ab9-3ead-4158-b6e6-6e87d27b99bf" />
 
 #### 2. Khấu hao tài sản
 Phân bổ chi phí mua tài sản vào nhiều kỳ kế toán:
@@ -159,17 +162,14 @@ Tạo các báo cáo tuân thủ tiêu chuẩn kế toán:
 <img width="1735" height="225" alt="image" src="https://github.com/user-attachments/assets/9a82d305-d0c1-40b4-ba5f-5edd20a6e92a" />
 
 
-#### 6. Dự báo ngân sách mua sắm **(NEW)**
-Lập kế hoạch tài chính dài hạn:
-- Dự báo nhu cầu thay thế tài sản cũ trong năm
-- Tính toán ngân sách CAPEX dựa trên lịch khấu hao
-- Tích hợp lịch sử mượn/trả để xác định tài sản cần thanh lý
-- Xác định tài sản nào thanh lý được giá tốt nhất
+
 
 #### 7. Quản lý đơn mua tài sản
 Theo dõi toàn bộ quy trình mua sắm:
 - Từ đơn đề xuất → phê duyệt → hợp đồng → nhận hàng → thanh toán
 - Liên kết với kế toán cho phép ghi nhận tài sản vào sổ cái ngay khi nhận hàng
+<img width="1731" height="264" alt="image" src="https://github.com/user-attachments/assets/e8dc681c-ef1a-4cda-83d0-d112860e5d63" />
+<img width="1708" height="830" alt="image" src="https://github.com/user-attachments/assets/446cd444-22e9-47b3-9e50-1ed41d3b94eb" />
 
 ---
 
@@ -181,6 +181,7 @@ Giao diện chính của hệ thống với các thống kê tổng hợp:
 - **Thống kê mượn trả**: Đơn chờ duyệt, đang mượn, quá hạn
 - **Thao tác nhanh**: Các nút điều hướng đến chức năng chính
 - Tự động tính toán dữ liệu khi mở dashboard
+<img width="1423" height="836" alt="image" src="https://github.com/user-attachments/assets/2122923c-2915-4fb9-b0f2-488734e64d45" />
 
 #### 2. AI Chatbot Assistant 🤖 **(NEW)**
 Trợ lý thông minh tích hợp **Google Gemini AI**:
@@ -196,8 +197,13 @@ Trợ lý thông minh tích hợp **Google Gemini AI**:
   - Hiểu thông tin người dùng, phòng ban, tài sản đang quản lý
 - **Intent Detection**: Tự động phát hiện ý định người dùng
 - **Lưu lịch sử hội thoại** trong database
+<img width="1713" height="860" alt="image" src="https://github.com/user-attachments/assets/182cceaf-e288-4b74-a413-8e92f3eccd98" />
 
 > 📖 Chi tiết xem tại: `addons/q_trang_chu/CHATBOT_DOCUMENTATION.md`
+#### 3. Quản lý chatbot
+<img width="1724" height="278" alt="image" src="https://github.com/user-attachments/assets/452b0160-52a7-4a27-9e62-fb43a984f237" />
+<img width="1724" height="270" alt="image" src="https://github.com/user-attachments/assets/ad116968-880f-414c-974f-e3846ba25811" />
+<img width="1706" height="333" alt="image" src="https://github.com/user-attachments/assets/a817860e-fd39-4939-975c-9e2eff5f4e40" />
 
 ---
 
@@ -211,7 +217,6 @@ Trợ lý thông minh tích hợp **Google Gemini AI**:
 | **Dashboard Tài sản** | Redesign giao diện với CSS Grid, responsive và đồng bộ style |
 | **AI Chatbot** | Tích hợp Google Gemini 2.0 Flash với RAG để hỗ trợ người dùng thông minh |
 | **Biểu đồ động** | Biểu đồ xu hướng khấu hao và mua sắm tự động cập nhật từ database |
-| **Dự báo ngân sách** | Chức năng mới hỗ trợ lập kế hoạch tài chính dài hạn (*sắp có*) |
 
 ### Cập nhật kỹ thuật (28/01/2026)
 - ✅ Sửa logic tính toán dashboard tài chính (sử dụng model `but_toan` thay vì `account.move`)
