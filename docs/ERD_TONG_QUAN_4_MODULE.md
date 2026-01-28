@@ -3,7 +3,7 @@
 ## 1. Sơ đồ ERD Tổng quan 4 Module (Mermaid)
 
 ```mermaid
-%%{init: {'theme':'default'}}%%
+
 erDiagram
     %% ========================================
     %% MODULE 1: NHÂN SỰ (nhan_su)
