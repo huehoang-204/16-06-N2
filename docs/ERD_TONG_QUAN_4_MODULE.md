@@ -3,7 +3,7 @@
 ## 1. Sơ đồ ERD Tổng quan 4 Module (Mermaid)
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#ffffff','primaryTextColor':'#000000','primaryBorderColor':'#000000','lineColor':'#000000','secondaryColor':'#f0f0f0','tertiaryColor':'#ffffff','background':'#ffffff','mainBkg':'#ffffff','secondBkg':'#f0f0f0','tertiaryBorderColor':'#cccccc'}}}%%
+%%{init: {'theme':'default'}}%%
 erDiagram
     %% ========================================
     %% MODULE 1: NHÂN SỰ (nhan_su)
