@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   postgres-odoo-base-15-04:
     container_name: postgres_odoo-base-15-04
@@ -13,30 +11,27 @@ services:
        - /home/ttdn/ttdn_k15/database_ttdn/cntt15_04_db/_data:/data/postgres
     ports:
       - "5434:5432"
-    # networks:
-    #   - postgres
-    # restart: unless-stopped
+    restart: unless-stopped
 
-  # pgadmin:
-  #   container_name: pgadmin_container
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-  #     PGADMIN_CONFIG_SERVER_MODE: 'False'
-  #   volumes:
-  #      - pgadmin:/root/.pgadmin
+  # Odoo Server
+  odoo:
+    container_name: odoo_server
+    image: odoo:15.0
+    depends_on:
+      - postgres-odoo-base-15-04
+    environment:
+      - HOST=postgres-odoo-base-15-04
+      - PORT=5432
+      - USER=odoo
+      - PASSWORD=odoo
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - odoo-web-data:/var/lib/odoo
+      - ./odoo-docker.conf:/etc/odoo/odoo.conf:ro
+    ports:
+      - "8071:8069"
+    restart: unless-stopped
 
-  #   ports:
-  #     - "${PGADMIN_PORT:-5050}:80"
-  #   networks:
-  #     - postgres
-  #   restart: unless-stopped
-
-#networks:
-#  postgres:
-#    driver: bridge
-
-#volumes:
-#    postgres:
-#    pgadmin:
+volumes:
+  odoo-web-data:

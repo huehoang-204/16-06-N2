@@ -14,15 +14,32 @@
                                 <field name="ho_ten" />
                                 <field name="ngay_sinh" />
                             </group>
-                            <group string="Thông tin chung">
+                            <group string="Liên hệ">
                                 <field name="tuoi" />
                                 <field name="que_quan" />
                                 <field name="email" />
+                                <field name="so_dien_thoai" />
                             </group>
                         </group>
                         <notebook>
-                            <page string="Danh sách lịch sử công tác">
+                            <page string="Lịch sử công tác">
                                 <field name="lich_su_cong_tac_ids"/>
+                            </page>
+                            <page string="Tài khoản Web">
+                                <group>
+                                    <group string="Thông tin đăng nhập">
+                                        <field name="web_username" />
+                                        <field name="is_web_active" widget="boolean_toggle"/>
+                                        <field name="last_login" readonly="1"/>
+                                    </group>
+                                    <group string="Liên kết Odoo">
+                                        <field name="user_id" />
+                                    </group>
+                                </group>
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Lưu ý:</strong> Mật khẩu mặc định là <code>123456</code>. 
+                                    Nhân viên có thể đổi mật khẩu thông qua web app.
+                                </div>
                             </page>
                         </notebook>
                     </sheet>
@@ -36,15 +53,14 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="ma_dinh_danh" />
-                    <field name="ngay_sinh" />
-                    <field name="que_quan" />
                     <field name="ho_ten" />
-
+                    <field name="ngay_sinh" optional="hide"/>
                     <field name="email" />
-                    <field name="tuoi" />
-                    <field name="lich_su_cong_tac_ids" />
-                    <!-- <field name = "ids_van_ban_di"/> -->
-
+                    <field name="so_dien_thoai" optional="hide"/>
+                    <field name="tuoi" optional="hide"/>
+                    <field name="web_username" string="Tài khoản"/>
+                    <field name="is_web_active" string="Web Active" widget="boolean_toggle"/>
+                    <field name="last_login" string="Đăng nhập lần cuối" optional="show"/>
                 </tree>
             </field>
         </record>
@@ -54,11 +70,14 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="ma_dinh_danh" />
-                    <field name="ngay_sinh" />
-                    <field name="que_quan" />
                     <field name="ho_ten" />
-
                     <field name="email" />
+                    <field name="web_username" />
+                    <filter string="Có tài khoản web" name="has_web_account" domain="[('web_username', '!=', False)]"/>
+                    <filter string="Tài khoản kích hoạt" name="web_active" domain="[('is_web_active', '=', True)]"/>
+                    <group expand="0" string="Nhóm theo">
+                        <filter string="Trạng thái web" name="group_web_status" context="{'group_by': 'is_web_active'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -71,5 +90,3 @@
         </record>
     </data>
 </odoo>
-        
-    
