@@ -37,6 +37,7 @@
 Hệ thống quản lý tài sản và tài chính tích hợp được thiết kế để tối ưu hóa quy trình kiểm soát, theo dõi và quản lý tài sản cố định cũng như các hoạt động tài chính liên quan trong tổ chức. Giải pháp này kết hợp hai module chính:
 - **Quản lý Tài sản**: Theo dõi vòng đời tài sản từ mua sắm đến thanh lý
 - **Quản lý Tài chính**: Xử lý khía cạnh kế toán, khấu hao và kiểm soát chi tiêu
+<img width="861" height="834" alt="image" src="https://github.com/user-attachments/assets/5d08646a-4d6c-4bd7-b8a7-485f2723d589" />
 
 ---
 
